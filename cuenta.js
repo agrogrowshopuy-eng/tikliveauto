@@ -34,7 +34,8 @@ const ERRORES = {
   'auth/invalid-email': 'Ese email no es válido.',
   'auth/missing-password': 'Escribí una contraseña.',
   'auth/weak-password': 'La contraseña tiene que tener al menos 6 letras o números.',
-  'auth/email-already-in-use': 'Ya hay una cuenta con ese email. Tocá "Entrar".',
+  'auth/email-already-in-use': 'Ya tenés una cuenta con ese email. Tocá "Entrar" (abajo) con la misma contraseña, o "Continuar con Google" si la creaste con Google. Si no te acordás la contraseña, tocá "Me olvidé la contraseña".',
+  'permission-denied': 'Tu cuenta está creada, pero todavía no pudimos leer tu plan. Igual podés descargar el programa.',
   'auth/invalid-credential': 'Email o contraseña incorrectos.',
   'auth/wrong-password': 'Email o contraseña incorrectos.',
   'auth/user-not-found': 'No hay ninguna cuenta con ese email. Tocá "Crear una gratis".',
@@ -104,7 +105,12 @@ async function iniciarFirebase() {
 
   A.onAuthStateChanged(auth, async (u) => {
     if (!u) { $('#vista-zona').classList.add('oculto'); $('#vista-entrar').classList.remove('oculto'); return; }
-    try { pintarZona(u, await ficha(u, $('#nombre').value.trim())); } catch (e) { avisar(traducir(e)); }
+    try { pintarZona(u, await ficha(u, $('#nombre').value.trim())); }
+    catch (e) {
+      // Si la base de datos falla, la persona igual entra y puede descargar (su prueba la controla el programa)
+      console.warn('Ficha del usuario:', e);
+      pintarZona(u, { nombre: u.displayName || '', pruebaHasta: Date.now() + CFG.diasPrueba * DIA });
+    }
   });
 
   $('#b-google').onclick = async () => {
@@ -120,7 +126,7 @@ async function iniciarFirebase() {
         const nombre = $('#nombre').value.trim();
         if (nombre) await A.updateProfile(r.user, { displayName: nombre });
       } else await A.signInWithEmailAndPassword(auth, email, clave);
-    } catch (e) { avisar(traducir(e)); }
+    } catch (e) { if (e && e.code === 'auth/email-already-in-use') { registro = false; pintarModo(); } avisar(traducir(e)); }
   };
   $('#b-olvide').onclick = async () => {
     const email = $('#email').value.trim();
