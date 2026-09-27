@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Administrar usuarios — TIKLIVEauto</title>
+<link rel="icon" href="img/favicon.png">
+<link rel="stylesheet" href="estilo.css">
+<!--
+  PANEL DEL DUEÑO: solo funciona con la cuenta de administrador (la de firestore.rules).
+  Cualquier otra persona que entre acá no ve nada: Firebase no le deja leer las fichas.
+-->
+<style>
+  .panel { padding: 30px 0 60px; }
+  .panel h1 { font-size: 28px; margin-bottom: 4px; }
+  .fila-top { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 18px; }
+  .fila-top .der { margin-left: auto; display: flex; gap: 8px; }
+  .resumen { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 18px 0; }
+  .resumen .tarjeta { text-align: center; padding: 16px; }
+  .resumen b { display: block; font-size: 30px; }
+  .resumen span { color: var(--suave); font-size: 14px; }
+  .buscar { width: 100%; max-width: 360px; padding: 11px 14px; border-radius: 12px; border: 1px solid var(--borde); background: #070d19; color: var(--texto); font-size: 15px; }
+  .tabla { overflow-x: auto; border: 1px solid var(--borde); border-radius: 16px; background: rgba(12,20,36,.9); }
+  table { width: 100%; border-collapse: collapse; min-width: 900px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--borde); font-size: 14px; vertical-align: top; }
+  th { color: var(--suave); font-weight: 600; font-size: 13px; position: sticky; top: 0; background: #0c1424; }
+  tr:last-child td { border-bottom: 0; }
+  td small { color: var(--suave); display: block; }
+  .acciones { display: flex; gap: 6px; flex-wrap: wrap; }
+  .acciones button { padding: 6px 10px; border-radius: 9px; border: 1px solid var(--borde); background: var(--caja2); color: var(--texto); font-size: 13px; cursor: pointer; }
+  .acciones button:hover { border-color: var(--cel); }
+  .acciones button.oro { border-color: rgba(255,200,60,.6); color: #ffd772; }
+  .acciones button.rojo { border-color: rgba(255,77,109,.5); color: #ffb3c1; }
+  .aviso-in { width: 100%; margin-top: 6px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--borde); background: #070d19; color: var(--texto); font-size: 13px; }
+  .chip.bloq { background: rgba(255,77,109,.18); color: #ffb3c1; }
+  .msg { margin: 12px 0; }
+</style>
+</head>
+<body>
+<header class="barra">
+  <div class="ancho">
+    <a class="marca" href="./"><img src="img/logo.png" alt="TIKLIVEauto"></a>
+    <nav><a href="cuenta.html">Mi cuenta</a></nav>
+  </div>
+</header>
+
+<div class="ancho panel">
+  <div id="v-entrar" class="caja-cuenta oculto" style="margin-top:20px">
+    <h1>Panel del dueño</h1>
+    <p class="sub">Entrá con la cuenta de administrador.</p>
+    <button class="boton google" id="b-google" type="button">Continuar con Google</button>
+    <div class="aviso" id="aviso-entrar"></div>
+  </div>
+
+  <div id="v-panel" class="oculto">
+    <div class="fila-top">
+      <div><h1>👥 Usuarios de TIKLIVEauto</h1><span style="color:var(--suave)" id="yo"></span></div>
+      <div class="der"><button class="boton chico" id="b-recargar" type="button">🔄 Actualizar</button><button class="boton chico" id="b-salir" type="button">Salir</button></div>
+    </div>
+    <div class="resumen">
+      <div class="tarjeta"><b id="n-total">0</b><span>Registrados</span></div>
+      <div class="tarjeta"><b id="n-premium">0</b><span>⭐ Premium</span></div>
+      <div class="tarjeta"><b id="n-prueba">0</b><span>🎁 En prueba</span></div>
+      <div class="tarjeta"><b id="n-gratis">0</b><span>Gratis (vencidos)</span></div>
+      <div class="tarjeta"><b id="n-activos">0</b><span>Usaron el programa (7 días)</span></div>
+    </div>
+    <input class="buscar" id="buscar" placeholder="🔎 Buscar por email o nombre…">
+    <div class="aviso msg" id="aviso"></div>
+    <div class="tabla"><table>
+      <thead><tr><th>Usuario</th><th>Plan</th><th>Vence</th><th>Último uso</th><th>Acciones</th></tr></thead>
+      <tbody id="filas"><tr><td colspan="5">Cargando…</td></tr></tbody>
+    </table></div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script type="module">
+  const CFG = window.TIKLIVE_CONFIG;
+  const $ = (s) => document.querySelector(s);
+  const DIA = 86400000;
+  const V = '10.12.2';
+  const { initializeApp } = await import(`https://www.gstatic.com/firebasejs/${V}/firebase-app.js`);
+  const A = await import(`https://www.gstatic.com/firebasejs/${V}/firebase-auth.js`);
+  const F = await import(`https://www.gstatic.com/firebasejs/${V}/firebase-firestore.js`);
+  const app = initializeApp(CFG.firebaseConfig);
+  const auth = A.getAuth(app); auth.languageCode = 'es';
+  const db = F.getFirestore(app);
+
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const ms = (t) => (t && t.toMillis ? t.toMillis() : 0);
+  const fecha = (m) => (m ? new Date(m).toLocaleDateString('es-UY', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '—');
+  const hace = (m) => { if (!m) return 'nunca'; const d = Math.floor((Date.now() - m) / DIA); return d <= 0 ? 'hoy' : d === 1 ? 'ayer' : `hace ${d} días`; };
+  function avisar(t, bien = false) { const a = $('#aviso'); a.textContent = t; a.className = 'aviso msg' + (t ? (bien ? ' bien' : ' mal') : ''); }
+
+  let usuarios = [];
+  function planDe(u) {
+    const ahora = Date.now();
+    if (u.bloqueado) return { cod: 'bloq', txt: '🚫 Bloqueado', vence: 0 };
+    if (u.premiumHasta > ahora) return { cod: 'premium', txt: '⭐ Premium', vence: u.premiumHasta };
+    if (u.pruebaHasta > ahora) return { cod: 'prueba', txt: '🎁 Prueba', vence: u.pruebaHasta };
+    return { cod: 'gratis', txt: 'Gratis', vence: 0 };
+  }
+
+  async function cargar() {
+    avisar('');
+    try {
+      const snap = await F.getDocs(F.collection(db, 'usuarios'));
+      usuarios = snap.docs.map((d) => {
+        const x = d.data();
+        return { id: d.id, email: x.email || '', nombre: x.nombre || '', creado: ms(x.creado), pruebaHasta: ms(x.pruebaHasta), premiumHasta: ms(x.premiumHasta),
+          ultimaVez: ms(x.ultimaVez), version: x.version || '', bloqueado: !!x.bloqueado, aviso: x.aviso || '' };
+      }).sort((a, b) => b.creado - a.creado);
+      pintar();
+    } catch (e) {
+      $('#filas').innerHTML = '';
+      avisar(e.code === 'permission-denied' ? 'Esta cuenta no es la de administrador.' : 'No se pudo leer: ' + e.message);
+    }
+  }
+
+  function pintar() {
+    const q = $('#buscar').value.trim().toLowerCase();
+    const lista = usuarios.filter((u) => !q || u.email.toLowerCase().includes(q) || u.nombre.toLowerCase().includes(q));
+    const cuenta = (c) => usuarios.filter((u) => planDe(u).cod === c).length;
+    $('#n-total').textContent = usuarios.length;
+    $('#n-premium').textContent = cuenta('premium');
+    $('#n-prueba').textContent = cuenta('prueba');
+    $('#n-gratis').textContent = cuenta('gratis');
+    $('#n-activos').textContent = usuarios.filter((u) => u.ultimaVez > Date.now() - 7 * DIA).length;
+    $('#filas').innerHTML = lista.length ? lista.map((u) => {
+      const p = planDe(u);
+      return `<tr data-id="${esc(u.id)}">
+        <td><b>${esc(u.email)}</b><small>${esc(u.nombre) || '—'} · registrado ${fecha(u.creado)}</small></td>
+        <td><span class="chip ${p.cod === 'bloq' ? 'bloq' : p.cod}">${p.txt}</span></td>
+        <td>${fecha(p.vence)}</td>
+        <td>${hace(u.ultimaVez)}<small>${u.version ? 'versión ' + esc(u.version) : ''}</small></td>
+        <td><div class="acciones">
+          <button class="oro" data-a="premium">⭐ +1 mes Premium</button>
+          <button data-a="prueba">🎁 +7 días prueba</button>
+          ${u.premiumHasta > Date.now() ? '<button data-a="quitar">Quitar Premium</button>' : ''}
+          <button class="rojo" data-a="bloquear">${u.bloqueado ? 'Desbloquear' : '🚫 Bloquear'}</button>
+        </div>
+        <input class="aviso-in" data-a="aviso" placeholder="Aviso para este usuario (Enter para guardar)" value="${esc(u.aviso)}"></td>
+      </tr>`;
+    }).join('') : '<tr><td colspan="5">No hay usuarios con esa búsqueda.</td></tr>';
+  }
+
+  async function guardar(u, cambios, texto) {
+    try {
+      await F.updateDoc(F.doc(db, 'usuarios', u.id), cambios);
+      avisar(texto + ' — ' + u.email, true);
+      await cargar();
+    } catch (e) { avisar('No se pudo guardar: ' + e.message); }
+  }
+
+  $('#filas').addEventListener('click', (ev) => {
+    const b = ev.target.closest('button[data-a]'); if (!b) return;
+    const u = usuarios.find((x) => x.id === b.closest('tr').dataset.id); if (!u) return;
+    const ahora = Date.now();
+    if (b.dataset.a === 'premium') {
+      const desde = Math.max(ahora, u.premiumHasta);  // si ya es Premium, suma un mes al final
+      const hasta = new Date(desde); hasta.setMonth(hasta.getMonth() + 1);
+      guardar(u, { premiumHasta: F.Timestamp.fromDate(hasta), plan: 'premium' }, `Premium hasta el ${fecha(hasta.getTime())}`);
+    }
+    if (b.dataset.a === 'prueba') {
+      const hasta = Math.max(ahora, u.pruebaHasta) + 7 * DIA;
+      guardar(u, { pruebaHasta: F.Timestamp.fromMillis(hasta) }, `Prueba hasta el ${fecha(hasta)}`);
+    }
+    if (b.dataset.a === 'quitar') guardar(u, { premiumHasta: null, plan: 'gratis' }, 'Premium quitado');
+    if (b.dataset.a === 'bloquear') guardar(u, { bloqueado: !u.bloqueado }, u.bloqueado ? 'Desbloqueado' : 'Bloqueado');
+  });
+  $('#filas').addEventListener('keydown', (ev) => {
+    if (ev.key !== 'Enter' || !ev.target.matches('input[data-a="aviso"]')) return;
+    const u = usuarios.find((x) => x.id === ev.target.closest('tr').dataset.id); if (!u) return;
+    guardar(u, { aviso: ev.target.value.trim() }, ev.target.value.trim() ? 'Aviso guardado' : 'Aviso borrado');
+  });
+  $('#buscar').addEventListener('input', pintar);
+  $('#b-recargar').onclick = cargar;
+  $('#b-salir').onclick = () => A.signOut(auth);
+  $('#b-google').onclick = async () => {
+    try { const p = new A.GoogleAuthProvider(); p.setCustomParameters({ prompt: 'select_account' }); await A.signInWithPopup(auth, p); }
+    catch (e) { const a = $('#aviso-entrar'); a.textContent = 'No se pudo entrar: ' + (e.code || e.message); a.className = 'aviso mal'; }
+  };
+  A.onAuthStateChanged(auth, (u) => {
+    $('#v-entrar').classList.toggle('oculto', !!u);
+    $('#v-panel').classList.toggle('oculto', !u);
+    if (u) { $('#yo').textContent = u.email; cargar(); }
+  });
+</script>
+</body>
+</html>

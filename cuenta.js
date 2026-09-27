@@ -59,8 +59,14 @@ function pintarZona(u, datos) {
   else if (prueba > ahora) { plan = '<span class="chip prueba">🎁 Prueba gratis</span>'; const d = Math.ceil((prueba - ahora) / DIA); vence = `en ${d} día${d === 1 ? '' : 's'}`; venceT = 'Termina'; }
   else { plan = '<span class="chip gratis">Gratis</span>'; vence = '—'; }
   $('#z-plan').innerHTML = plan; $('#z-vence').textContent = vence; $('#z-vence-t').textContent = venceT;
-  $('#b-premium').href = `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent('Hola! Quiero pasar a TIKLIVEauto Premium. Mi email es ' + u.email)}`;
-  $('#b-premium').classList.toggle('oculto', prem > ahora);
+  const precio = CFG.precioPremium || 10, P = CFG.pagos || {};
+  $('#p-precio').textContent = precio; $('#z-email3').textContent = u.email;
+  $('#b-premium').href = `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(`¡Hola! Ya pagué TIKLIVEauto Premium (${precio} USD). Mi email es ${u.email}`)}`;
+  $('#b-paypal').href = P.paypal ? `https://www.paypal.com/paypalme/${P.paypal}/${precio}USD` : '#';
+  $('#b-paypal').classList.toggle('oculto', !P.paypal);
+  $('#b-mp').href = P.mercadopago || '#';
+  $('#b-mp').classList.toggle('oculto', !P.mercadopago);
+  $('#caja-premium').classList.toggle('oculto', prem > ahora);
   const url = urlDescarga();
   $('#b-descargar').href = url;
   if (url === '#') { $('#b-descargar').onclick = (e) => { e.preventDefault(); alert('La descarga todavía no está publicada.'); }; }
