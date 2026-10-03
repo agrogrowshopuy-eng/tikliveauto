@@ -12,6 +12,37 @@ const urlDescarga = () => CFG.github.usuario && CFG.github.usuario !== 'PEGAR_AQ
   ? `https://github.com/${CFG.github.usuario}/${CFG.github.repositorio}/releases/latest/download/TIKLIVEauto-Setup.exe`
   : '#';
 
+// ---------- Vuelta de Mercado Pago: guarda el número de suscripción ----------
+// Mercado Pago devuelve a esta página con ?preapproval_id=XXXX. Se guarda en el navegador
+// (por si la persona todavía tiene que entrar a su cuenta) y se limpia la dirección.
+const CLAVE_MP = 'tla_mp_suscripcion';
+(function () {
+  try {
+    const q = new URLSearchParams(location.search);
+    const id = q.get('preapproval_id');
+    if (id && /^[A-Za-z0-9]{20,40}$/.test(id)) {
+      localStorage.setItem(CLAVE_MP, JSON.stringify({ id, intentos: 0 }));
+      q.delete('preapproval_id');
+      const resto = q.toString();
+      history.replaceState(null, '', location.pathname + (resto ? '?' + resto : ''));
+    }
+  } catch (e) { /* sin almacenamiento: se sigue igual */ }
+})();
+function suscripcionPendiente() {
+  try { return JSON.parse(localStorage.getItem(CLAVE_MP) || 'null'); } catch (e) { return null; }
+}
+function avisoPago(texto, bien = false) {
+  let a = document.getElementById('aviso-pago');
+  if (!a) {
+    a = document.createElement('div'); a.id = 'aviso-pago';
+    const caja = document.querySelector('.estado-plan');
+    if (caja) caja.appendChild(a);
+  }
+  a.textContent = texto;
+  a.className = 'aviso' + (texto ? (bien ? ' bien' : ' mal') : '');
+  a.style.marginTop = '12px';
+}
+
 // ---------- Modo: entrar o registrarse ----------
 let registro = new URLSearchParams(location.search).has('registro');
 function pintarModo() {
@@ -111,13 +142,50 @@ async function iniciarFirebase() {
 
   A.onAuthStateChanged(auth, async (u) => {
     if (!u) { $('#vista-zona').classList.add('oculto'); $('#vista-entrar').classList.remove('oculto'); return; }
-    try { pintarZona(u, await ficha(u, $('#nombre').value.trim())); }
+    try {
+      const datos = await ficha(u, $('#nombre').value.trim());
+      pintarZona(u, datos);
+      activarSuscripcion(u, datos);
+    }
     catch (e) {
       // Si la base de datos falla, la persona igual entra y puede descargar (su prueba la controla el programa)
       console.warn('Ficha del usuario:', e);
       pintarZona(u, { nombre: u.displayName || '', pruebaHasta: Date.now() + CFG.diasPrueba * DIA });
     }
   });
+
+  // Si la persona viene de suscribirse en Mercado Pago, le avisa al sistema de cobro
+  // (Make) quién es y espera a que el Premium quede anotado en su ficha.
+  async function activarSuscripcion(u, datos) {
+    const P = CFG.pagos || {}, pend = suscripcionPendiente();
+    if (!pend || !P.webhook) return;
+    if (datos.premiumHasta > Date.now() && pend.intentos > 0) { localStorage.removeItem(CLAVE_MP); return; }
+    if (pend.intentos >= 3) {
+      localStorage.removeItem(CLAVE_MP);
+      avisoPago('No pudimos confirmar tu suscripción automáticamente. Tocá "Ya pagué: avisar por WhatsApp" y te lo activamos a mano.');
+      return;
+    }
+    pend.intentos += 1; localStorage.setItem(CLAVE_MP, JSON.stringify(pend));
+    avisoPago('⏳ Confirmando tu suscripción con Mercado Pago…', true);
+    try {
+      await fetch(P.webhook, { method: 'POST', mode: 'no-cors',
+        body: new URLSearchParams({ uid: u.uid, preapproval_id: pend.id, email: u.email || '' }) });
+    } catch (e) { console.warn('Aviso de suscripción:', e); }
+    const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+    for (const ms of [6000, 9000, 15000]) {
+      await esperar(ms);
+      try {
+        const d = await ficha(u);
+        if (d.premiumHasta > Date.now()) {
+          localStorage.removeItem(CLAVE_MP);
+          pintarZona(u, d);
+          avisoPago('⭐ ¡Listo! Tu Premium ya está activo. Abrí el programa y lo toma solo.', true);
+          return;
+        }
+      } catch (e) { console.warn('Ficha:', e); }
+    }
+    avisoPago('Tu pago todavía se está procesando. Volvé a entrar en unos minutos; si no aparece el Premium, tocá "Ya pagué: avisar por WhatsApp".');
+  }
 
   $('#b-google').onclick = async () => {
     avisar('');
