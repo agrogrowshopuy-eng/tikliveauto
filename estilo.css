@@ -146,3 +146,7 @@ footer .der { margin-left: auto; }
 .texto-legal h2 { font-size: 20px; margin: 24px 0 8px; }
 .texto-legal p, .texto-legal li { color: var(--suave); }
 .texto-legal ul { padding-left: 22px; }
+
+/* Evita que las imágenes se deformen al tener width/height */
+img { max-width: 100%; height: auto; }
+.barra .marca img { width: auto; }
