@@ -101,6 +101,29 @@ function pintarZona(u, datos) {
   const url = urlDescarga();
   $('#b-descargar').href = url;
   if (url === '#') { $('#b-descargar').onclick = (e) => { e.preventDefault(); alert('La descarga todavía no está publicada.'); }; }
+  avisoCelular(url);
+}
+
+// En el celular no se baja el instalador de Windows: se explica qué hacer
+function avisoCelular(url) {
+  const ua = navigator.userAgent || '';
+  const esCel = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const caja = document.querySelector('.tarjeta.descarga');
+  if (!esCel || !caja || caja.dataset.cel) return;
+  caja.dataset.cel = '1';
+  $('#b-descargar').classList.add('oculto');
+  const d = document.createElement('div');
+  d.innerHTML = `
+    <p style="margin-bottom:14px">📱 <b>Estás en un celular.</b> El programa se instala en una <b>PC con Windows</b>. Entrá a esta misma página desde tu PC, con esta cuenta, y descargalo ahí.</p>
+    <button class="boton principal" type="button" id="b-copiar-link" style="width:100%;justify-content:center">🔗 Copiar el link para abrirlo en la PC</button>
+    <a class="boton" href="celular.html" style="width:100%;justify-content:center;margin-top:10px">🎛️ Usar la botonera en el celular</a>
+    <small style="display:block;margin-top:10px"><a href="${url}">Descargar igual el instalador de Windows</a></small>`;
+  caja.insertBefore(d, $('#z-version'));
+  $('#b-copiar-link').onclick = async () => {
+    const link = location.origin + location.pathname;
+    try { await navigator.clipboard.writeText(link); $('#b-copiar-link').textContent = '✅ Link copiado: mandátelo por WhatsApp o mail'; }
+    catch (e) { prompt('Copiá este link:', link); }
+  };
 }
 
 // ---------- MODO VISTA PREVIA (sin Firebase) ----------
