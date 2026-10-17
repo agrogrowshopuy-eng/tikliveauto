@@ -1,0 +1,15 @@
+{
+  "name": "tikliveauto-nube",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TIKLIVEauto Nube: el programa funcionando en internet, para usarlo solo con el celular",
+  "main": "server.js",
+  "engines": { "node": ">=20" },
+  "scripts": { "start": "node server.js" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "msedge-tts": "^2.0.7",
+    "tiktok-live-connector": "^2.5.0",
+    "ws": "^8.18.0"
+  }
+}
