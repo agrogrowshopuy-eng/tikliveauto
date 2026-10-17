@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TIKLIVEauto en el celular — Botonera para Android y iPhone</title>
+<meta name="description" content="Usá TIKLIVEauto desde tu celular Android o iPhone: la botonera para lanzar animaciones y sonidos en tu LIVE con un toque, instalada como app. Gratis.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agrogrowshopuy-eng.github.io/tikliveauto/celular.html">
+<meta property="og:title" content="TIKLIVEauto en el celular — Android y iPhone">
+<meta property="og:description" content="La botonera de TIKLIVEauto en tu celular, como una app. Lanzá animaciones y sonidos con un toque.">
+<meta property="og:image" content="https://agrogrowshopuy-eng.github.io/tikliveauto/img/captura_inicio.jpg">
+<link rel="icon" href="img/favicon.png">
+<link rel="stylesheet" href="estilo.css">
+<style>
+  .cel-portada { padding: 56px 20px 20px; text-align: center; }
+  .cel-portada h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.1; margin-bottom: 14px; }
+  .cel-portada h1 .grad { background: linear-gradient(90deg, var(--cel), var(--violeta), var(--rosa)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .cel-portada p { color: var(--suave); font-size: 18px; max-width: 640px; margin: 0 auto; }
+  .pestanas { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 26px 0 18px; }
+  .pestanas button { font: inherit; font-weight: 700; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--borde); background: var(--caja2); color: var(--texto); cursor: pointer; }
+  .pestanas button[aria-selected="true"] { border-color: var(--cel); box-shadow: 0 0 16px rgba(34,229,255,.3); color: var(--cel); }
+  .sistema { display: none; }
+  .sistema.activo { display: block; }
+  .pasos .tarjeta b { color: var(--texto); }
+  .abrir { max-width: 520px; margin: 0 auto; background: rgba(12,20,36,.92); border: 1px solid var(--rosa); border-radius: 18px; padding: 22px; box-shadow: 0 0 24px rgba(255,45,149,.18); }
+  .abrir h3 { font-size: 19px; margin-bottom: 6px; }
+  .abrir p { color: var(--suave); font-size: 15px; margin-bottom: 12px; }
+  .abrir .fila { display: flex; gap: 10px; flex-wrap: wrap; }
+  .abrir input { flex: 1; min-width: 0; width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--borde); background: #070d19; color: var(--texto); font-size: 17px; }
+  .abrir input:focus { outline: none; border-color: var(--cel); }
+  .abrir .boton { justify-content: center; }
+  .nota-chica { color: var(--suave); font-size: 14px; margin-top: 10px; }
+  .requisitos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .pronto { border-style: dashed; }
+  @media (max-width: 520px) { .abrir .fila .boton { width: 100%; } }
+</style>
+</head>
+<body>
+<header class="barra">
+  <div class="ancho">
+    <a class="marca" href="./"><img src="img/logo.png" alt="TIKLIVEauto"></a>
+    <nav>
+      <a class="opcional" href="./#funciones">Funciones</a>
+      <a class="opcional" href="packs.html">Packs</a>
+      <a class="opcional" href="./#planes">Planes</a>
+      <a class="boton chico principal" href="cuenta.html">Entrar / Registrarme</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="ancho cel-portada">
+    <div style="font-size:44px">📱</div>
+    <h1>TIKLIVEauto <span class="grad">en tu celular</span></h1>
+    <p>Tu botonera en la mano: lanzá animaciones, sonidos y potenciadores en tu LIVE con un toque, desde Android o iPhone. Se instala como una app, gratis.</p>
+  </div>
+
+  <section style="padding-top:20px">
+    <div class="ancho">
+      <h2>Qué necesitás</h2>
+      <div class="requisitos">
+        <div class="tarjeta"><div class="ico">💻</div><h3>El programa abierto en tu PC</h3><p>TIKLIVEauto instalado y abierto en Windows. El celular funciona como control remoto.</p></div>
+        <div class="tarjeta"><div class="ico">📶</div><h3>El mismo WiFi</h3><p>El celular y la PC tienen que estar conectados a la misma red de tu casa.</p></div>
+        <div class="tarjeta"><div class="ico">🔢</div><h3>La dirección de tu PC</h3><p>La ves en el programa: <b>Panel → Botonera → En el celular</b>. Es algo como <b>192.168.1.20</b>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="ancho">
+      <h2>Abrí tu botonera</h2>
+      <div class="abrir">
+        <h3>🎛️ Dirección de tu PC</h3>
+        <p>Escribila una sola vez. Queda guardada en este celular.</p>
+        <form class="fila" id="form-abrir">
+          <input id="ip" inputmode="decimal" autocomplete="off" placeholder="Ej: 192.168.1.20" aria-label="Dirección de tu PC">
+          <button class="boton principal" type="submit">Abrir botonera</button>
+        </form>
+        <div class="aviso" id="aviso"></div>
+        <p class="nota-chica">Si no abre: revisá que el programa esté abierto, que estés en el mismo WiFi y, la primera vez, aceptá el permiso de red que muestra Windows.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="ancho">
+      <h2>Instalala como app</h2>
+      <p class="sub">Después de abrir la botonera, hacé esto <b>en esa misma página</b> para que te quede el ícono en el celular.</p>
+      <div class="pestanas" role="tablist">
+        <button role="tab" data-sis="iphone" aria-selected="false">🍎 iPhone</button>
+        <button role="tab" data-sis="android" aria-selected="false">🤖 Android</button>
+      </div>
+
+      <div class="sistema" id="sis-iphone">
+        <div class="pasos">
+          <div class="tarjeta"><h3>Abrila con Safari</h3><p>En iPhone tiene que ser con <b>Safari</b>, el navegador de Apple.</p></div>
+          <div class="tarjeta"><h3>Tocá Compartir</h3><p>El botón del <b>cuadrado con la flecha hacia arriba</b>, abajo en el centro.</p></div>
+          <div class="tarjeta"><h3>Agregar a inicio</h3><p>Bajá y tocá <b>"Agregar a pantalla de inicio"</b> y después <b>"Agregar"</b>.</p></div>
+        </div>
+      </div>
+
+      <div class="sistema" id="sis-android">
+        <div class="pasos">
+          <div class="tarjeta"><h3>Abrila con Chrome</h3><p>Usá <b>Google Chrome</b>, que viene en casi todos los Android.</p></div>
+          <div class="tarjeta"><h3>Tocá los 3 puntitos</h3><p>Arriba a la derecha, el menú <b>⋮</b>.</p></div>
+          <div class="tarjeta"><h3>Agregar a inicio</h3><p>Tocá <b>"Agregar a pantalla principal"</b> (o "Instalar app") y confirmá.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="ancho">
+      <h2>Qué podés hacer desde el celular</h2>
+      <div class="grilla">
+        <div class="tarjeta"><div class="ico">🎛️</div><h3>Botonera</h3><p>Tus botones con fotos y colores. Los mismos en la PC, el celular y la tablet.</p></div>
+        <div class="tarjeta"><div class="ico">🎬</div><h3>Animaciones y sonidos</h3><p>Lanzá videos, imágenes y sonidos en tu LIVE sin tocar la PC.</p></div>
+        <div class="tarjeta"><div class="ico">🥊</div><h3>Potenciadores</h3><p>Los robots de batalla y tus animaciones, a un toque.</p></div>
+        <div class="tarjeta"><div class="ico">📸</div><h3>Fotos de los botones</h3><p>Subí la foto de un botón directo desde la galería del celular.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="ancho">
+      <h2>Próximamente</h2>
+      <div class="grilla">
+        <div class="tarjeta pronto"><div class="ico">📲</div><h3>Modo solo celular</h3><p>Para transmitir sin PC, con las animaciones encima de tu cámara.</p></div>
+        <div class="tarjeta pronto"><div class="ico">🌐</div><h3>Más plataformas</h3><p>YouTube, Kick y Facebook, además de TikTok.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="llamado">
+    <h2>¿Todavía no tenés el programa?</h2>
+    <p class="sub" style="color:var(--suave);margin-bottom:22px">1 mes gratis con todo. Sin tarjeta.</p>
+    <a class="boton principal" href="cuenta.html?registro=1">⬇️ Crear cuenta y descargar</a>
+  </div>
+</main>
+
+<footer>
+  <div class="ancho">
+    <span>© <span id="anio"></span> TIKLIVEauto</span>
+    <a href="./">Inicio</a>
+    <a href="packs.html">Packs de animaciones</a>
+    <a href="privacidad.html">Privacidad</a>
+    <a href="terminos.html">Términos de uso</a>
+    <a class="der" href="https://wa.me/59898993720" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('anio').textContent = new Date().getFullYear();
+
+// Pestañas iPhone / Android: abre sola la del celular que se usa
+const ua = navigator.userAgent || '';
+const esApple = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+function mostrar(sis) {
+  document.querySelectorAll('.pestanas button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.sis === sis)));
+  document.querySelectorAll('.sistema').forEach((s) => s.classList.toggle('activo', s.id === 'sis-' + sis));
+}
+document.querySelectorAll('.pestanas button').forEach((b) => b.addEventListener('click', () => mostrar(b.dataset.sis)));
+mostrar(esApple ? 'iphone' : 'android');
+
+// Dirección de la PC: se guarda en este celular
+const campo = document.getElementById('ip');
+const aviso = document.getElementById('aviso');
+try { campo.value = localStorage.getItem('tla_ip_pc') || ''; } catch (e) {}
+
+function limpiar(txt) {
+  let t = String(txt || '').trim().replace(/^https?:\/\//i, '').replace(/\/.*$/, '');
+  if (!t) return '';
+  if (!/:\d+$/.test(t)) t += ':3000';
+  return t;
+}
+document.getElementById('form-abrir').addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  const dir = limpiar(campo.value);
+  if (!/^[\w.-]+:\d+$/.test(dir)) {
+    aviso.className = 'aviso mal';
+    aviso.textContent = 'Escribí la dirección que muestra el programa, por ejemplo 192.168.1.20';
+    return;
+  }
+  try { localStorage.setItem('tla_ip_pc', campo.value.trim()); } catch (e) {}
+  aviso.className = 'aviso bien';
+  aviso.textContent = 'Abriendo tu botonera…';
+  location.href = 'http://' + dir + '/botonera';
+});
+</script>
+</body>
+</html>
