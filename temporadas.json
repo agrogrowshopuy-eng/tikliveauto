@@ -1,0 +1,107 @@
+{
+  "temporadas": [
+    {
+      "id": "halloween-2026",
+      "nombre": "Halloween",
+      "emoji": "🎃",
+      "precio": 20,
+      "requierePremium": true,
+      "descripcion": "10 animaciones de Halloween que salen solas en tus batallas y en tu LIVE. También las podés lanzar con comandos, regalos o botones.",
+      "paquete": "https://github.com/agrogrowshopuy-eng/tikliveauto/releases/download/v1.3.0/halloween-2026.tlpack",
+      "tamano": 150298954,
+      "sha256": "8b9d54dde80ab3cea066ec61b2790800959521adf80b6e7c12e415c941b6a7a0",
+      "archivos": [
+        {
+          "archivo": "tem_halloween-2026_guante_rojo.webm",
+          "nombre": "GUANTE ROJO",
+          "cuando": "Te tiran un guante",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_guante_rojo.jpg"
+        },
+        {
+          "archivo": "tem_halloween-2026_guante_dorado.webm",
+          "nombre": "GUANTE DORADO",
+          "cuando": "Te tiran el guante dorado",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_guante_dorado.jpg"
+        },
+        {
+          "archivo": "tem_halloween-2026_x2.webm",
+          "nombre": "X2",
+          "cuando": "Se activa el x2",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_x2.jpg"
+        },
+        {
+          "archivo": "tem_halloween-2026_x3.webm",
+          "nombre": "X3",
+          "cuando": "Se activa el x3",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_x3.jpg"
+        },
+        {
+          "archivo": "tem_halloween-2026_fight.webm",
+          "nombre": "FIGHT",
+          "cuando": "Empieza la batalla",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_fight.jpg"
+        },
+        {
+          "archivo": "tem_halloween-2026_game_over.webm",
+          "nombre": "GAME OVER",
+          "cuando": "Termina la batalla",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_game_over.jpg"
+        },
+        {
+          "archivo": "tem_halloween-2026_level_up.webm",
+          "nombre": "LEVEL UP",
+          "cuando": "Alguien sube de nivel en tu club de fans",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_level_up.jpg"
+        },
+        {
+          "archivo": "tem_halloween-2026_quiereme.webm",
+          "nombre": "QUIÉREME",
+          "cuando": "Te regalan un Quiéreme",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_quiereme.jpg"
+        },
+        {
+          "archivo": "tem_halloween-2026_tap_tap.webm",
+          "nombre": "TAP TAP",
+          "cuando": "Lluvia de tap tap",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_tap_tap.jpg"
+        },
+        {
+          "archivo": "tem_halloween-2026_snipe.webm",
+          "nombre": "SNIPE",
+          "cuando": "Con !snipe en el chat o un botón",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/h_snipe.jpg"
+        }
+      ],
+      "potenciadores": {
+        "guante": "tem_halloween-2026_guante_rojo.webm",
+        "guante dorado": "tem_halloween-2026_guante_dorado.webm",
+        "x2": "tem_halloween-2026_x2.webm",
+        "x3": "tem_halloween-2026_x3.webm",
+        "inicio batalla": "tem_halloween-2026_fight.webm",
+        "fin batalla": "tem_halloween-2026_game_over.webm",
+        "nivel equipo": "tem_halloween-2026_level_up.webm",
+        "snipe": "tem_halloween-2026_snipe.webm"
+      },
+      "eventos": [
+        {
+          "nombre": "Quiéreme",
+          "disparador": "regalo",
+          "valor": "Heart Me, Quiéreme",
+          "archivo": "tem_halloween-2026_quiereme.webm"
+        },
+        {
+          "nombre": "Tap Tap",
+          "disparador": "likes",
+          "valor": "300",
+          "archivo": "tem_halloween-2026_tap_tap.webm"
+        },
+        {
+          "nombre": "Snipe",
+          "disparador": "comando",
+          "valor": "!snipe",
+          "archivo": "tem_halloween-2026_snipe.webm"
+        }
+      ]
+    }
+  ]
+}

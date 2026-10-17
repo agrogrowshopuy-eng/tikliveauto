@@ -65,6 +65,16 @@
       <div class="tarjeta"><b id="n-gratis">0</b><span>Gratis (vencidos)</span></div>
       <div class="tarjeta"><b id="n-activos">0</b><span>Usaron el programa (7 días)</span></div>
     </div>
+    <details class="buscar" id="caja-llaves" style="padding:10px 12px">
+      <summary><b>🎃 Llaves de las temporadas</b> <small id="estado-llaves"></small></summary>
+      <p style="margin:8px 0;font-size:13px;opacity:.85">Se hace una sola vez por temporada. Pegá la llave que te pasó Claude y tocá Guardar.
+        La llave nunca va en la web ni en el programa: Firebase solo se la da a quien tenga la temporada activada.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <select id="llave-tem"></select>
+        <input id="llave-txt" placeholder="Pegá la llave acá" style="flex:1;min-width:220px">
+        <button class="oro" id="b-llave">Guardar llave</button>
+      </div>
+    </details>
     <input class="buscar" id="buscar" placeholder="🔎 Buscar por email o nombre…">
     <div class="aviso msg" id="aviso"></div>
     <div class="tabla"><table>
@@ -102,6 +112,23 @@
     return { cod: 'gratis', txt: 'Gratis', vence: 0 };
   }
 
+  // Temporadas (Premium Halloween...): la lista sale de temporadas.json, la misma que lee el programa
+  let temporadas = [];
+  async function cargarTemporadas() {
+    try { temporadas = (await fetch('temporadas.json?t=' + Date.now()).then((r) => r.json())).temporadas || []; } catch { temporadas = []; }
+    $('#llave-tem').innerHTML = temporadas.map((t) => `<option value="${esc(t.id)}">${esc(t.emoji || '🎃')} ${esc(t.nombre)}</option>`).join('');
+    const faltan = [];
+    for (const t of temporadas) { try { const d = await F.getDoc(F.doc(db, 'temporadas', t.id)); if (!d.exists() || !d.data().llave) faltan.push(t.nombre); } catch {} }
+    $('#estado-llaves').textContent = faltan.length ? `— ⚠️ falta la llave de: ${faltan.join(', ')}` : temporadas.length ? '— ✅ todas guardadas' : '';
+    $('#caja-llaves').open = faltan.length > 0;
+  }
+  $('#b-llave').onclick = async () => {
+    const id = $('#llave-tem').value, llave = $('#llave-txt').value.trim();
+    if (!id || !/^[A-Za-z0-9+/=]{40,}$/.test(llave)) return avisar('Esa llave no parece correcta: pegala entera, sin espacios.');
+    try { await F.setDoc(F.doc(db, 'temporadas', id), { llave }); $('#llave-txt').value = ''; avisar('Llave guardada', true); cargarTemporadas(); }
+    catch (e) { avisar('No se pudo guardar la llave: ' + e.message + ' (¿publicaste las reglas nuevas?)'); }
+  };
+
   async function cargar() {
     avisar('');
     try {
@@ -109,7 +136,8 @@
       usuarios = snap.docs.map((d) => {
         const x = d.data();
         return { id: d.id, email: x.email || '', nombre: x.nombre || '', creado: ms(x.creado), pruebaHasta: ms(x.pruebaHasta), premiumHasta: ms(x.premiumHasta),
-          ultimaVez: ms(x.ultimaVez), version: x.version || '', bloqueado: !!x.bloqueado, aviso: x.aviso || '' };
+          ultimaVez: ms(x.ultimaVez), version: x.version || '', bloqueado: !!x.bloqueado, aviso: x.aviso || '',
+          temporadas: Array.isArray(x.temporadas) ? x.temporadas : [] };
       }).sort((a, b) => b.creado - a.creado);
       pintar();
     } catch (e) {
@@ -137,6 +165,7 @@
         <td><div class="acciones">
           <button class="oro" data-a="premium">⭐ +1 mes Premium</button>
           <button data-a="prueba">🎁 +7 días prueba</button>
+          ${temporadas.map((t) => `<button data-a="temporada" data-t="${esc(t.id)}" class="${u.temporadas.includes(t.id) ? 'oro' : ''}">${esc(t.emoji || '🎃')} ${esc(t.nombre)}${u.temporadas.includes(t.id) ? ' ✔ (quitar)' : ''}</button>`).join('')}
           ${u.premiumHasta > Date.now() ? '<button data-a="quitar">Quitar Premium</button>' : ''}
           <button class="rojo" data-a="bloquear">${u.bloqueado ? 'Desbloquear' : '🚫 Bloquear'}</button>
         </div>
@@ -167,6 +196,10 @@
       guardar(u, { pruebaHasta: F.Timestamp.fromMillis(hasta) }, `Prueba hasta el ${fecha(hasta)}`);
     }
     if (b.dataset.a === 'quitar') guardar(u, { premiumHasta: null, plan: 'gratis' }, 'Premium quitado');
+    if (b.dataset.a === 'temporada') {
+      const t = temporadas.find((x) => x.id === b.dataset.t); const tiene = u.temporadas.includes(b.dataset.t);
+      guardar(u, { temporadas: tiene ? F.arrayRemove(b.dataset.t) : F.arrayUnion(b.dataset.t) }, `${t ? t.nombre : b.dataset.t} ${tiene ? 'quitada' : 'activada'}`);
+    }
     if (b.dataset.a === 'bloquear') guardar(u, { bloqueado: !u.bloqueado }, u.bloqueado ? 'Desbloqueado' : 'Bloqueado');
   });
   $('#filas').addEventListener('keydown', (ev) => {
@@ -184,7 +217,7 @@
   A.onAuthStateChanged(auth, (u) => {
     $('#v-entrar').classList.toggle('oculto', !!u);
     $('#v-panel').classList.toggle('oculto', !u);
-    if (u) { $('#yo').textContent = u.email; cargar(); }
+    if (u) { $('#yo').textContent = u.email; cargarTemporadas().then(cargar); }
   });
 </script>
 </body>
