@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#060913">
+<meta name="robots" content="noindex">
+<title>TIKLIVEauto Celular</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icono-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TIKLIVEauto">
+<style>
+  :root { --cel:#22e5ff; --rosa:#ff2d95; --violeta:#8a7dff; --fondo:#060913; --caja:#0c1424; --caja2:#101a2e; --borde:#1d3550; --texto:#e8f7ff; --suave:#8fb3c9; --verde:#1bf29a; --rojo:#ff4d6d; --amarillo:#ffd34d; }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { font-family: system-ui, 'Segoe UI', Roboto, sans-serif; color: var(--texto); background: var(--fondo); line-height: 1.45; min-height: 100vh;
+    background: radial-gradient(700px 400px at 0% -10%, rgba(34,229,255,.13), transparent 60%), radial-gradient(700px 400px at 100% -10%, rgba(255,45,149,.13), transparent 60%), var(--fondo); }
+  .oculto { display: none !important; }
+  header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 10px; padding: 10px 16px; padding-top: max(10px, env(safe-area-inset-top));
+    background: rgba(6,9,19,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--borde); }
+  header img { height: 34px; }
+  header .chip { margin-left: auto; }
+  main { max-width: 560px; margin: 0 auto; padding: 16px 16px 110px; }
+  h1 { font-size: 24px; margin-bottom: 6px; }
+  h2 { font-size: 18px; margin: 4px 0 10px; }
+  p.suave, .suave { color: var(--suave); font-size: 14px; }
+  .caja { background: rgba(12,20,36,.92); border: 1px solid var(--borde); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+  .caja.rosa { border-color: var(--rosa); box-shadow: 0 0 22px rgba(255,45,149,.15); }
+  .boton { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 16px; border-radius: 13px; font: 700 16px system-ui, sans-serif;
+    border: 1px solid var(--borde); background: var(--caja2); color: var(--texto); cursor: pointer; text-decoration: none; }
+  .boton.principal { border: 0; color: #061018; background: linear-gradient(135deg, var(--cel), var(--violeta) 55%, var(--rosa)); }
+  .boton.rojo { border-color: rgba(255,77,109,.6); color: #ffd0da; }
+  .boton.google { background: #fff; color: #1f1f1f; border: 0; }
+  .boton + .boton, .fila + .boton { margin-top: 10px; }
+  label { display: block; font-size: 14px; color: var(--suave); margin: 12px 0 6px; }
+  input, select { width: 100%; padding: 12px 13px; border-radius: 12px; border: 1px solid var(--borde); background: #070d19; color: var(--texto); font-size: 16px; }
+  input:focus, select:focus { outline: none; border-color: var(--cel); }
+  .fila { display: flex; gap: 10px; align-items: center; }
+  .fila > * { flex: 1; min-width: 0; }
+  .interruptor { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--borde); }
+  .interruptor:last-child { border-bottom: 0; }
+  .interruptor span { font-size: 15px; }
+  .interruptor small { display: block; color: var(--suave); font-size: 13px; }
+  .interruptor input { width: 50px; height: 28px; flex: none; appearance: none; border-radius: 99px; background: #233247; border: 0; position: relative; padding: 0; transition: background .2s; }
+  .interruptor input::after { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: left .2s; }
+  .interruptor input:checked { background: var(--verde); }
+  .interruptor input:checked::after { left: 25px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 99px; font-size: 13px; font-weight: 700; background: rgba(34,229,255,.12); color: var(--cel); border: 1px solid rgba(34,229,255,.35); }
+  .chip.prueba { background: rgba(255,211,77,.12); color: var(--amarillo); border-color: rgba(255,211,77,.4); }
+  .chip.premium { background: rgba(27,242,154,.12); color: var(--verde); border-color: rgba(27,242,154,.4); }
+  .estado { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+  .punto { width: 12px; height: 12px; border-radius: 50%; background: #475569; flex: none; }
+  .punto.ok { background: var(--verde); box-shadow: 0 0 10px var(--verde); }
+  .punto.medio { background: var(--amarillo); }
+  .punto.mal { background: var(--rojo); }
+  .plataformas { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+  .plataformas button { font: 700 13px system-ui; padding: 10px 6px; border-radius: 12px; border: 1px solid var(--borde); background: var(--caja2); color: var(--texto); }
+  .plataformas button.activa { border-color: var(--cel); color: var(--cel); box-shadow: 0 0 12px rgba(34,229,255,.25); }
+  .plataformas button small { display: block; font-weight: 500; color: var(--suave); font-size: 11px; }
+  .enlace { font: 13px ui-monospace, monospace; word-break: break-all; background: #070d19; border: 1px dashed var(--borde); border-radius: 10px; padding: 10px; margin: 8px 0; color: var(--cel); }
+  ol.pasos { padding-left: 20px; display: grid; gap: 6px; font-size: 15px; }
+  ol.pasos b { color: var(--texto); }
+  .robots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .robots button { aspect-ratio: 1; border-radius: 16px; border: 1px solid var(--borde); background: var(--caja2); color: var(--texto); font: 700 13px system-ui; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 6px; }
+  .robots button .e { font-size: 30px; }
+  .robots button:active { transform: scale(.96); border-color: var(--cel); }
+  .robots button.bloq { opacity: .45; }
+  .registro { max-height: 260px; overflow: auto; font-size: 14px; display: grid; gap: 6px; }
+  .registro div { padding: 7px 10px; border-radius: 10px; background: #0a1220; }
+  .evento { border: 1px solid var(--borde); border-radius: 12px; padding: 12px; margin-bottom: 10px; }
+  nav.abajo { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; display: grid; grid-template-columns: repeat(5, 1fr); background: rgba(6,9,19,.96); border-top: 1px solid var(--borde); padding-bottom: env(safe-area-inset-bottom); }
+  nav.abajo button { background: none; border: 0; color: var(--suave); font: 600 11px system-ui; padding: 9px 2px 10px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  nav.abajo button .e { font-size: 21px; }
+  nav.abajo button.activa { color: var(--cel); }
+  .aviso { padding: 10px 13px; border-radius: 11px; font-size: 14px; margin-top: 10px; }
+  .aviso.mal { background: rgba(255,77,109,.12); border: 1px solid rgba(255,77,109,.5); color: #ffd0da; }
+  .aviso.bien { background: rgba(27,242,154,.1); border: 1px solid rgba(27,242,154,.4); color: #c7ffe8; }
+  .aviso.info { background: rgba(34,229,255,.08); border: 1px solid rgba(34,229,255,.35); color: #cdf6ff; }
+  .separador { display: flex; align-items: center; gap: 10px; color: var(--suave); font-size: 13px; margin: 16px 0 4px; }
+  .separador::before, .separador::after { content: ''; flex: 1; height: 1px; background: var(--borde); }
+  #toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); background: #0f1b30; border: 1px solid var(--cel); color: var(--texto); padding: 10px 16px; border-radius: 12px; font-size: 14px; z-index: 30; max-width: 90%; text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <img src="../img/logo.png" alt="TIKLIVEauto">
+  <span class="chip" id="chip-plan">📱 Celular</span>
+</header>
+
+<main>
+  <!-- ========== ENTRAR ========== -->
+  <section id="v-entrar" class="oculto">
+    <h1>TIKLIVEauto Celular</h1>
+    <p class="suave" style="margin-bottom:16px">Tu LIVE con animaciones, robots de batalla y lector del chat, sin PC. Entrá con tu cuenta de TIKLIVEauto: los primeros <b>15 días son gratis</b>.</p>
+    <div class="caja">
+      <button class="boton google" id="b-google" type="button">
+        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+        Entrar con Google
+      </button>
+      <div class="separador">o con tu email</div>
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" inputmode="email">
+      <label for="clave">Contraseña</label>
+      <input id="clave" type="password" autocomplete="current-password">
+      <div class="fila" style="margin-top:14px">
+        <button class="boton principal" id="b-entrar" type="button">Entrar</button>
+        <button class="boton" id="b-crear" type="button">Crear cuenta</button>
+      </div>
+      <div class="aviso mal oculto" id="aviso-entrar"></div>
+    </div>
+  </section>
+
+  <!-- ========== SIN PLAN ========== -->
+  <section id="v-plan" class="oculto">
+    <div class="caja rosa">
+      <h2>⭐ Modo celular</h2>
+      <p id="txt-plan" class="suave" style="margin-bottom:14px"></p>
+      <a class="boton principal" id="b-paypal" target="_blank" rel="noopener">💳 Pagar con PayPal o tarjeta — 20 USD</a>
+      <a class="boton" id="b-yapague" target="_blank" rel="noopener">✅ Ya pagué: avisar por WhatsApp</a>
+      <p class="suave" style="margin-top:12px">Se activa en tu misma cuenta (<span id="mail-plan"></span>). Volvé a abrir esta app cuando te avisemos.</p>
+    </div>
+    <button class="boton" type="button" data-salir>Salir de la cuenta</button>
+  </section>
+
+  <!-- ========== APP ========== -->
+  <section id="v-app" class="oculto">
+
+    <!-- INICIO -->
+    <div data-pestana="inicio">
+      <div class="caja">
+        <div class="estado"><span class="punto" id="punto"></span><span id="txt-estado">Sin conectar</span></div>
+        <p class="suave" id="txt-estado2" style="margin-top:4px"></p>
+      </div>
+
+      <div class="caja">
+        <h2>1. Tu plataforma</h2>
+        <div class="plataformas" id="plataformas">
+          <button type="button" class="activa" data-p="tiktok">🎵 TikTok</button>
+          <button type="button" data-p="youtube">▶️ YouTube<small>Próximamente</small></button>
+          <button type="button" data-p="kick">🟩 Kick<small>Próximamente</small></button>
+          <button type="button" data-p="facebook">📘 Facebook<small>Próximamente</small></button>
+          <button type="button" data-p="instagram">📸 Instagram<small>Próximamente</small></button>
+        </div>
+        <label for="usuario">Tu usuario de TikTok</label>
+        <input id="usuario" placeholder="@tuusuario" autocapitalize="off" autocomplete="off" spellcheck="false">
+        <div class="fila" style="margin-top:12px">
+          <button class="boton principal" id="b-conectar" type="button">🔌 Conectar</button>
+          <button class="boton rojo oculto" id="b-desconectar" type="button">⏹️ Desconectar</button>
+        </div>
+        <p class="suave" style="margin-top:8px">Si todavía no estás en vivo, queda esperando y se conecta solo cuando empezás.</p>
+      </div>
+
+      <div class="caja rosa">
+        <h2>2. Tu enlace para PRISM Live</h2>
+        <p class="suave">Las animaciones y la voz salen en tu LIVE por este enlace.</p>
+        <div class="enlace" id="enlace">…</div>
+        <button class="boton principal" id="b-copiar" type="button">📋 Copiar enlace</button>
+        <p class="suave" id="txt-overlay" style="margin-top:10px"></p>
+      </div>
+
+      <div class="caja">
+        <h2>3. Cómo transmitir desde el celular</h2>
+        <ol class="pasos">
+          <li>Instalá <b>PRISM Live Studio</b> (gratis, Play Store o App Store).</li>
+          <li>En PRISM agregá tu destino con <b>RTMP personalizado</b>: pegá la <b>URL del servidor</b> y la <b>clave de transmisión</b> de tu plataforma.</li>
+          <li>En la pantalla principal de PRISM deslizá a la izquierda: <b>My Studio → Widget → Web</b>.</li>
+          <li>Pegá tu enlace (paso 2), poné un nombre y tocá <b>Save</b>. Agrandalo a <b>toda la pantalla</b>.</li>
+          <li>Empezá el LIVE desde PRISM. Acá tiene que decir <b>"Enlace abierto en PRISM ✅"</b>.</li>
+        </ol>
+        <div class="aviso info">🍎 En <b>iPhone</b> las animaciones con fondo transparente pueden verse con fondo negro. En <b>Android</b> se ven bien.</div>
+        <div class="aviso info">🔑 TikTok da la clave de transmisión a cuentas con cierta cantidad de seguidores o con agencia. YouTube y Kick se la dan a cualquiera.</div>
+      </div>
+
+      <div class="caja">
+        <h2>Lo que pasa en tu LIVE</h2>
+        <div class="registro" id="registro"><div class="suave">Todavía nada.</div></div>
+      </div>
+    </div>
+
+    <!-- BOTONERA -->
+    <div data-pestana="botonera" class="oculto">
+      <div class="caja">
+        <h2>🤖 Robots</h2>
+        <p class="suave" style="margin-bottom:12px">Tocá uno y sale en tu LIVE.</p>
+        <div class="robots" id="robots"></div>
+        <button class="boton rojo" id="b-cortar" type="button" style="margin-top:14px">✋ Cortar lo que está sonando</button>
+      </div>
+      <div class="caja">
+        <h2>🗣️ Que hable la voz</h2>
+        <input id="decir" placeholder="Escribí lo que querés que diga">
+        <button class="boton principal" id="b-decir" type="button" style="margin-top:10px">Decir en el LIVE</button>
+      </div>
+      <div class="aviso info">💡 Mientras transmitís, PRISM está en pantalla. Para usar la botonera en pleno LIVE, abrí esta app en <b>otro celular o tablet</b> con tu misma cuenta.</div>
+    </div>
+
+    <!-- LECTOR -->
+    <div data-pestana="lector" class="oculto">
+      <div class="caja">
+        <h2>🗣️ Lector del chat</h2>
+        <div class="interruptor"><span>Leer el chat en voz alta</span><input type="checkbox" id="l-activo"></div>
+        <div class="interruptor"><span>Solo seguidores<small>Los que no te siguen no se leen</small></span><input type="checkbox" id="l-seguidores-solo"></div>
+        <div class="interruptor"><span>Agradecer regalos</span><input type="checkbox" id="l-regalos"></div>
+        <div class="interruptor"><span>Agradecer nuevos seguidores</span><input type="checkbox" id="l-follows"></div>
+        <label for="l-voz">Voz</label>
+        <select id="l-voz">
+          <option value="es-AR-ElenaNeural">Elena (Argentina, mujer)</option>
+          <option value="es-AR-TomasNeural">Tomás (Argentina, hombre)</option>
+          <option value="es-UY-ValentinaNeural">Valentina (Uruguay, mujer)</option>
+          <option value="es-UY-MateoNeural">Mateo (Uruguay, hombre)</option>
+          <option value="es-MX-DaliaNeural">Dalia (México, mujer)</option>
+          <option value="es-MX-JorgeNeural">Jorge (México, hombre)</option>
+          <option value="es-CO-SalomeNeural">Salomé (Colombia, mujer)</option>
+          <option value="es-ES-ElviraNeural">Elvira (España, mujer)</option>
+          <option value="pt-BR-FranciscaNeural">Francisca (Brasil, mujer)</option>
+          <option value="en-US-JennyNeural">Jenny (inglés, mujer)</option>
+        </select>
+        <label for="l-vel">Velocidad: <b id="l-vel-t">0</b></label>
+        <input id="l-vel" type="range" min="-30" max="40" step="5" style="padding:0">
+        <label for="vol">Volumen del LIVE: <b id="vol-t">80</b>%</label>
+        <input id="vol" type="range" min="0" max="100" step="5" style="padding:0">
+        <button class="boton" id="b-probar-voz" type="button" style="margin-top:14px">🔊 Probar la voz</button>
+      </div>
+      <div class="caja">
+        <h2>💬 Chat</h2>
+        <div class="registro" id="chat"><div class="suave">Cuando te conectes, el chat aparece acá.</div></div>
+      </div>
+    </div>
+
+    <!-- REGALOS Y BATALLAS -->
+    <div data-pestana="regalos" class="oculto">
+      <div class="caja">
+        <h2>🥊 Batallas</h2>
+        <div class="interruptor"><span>Robots automáticos<small>Cuando tiran guante, neblina, martillo, x2, x3… sale el robot solo</small></span><input type="checkbox" id="b-auto"></div>
+        <div class="interruptor"><span>Solo los que me tiran a mí<small>Los potenciadores para el rival no se muestran</small></span><input type="checkbox" id="b-mios"></div>
+      </div>
+      <div class="caja">
+        <h2>🎁 Animación por regalo</h2>
+        <p class="suave" style="margin-bottom:12px">Elegí qué animación sale con cada regalo. El regalo se escribe como aparece en TikTok (ej: Rosa, Rosquilla).</p>
+        <div id="eventos"></div>
+        <button class="boton" id="b-agregar-ev" type="button">➕ Agregar regalo</button>
+        <button class="boton principal" id="b-guardar-ev" type="button">💾 Guardar</button>
+      </div>
+    </div>
+
+    <!-- CUENTA -->
+    <div data-pestana="cuenta" class="oculto">
+      <div class="caja">
+        <h2>👤 Tu cuenta</h2>
+        <p id="txt-cuenta" class="suave"></p>
+        <button class="boton" type="button" data-salir style="margin-top:12px">Salir de la cuenta</button>
+      </div>
+      <div class="caja">
+        <h2>📲 Instalala como app</h2>
+        <p class="suave"><b>Android (Chrome):</b> menú ⋮ → <b>Agregar a pantalla principal</b>.<br><b>iPhone (Safari):</b> botón Compartir → <b>Agregar a pantalla de inicio</b>.</p>
+      </div>
+      <div class="caja oculto" id="caja-admin">
+        <h2>🛠️ Admin: activar modo celular</h2>
+        <label for="a-email">Email del cliente</label>
+        <input id="a-email" type="email" inputmode="email" autocapitalize="off">
+        <label for="a-dias">Días</label>
+        <input id="a-dias" type="number" value="30" inputmode="numeric">
+        <div class="fila" style="margin-top:12px">
+          <button class="boton principal" id="b-admin-dar" type="button">Activar</button>
+          <button class="boton rojo" id="b-admin-sacar" type="button">Sacar</button>
+        </div>
+        <div class="registro" id="admin-lista" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="abajo oculto" id="nav">
+  <button type="button" data-ir="inicio" class="activa"><span class="e">🏠</span>Inicio</button>
+  <button type="button" data-ir="botonera"><span class="e">🎛️</span>Botonera</button>
+  <button type="button" data-ir="lector"><span class="e">🗣️</span>Lector</button>
+  <button type="button" data-ir="regalos"><span class="e">🎁</span>Regalos</button>
+  <button type="button" data-ir="cuenta"><span class="e">👤</span>Cuenta</button>
+</nav>
+<div id="toast" class="oculto"></div>
+
+<script src="../config.js"></script>
+<script type="module">
+const SERVIDOR = 'wss://nube-production-3662.up.railway.app/ws';
+const CFG = window.TIKLIVE_CONFIG;
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => [...document.querySelectorAll(s)];
+const ver = (id) => ['#v-entrar', '#v-plan', '#v-app'].forEach((x) => $(x).classList.toggle('oculto', x !== id));
+const toast = (t) => { const e = $('#toast'); e.textContent = t; e.classList.remove('oculto'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.add('oculto'), 3000); };
+const leerLS = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+const guardarLS = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+
+const ROBOTS = [
+  ['guante', '🥊', 'Guante'], ['guante dorado', '🏆', 'Guante dorado'], ['neblina', '🌫️', 'Neblina'],
+  ['martillo', '🔨', 'Martillo'], ['x2', '⚡', 'x2'], ['x3', '🔥', 'x3'],
+  ['numero 2', '🥈', 'N.º 2'], ['numero 3', '🥉', 'N.º 3'], ['tiempo', '⏱️', '+Tiempo'],
+  ['snipe', '🎯', 'Snipe'], ['musica', '🎵', 'Música'],
+];
+const ARCHIVO = { guante: 'pot_robot_guante.webm', 'guante dorado': 'pot_robot_guante_dorado.webm', neblina: 'pot_robot_neblina.webm', martillo: 'pot_robot_martillo.webm', 'numero 2': 'pot_robot_n2.webm', 'numero 3': 'pot_robot_n3.webm', x2: 'pot_robot_x2.webm', x3: 'pot_robot_x3.webm', tiempo: 'pot_robot_tiempo.webm', snipe: 'pot_robot_snipe.webm', musica: 'pot_robot_musica.webm' };
+let MEDIA = new URL('robots/', location.href).href;
+
+let auth = null, A = null, ws = null, cfg = null, cuenta = null, sala = '';
+
+// ---------- Pestañas ----------
+$$('[data-ir]').forEach((b) => b.onclick = () => {
+  $$('[data-ir]').forEach((x) => x.classList.toggle('activa', x === b));
+  $$('[data-pestana]').forEach((p) => p.classList.toggle('oculto', p.dataset.pestana !== b.dataset.ir));
+  scrollTo(0, 0);
+});
+$$('#plataformas button').forEach((b) => b.onclick = () => { if (b.dataset.p !== 'tiktok') toast(`${b.textContent.replace('Próximamente', '').trim()}: muy pronto. Por ahora, TikTok.`); });
+
+// ---------- Firebase ----------
+async function iniciar() {
+  const V = '10.12.2';
+  const { initializeApp } = await import(`https://www.gstatic.com/firebasejs/${V}/firebase-app.js`);
+  A = await import(`https://www.gstatic.com/firebasejs/${V}/firebase-auth.js`);
+  auth = A.getAuth(initializeApp(CFG.firebaseConfig)); auth.languageCode = 'es';
+  A.getRedirectResult(auth).catch((e) => mostrarError(e));
+  A.onAuthStateChanged(auth, (u) => { if (u) conectarServidor(); else { cerrarWS(); ver('#v-entrar'); $('#nav').classList.add('oculto'); } });
+}
+const ERRORES = { 'auth/invalid-credential': 'Email o contraseña incorrectos.', 'auth/wrong-password': 'Contraseña incorrecta.', 'auth/user-not-found': 'No hay una cuenta con ese email.', 'auth/email-already-in-use': 'Ese email ya tiene cuenta: tocá Entrar.', 'auth/weak-password': 'La contraseña tiene que tener al menos 6 letras o números.', 'auth/invalid-email': 'Ese email no es válido.', 'auth/popup-closed-by-user': 'Se cerró la ventana de Google.' };
+function mostrarError(e) { if (!e) return; const t = ERRORES[e.code] || e.message || String(e); const a = $('#aviso-entrar'); a.textContent = t; a.classList.remove('oculto'); }
+$('#b-google').onclick = async () => {
+  const p = new A.GoogleAuthProvider();
+  try { await A.signInWithPopup(auth, p); }
+  catch (e) { if (/popup-blocked|operation-not-supported/.test(e.code || '')) A.signInWithRedirect(auth, p); else mostrarError(e); }
+};
+$('#b-entrar').onclick = () => A.signInWithEmailAndPassword(auth, $('#email').value.trim(), $('#clave').value).catch(mostrarError);
+$('#b-crear').onclick = () => A.createUserWithEmailAndPassword(auth, $('#email').value.trim(), $('#clave').value).catch(mostrarError);
+$$('[data-salir]').forEach((b) => b.onclick = () => { cerrarWS(); A.signOut(auth); });
+
+// ---------- Servidor ----------
+let espera = 1000, cerrando = false;
+function cerrarWS() { cerrando = true; try { ws && ws.close(); } catch {} ws = null; }
+async function conectarServidor() {
+  cerrando = false;
+  const u = auth.currentUser; if (!u) return;
+  const token = await u.getIdToken();
+  try { ws && ws.close(); } catch {}
+  ws = new WebSocket(SERVIDOR);
+  ws.onopen = () => { espera = 1000; enviar({ tipo: 'hola', token, cfg: leerLS('tla_cfg', null) }); };
+  ws.onmessage = (e) => { let m; try { m = JSON.parse(e.data); } catch { return; } recibir(m); };
+  ws.onclose = () => { if (cerrando) return; pintarEstado({ mensaje: 'sinServidor' }); setTimeout(conectarServidor, espera); espera = Math.min(espera * 2, 15000); };
+}
+const enviar = (m) => { if (ws && ws.readyState === 1) ws.send(JSON.stringify(m)); else toast('Sin conexión con el servidor, reintentando…'); };
+
+function recibir(m) {
+  if (m.tipo === 'bienvenido') {
+    cuenta = m.cuenta; sala = m.sala; cfg = m.cfg; if (m.media) MEDIA = m.media;
+    ver('#v-app'); $('#nav').classList.remove('oculto');
+    pintarCuenta(); pintarCfg(); pintarEstado(m.estado, m.overlays);
+    $('#registro').innerHTML = ''; (m.registro || []).forEach((r) => agregar('#registro', r.texto));
+    if (!(m.registro || []).length) $('#registro').innerHTML = '<div class="suave">Todavía nada.</div>';
+    if (cuenta.admin) { $('#caja-admin').classList.remove('oculto'); enviar({ tipo: 'admin-lista' }); }
+  }
+  else if (m.tipo === 'estado') pintarEstado(m.estado, m.overlays);
+  else if (m.tipo === 'cfg') { cfg = m.cfg; guardarLS('tla_cfg', cfg); }
+  else if (m.tipo === 'registro') agregar('#registro', m.texto);
+  else if (m.tipo === 'chat') agregar('#chat', `<b>${esc(m.usuario)}:</b> ${esc(m.texto)}`, true);
+  else if (m.tipo === 'aviso') toast(m.texto);
+  else if (m.tipo === 'admin') pintarAdmin(m.lista);
+  else if (m.tipo === 'error') {
+    if (m.codigo === 'plan') { cerrando = true; mostrarPlan(m.texto, m.precio); }
+    else toast(m.texto);
+  }
+}
+const esc = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function agregar(sel, html, esHtml) {
+  const caja = $(sel); if (caja.querySelector('.suave')) caja.innerHTML = '';
+  const d = document.createElement('div'); if (esHtml) d.innerHTML = html; else d.textContent = html;
+  caja.prepend(d); while (caja.children.length > 60) caja.lastChild.remove();
+}
+
+function mostrarPlan(texto, precio) {
+  const u = auth.currentUser;
+  ver('#v-plan'); $('#nav').classList.add('oculto');
+  $('#txt-plan').textContent = texto; $('#mail-plan').textContent = u?.email || '';
+  $('#b-paypal').href = `https://www.paypal.com/paypalme/${CFG.pagos?.paypal || 'agrogrow'}/${precio || 20}USD`;
+  $('#b-yapague').href = `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(`¡Hola! Pagué TIKLIVEauto modo celular (${precio || 20} USD). Mi email es ${u?.email || ''}`)}`;
+}
+
+function pintarCuenta() {
+  const dias = Math.ceil(((cuenta.vence || 0) - Date.now()) / 864e5);
+  const chip = $('#chip-plan');
+  if (cuenta.admin) { chip.className = 'chip premium'; chip.textContent = '🛠️ Admin'; }
+  else if (cuenta.plan === 'premium') { chip.className = 'chip premium'; chip.textContent = '⭐ Celular'; }
+  else { chip.className = 'chip prueba'; chip.textContent = `🎁 Prueba: ${Math.max(0, dias)} día${dias === 1 ? '' : 's'}`; }
+  $('#txt-cuenta').innerHTML = `${esc(cuenta.email)}<br>${cuenta.admin ? 'Administrador' : cuenta.plan === 'premium' ? `Modo celular activo hasta el ${new Date(cuenta.vence).toLocaleDateString('es')}` : `Prueba gratis: te quedan ${Math.max(0, dias)} días. Después, ${cuenta.precio} USD por mes.`}`;
+  const enlace = new URL(`overlay.html?sala=${sala}`, location.href).href;
+  $('#enlace').textContent = enlace;
+}
+
+const MENSAJES = {
+  conectado: ['ok', 'Conectado a tu LIVE'], conectando: ['medio', 'Conectando…'], reconectando: ['medio', 'Reconectando…'],
+  esperandoLive: ['medio', 'Esperando que empieces el LIVE'], noEncontrado: ['mal', 'No encuentro tu LIVE'],
+  limite: ['mal', 'TikTok está limitando conexiones: reintento solo'], error: ['mal', 'No se pudo conectar: reintento solo'],
+  faltaUsuario: ['mal', 'Escribí tu usuario de TikTok'], desconectado: ['', 'Sin conectar'], sinServidor: ['mal', 'Sin conexión con el servidor'],
+};
+function pintarEstado(e = {}, overlays) {
+  const [cl, txt] = MENSAJES[e.mensaje] || ['', e.mensaje || 'Sin conectar'];
+  $('#punto').className = 'punto ' + cl;
+  $('#txt-estado').textContent = txt;
+  $('#txt-estado2').textContent = e.conectado && e.espectadores ? `👀 ${e.espectadores} mirando` : e.mensaje === 'noEncontrado' ? 'Revisá el usuario, o empezá el LIVE: reintento solo.' : '';
+  const activo = e.conectado || e.conectando || ['esperandoLive', 'reconectando', 'noEncontrado', 'limite', 'error'].includes(e.mensaje);
+  $('#b-conectar').classList.toggle('oculto', !!activo);
+  $('#b-desconectar').classList.toggle('oculto', !activo);
+  if (overlays !== undefined) $('#txt-overlay').innerHTML = overlays ? '<b style="color:var(--verde)">Enlace abierto en PRISM ✅</b>' : 'Todavía no está abierto en PRISM.';
+}
+
+function pintarCfg() {
+  $('#usuario').value = cfg.usuario ? '@' + cfg.usuario : '';
+  $('#l-activo').checked = cfg.lector.activo; $('#l-seguidores-solo').checked = cfg.lector.quien === 'seguidores';
+  $('#l-regalos').checked = cfg.lector.regalos; $('#l-follows').checked = cfg.lector.seguidores;
+  $('#l-voz').value = cfg.lector.voz; $('#l-vel').value = cfg.lector.velocidad; $('#l-vel-t').textContent = cfg.lector.velocidad;
+  $('#vol').value = cfg.volumen; $('#vol-t').textContent = cfg.volumen;
+  $('#b-auto').checked = cfg.potenciadores; $('#b-mios').checked = cfg.soloMios;
+  pintarEventos();
+  guardarLS('tla_cfg', cfg);
+}
+const mandarCfg = (parte) => { Object.assign(cfg, parte); enviar({ tipo: 'cfg', cfg: parte }); };
+const lector = () => ({ lector: { activo: $('#l-activo').checked, quien: $('#l-seguidores-solo').checked ? 'seguidores' : 'todos', regalos: $('#l-regalos').checked, seguidores: $('#l-follows').checked, voz: $('#l-voz').value, velocidad: Number($('#l-vel').value) } });
+['#l-activo', '#l-seguidores-solo', '#l-regalos', '#l-follows', '#l-voz'].forEach((s) => $(s).onchange = () => mandarCfg(lector()));
+$('#l-vel').oninput = () => { $('#l-vel-t').textContent = $('#l-vel').value; };
+$('#l-vel').onchange = () => mandarCfg(lector());
+$('#vol').oninput = () => { $('#vol-t').textContent = $('#vol').value; };
+$('#vol').onchange = () => mandarCfg({ volumen: Number($('#vol').value) });
+$('#b-auto').onchange = () => mandarCfg({ potenciadores: $('#b-auto').checked });
+$('#b-mios').onchange = () => mandarCfg({ soloMios: $('#b-mios').checked });
+$('#b-probar-voz').onclick = () => enviar({ tipo: 'decir', texto: '¡Hola! Así suena la voz del lector en tu LIVE.' });
+
+$('#b-conectar').onclick = () => { const u = $('#usuario').value.trim(); if (!u) return toast('Escribí tu usuario de TikTok'); enviar({ tipo: 'conectar', usuario: u }); };
+$('#b-desconectar').onclick = () => enviar({ tipo: 'desconectar' });
+$('#b-copiar').onclick = async () => { const t = $('#enlace').textContent; try { await navigator.clipboard.writeText(t); toast('✅ Enlace copiado. Pegalo en PRISM → Widget → Web'); } catch { prompt('Copiá este enlace:', t); } };
+
+// ---------- Botonera ----------
+$('#robots').innerHTML = ROBOTS.map(([id, e, n]) => `<button type="button" data-r="${id}"><span class="e">${e}</span>${n}</button>`).join('');
+$$('#robots button').forEach((b) => b.onclick = () => { enviar({ tipo: 'robot', cual: b.dataset.r }); navigator.vibrate?.(30); });
+$('#b-cortar').onclick = () => enviar({ tipo: 'cortar' });
+$('#b-decir').onclick = () => { const t = $('#decir').value.trim(); if (t) { enviar({ tipo: 'decir', texto: t }); $('#decir').value = ''; } };
+
+// ---------- Regalos ----------
+function opcionesAnim(url) {
+  const ops = ROBOTS.map(([id, , n]) => { const u = MEDIA + ARCHIVO[id]; return `<option value="${u}" ${u === url ? 'selected' : ''}>🤖 Robot ${n}</option>`; }).join('');
+  const propio = url && !url.startsWith(MEDIA);
+  return ops + `<option value="propio" ${propio ? 'selected' : ''}>🔗 Mi animación (link)</option>`;
+}
+function filaEvento(ev = {}) {
+  const d = document.createElement('div'); d.className = 'evento';
+  const propio = ev.url && !ev.url.startsWith(MEDIA);
+  d.innerHTML = `<div class="fila"><input class="ev-regalo" placeholder="Regalo (vacío = cualquiera)" value="${esc(ev.regalo || '')}"><input class="ev-min" type="number" inputmode="numeric" min="1" placeholder="Monedas mín." value="${ev.minMonedas || 1}" style="max-width:110px"></div>
+    <label>Animación</label><select class="ev-anim">${opcionesAnim(ev.url)}</select>
+    <input class="ev-url ${propio ? '' : 'oculto'}" placeholder="https://… (video .webm o .mp4)" value="${propio ? esc(ev.url) : ''}" style="margin-top:8px">
+    <button type="button" class="boton rojo ev-borrar" style="margin-top:8px;padding:9px">Quitar</button>`;
+  d.querySelector('.ev-anim').onchange = (e) => d.querySelector('.ev-url').classList.toggle('oculto', e.target.value !== 'propio');
+  d.querySelector('.ev-borrar').onclick = () => d.remove();
+  return d;
+}
+function pintarEventos() { const c = $('#eventos'); c.innerHTML = ''; (cfg.eventos || []).forEach((ev) => c.append(filaEvento(ev))); if (!cfg.eventos?.length) c.append(filaEvento({ regalo: 'Rosa', url: MEDIA + ARCHIVO.guante })); }
+$('#b-agregar-ev').onclick = () => $('#eventos').append(filaEvento());
+$('#b-guardar-ev').onclick = () => {
+  const eventos = $$('#eventos .evento').map((d) => {
+    const sel = d.querySelector('.ev-anim').value;
+    return { regalo: d.querySelector('.ev-regalo').value.trim(), minMonedas: Number(d.querySelector('.ev-min').value) || 1, url: sel === 'propio' ? d.querySelector('.ev-url').value.trim() : sel };
+  }).filter((e) => /^https:\/\//.test(e.url));
+  mandarCfg({ eventos }); toast('✅ Guardado');
+};
+
+// ---------- Admin ----------
+function pintarAdmin(lista = []) {
+  $('#admin-lista').innerHTML = lista.map((c) => `<div><b>${esc(c.email)}</b><br><span class="suave">${c.celularHasta > Date.now() ? '⭐ Pagó hasta ' + new Date(c.celularHasta).toLocaleDateString('es') : c.pruebaHasta > Date.now() ? '🎁 Prueba hasta ' + new Date(c.pruebaHasta).toLocaleDateString('es') : '— Vencido'}</span></div>`).join('') || '<div class="suave">Nadie usó el modo celular todavía.</div>';
+}
+$('#b-admin-dar').onclick = () => enviar({ tipo: 'admin-dar', email: $('#a-email').value, dias: Number($('#a-dias').value) || 30 });
+$('#b-admin-sacar').onclick = () => { if (confirm('¿Sacarle el modo celular a ' + $('#a-email').value + '?')) enviar({ tipo: 'admin-dar', email: $('#a-email').value, dias: -1 }); };
+
+// Al volver a la app, se reconecta enseguida
+document.addEventListener('visibilitychange', () => { if (!document.hidden && auth?.currentUser && (!ws || ws.readyState > 1)) conectarServidor(); });
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+iniciar().catch((e) => { ver('#v-entrar'); mostrarError(e); });
+</script>
+</body>
+</html>
