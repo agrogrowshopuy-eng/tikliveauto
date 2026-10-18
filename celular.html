@@ -35,6 +35,8 @@
   .requisitos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
   .pronto { border-style: dashed; }
   @media (max-width: 520px) { .abrir .fila .boton { width: 100%; } }
+.en-prueba { display: inline-block; margin-bottom: 10px; padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .08em; color: #ffe3a3; background: rgba(255,200,60,.14); border: 1px solid rgba(255,200,60,.55); }
+.aviso-prueba { color: #ffe3a3 !important; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -127,9 +129,11 @@
     <div class="ancho">
       <h2>¿No tenés PC? Modo solo celular</h2>
       <div class="abrir">
+        <span class="en-prueba">🧪 EN PRUEBA · MUY PRONTO</span>
         <h3>📲 TIKLIVEauto Celular</h3>
+        <p class="aviso-prueba">Esta versión está en etapa de prueba. Muy pronto va a estar disponible para el público.</p>
         <p>Transmití desde el celular con PRISM Live y TIKLIVEauto funciona en internet: robots de batalla automáticos, animaciones por regalo y lector del chat con voz. <b>15 días gratis</b>, después 20 USD por mes.</p>
-        <a class="boton principal" href="app/" style="width:100%;justify-content:center">Abrir TIKLIVEauto Celular</a>
+        <span class="boton" aria-disabled="true" style="width:100%;justify-content:center;opacity:.6;cursor:default">⏳ Disponible muy pronto</span>
       </div>
     </div>
   </section>
