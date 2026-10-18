@@ -65,10 +65,10 @@
 
   <div class="ancho">
     <ul class="datos">
-      <li><b>16</b><span>personajes con voz</span></li>
-      <li><b>11</b><span>robots de batalla</span></li>
+      <li><b data-n="16">16</b><span>personajes con voz</span></li>
+      <li><b data-n="11">11</b><span>robots de batalla</span></li>
       <li><b>1</b><span>link en LIVE Studio</span></li>
-      <li><b>30</b><span>días gratis con todo</span></li>
+      <li><b data-n="30">30</b><span>días gratis con todo</span></li>
     </ul>
   </div>
 
@@ -79,6 +79,51 @@
       <span class="boton chico principal">Ver packs</span>
     </a>
   </div>
+
+  <section id="comparacion" class="versus">
+    <div class="ancho">
+      <h2>Con TIKLIVEauto <span class="grad">vs</span> a mano</h2>
+      <p class="sub">Lo mismo pasa en todos los LIVE. La diferencia es quién se encarga.</p>
+      <div class="vs-tabla" role="table" aria-label="Comparación entre hacerlo a mano y con TIKLIVEauto">
+        <div class="vs-fila vs-cabeza" role="row">
+          <span role="columnheader">En tu LIVE…</span>
+          <span role="columnheader" class="vs-mano">😓 A mano</span>
+          <span role="columnheader" class="vs-tla">⚡ Con TIKLIVEauto</span>
+        </div>
+        <div class="vs-fila" role="row">
+          <span role="cell" class="vs-evento"><i>🌹</i>Ana te manda una rosa</span>
+          <span role="cell" class="vs-mano">Dejás de hablar, buscás el video y le das play</span>
+          <span role="cell" class="vs-tla">Su video sale solo en pantalla</span>
+        </div>
+        <div class="vs-fila" role="row">
+          <span role="cell" class="vs-evento"><i>💬</i>Leo escribe mientras cantás</span>
+          <span role="cell" class="vs-mano">Lo leés al terminar… si te acordás</span>
+          <span role="cell" class="vs-tla">Se lee en voz alta con un personaje</span>
+        </div>
+        <div class="vs-fila" role="row">
+          <span role="cell" class="vs-evento"><i>🥊</i>Te tiran un guante en la batalla</span>
+          <span role="cell" class="vs-mano">Buscás la animación y llega tarde</span>
+          <span role="cell" class="vs-tla">El robot del guante sale solo</span>
+        </div>
+        <div class="vs-fila" role="row">
+          <span role="cell" class="vs-evento"><i>😂</i>Alguien escribe !risa</span>
+          <span role="cell" class="vs-mano">No pasa nada</span>
+          <span role="cell" class="vs-tla">Suena la risa en tu LIVE</span>
+        </div>
+        <div class="vs-fila" role="row">
+          <span role="cell" class="vs-evento"><i>⭐</i>Entra un seguidor nuevo</span>
+          <span role="cell" class="vs-mano">Se pierde entre los comentarios</span>
+          <span role="cell" class="vs-tla">Recibe su bienvenida automática</span>
+        </div>
+        <div class="vs-fila vs-marcador" role="row">
+          <span role="cell">Momentos aprovechados</span>
+          <span role="cell" class="vs-mano"><b>0</b> de 5</span>
+          <span role="cell" class="vs-tla"><b>5</b> de 5 <em>🏆 GANA</em></span>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:24px"><a class="boton principal" href="cuenta.html?registro=1">⬇️ Probar 1 mes gratis</a></p>
+    </div>
+  </section>
 
   <section id="funciones">
     <div class="ancho">
@@ -188,6 +233,10 @@
       <details><summary>¿Necesito Tikfinity u otro programa?</summary><p>No. TIKLIVEauto se conecta directo a tu LIVE. Si alguna vez falla, puede usar Tikfinity como respaldo.</p></details>
       <details><summary>¿Lo puedo usar desde el celular?</summary><p>Sí. La botonera se instala en Android o iPhone como una app y maneja el programa de tu PC por WiFi. <a href="celular.html">Mirá cómo hacerlo</a>.</p></details>
       <details><summary>¿Qué pasa cuando termina el mes gratis?</summary><p>Seguís usándolo gratis con menos funciones, o pasás a Premium por 12 USD al mes (o $ 500 uruguayos con Mercado Pago). Al terminar la prueba no se te cobra nada: solo pagás si vos elegís suscribirte.</p></details>
+      <details><summary>¿Cómo pago el Premium?</summary><p>Con PayPal (12 USD por mes) o con Mercado Pago ($ 500 uruguayos por mes, con tarjeta). Si tenés alguna duda con el pago, <a href="https://wa.me/59898993720" target="_blank" rel="noopener">escribinos por WhatsApp</a>.</p></details>
+      <details><summary>¿Puedo dejar de pagar cuando quiera?</summary><p>Sí. No hay permanencia: si dejás de pagar, el programa sigue funcionando con el plan Gratis.</p></details>
+      <details><summary>¿Funciona en Mac?</summary><p>Por ahora el programa es para Windows 10 y 11. La botonera del celular sí funciona en Android y iPhone.</p></details>
+      <details><summary>¿Y si algo no me funciona?</summary><p>Mirá la guía paso a paso (PDF) o la ayuda dentro del programa. Si seguís trabado, <a href="https://wa.me/59898993720" target="_blank" rel="noopener">te ayudamos por WhatsApp</a>.</p></details>
       <details><summary>¿Windows me muestra "Windows protegió su PC"?</summary><p>Es normal en programas nuevos. Tocá "Más información" y después "Ejecutar de todas formas".</p></details>
       <details><summary>¿Las voces son de famosos?</summary><p>No. Son personajes originales con voces de Microsoft. Imitar voces de famosos o personajes con dueño no está permitido y TikTok puede sancionar el LIVE.</p></details>
     </div>
@@ -236,6 +285,42 @@
       el.classList.add('revelar'); el.style.setProperty('--d', (i % 4) * 70 + 'ms'); obs.observe(el);
     });
   } catch (err) { document.querySelectorAll('.revelar').forEach(function (el) { el.classList.add('visto'); }); }
+})();
+</script>
+<script>
+/* Comparación animada y contadores: si algo falla, la página queda igual que sin esto */
+(function () {
+  try {
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function contar(el, hasta, ms) {
+      var t0 = null;
+      function paso(t) { if (!t0) t0 = t; var p = Math.min((t - t0) / ms, 1); el.textContent = Math.round(hasta * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(paso); }
+      requestAnimationFrame(paso);
+    }
+    /* Números de la franja: suben de 0 hasta su valor al aparecer */
+    var nums = [];
+    document.querySelectorAll('.datos b').forEach(function (b) { var n = parseInt(b.textContent, 10); if (n > 1) { nums.push([b, n]); b.textContent = '0'; } });
+    if (nums.length) new IntersectionObserver(function (e, o) { if (e[0].isIntersecting) { o.disconnect(); nums.forEach(function (x) { contar(x[0], x[1], 1400); }); } }, { threshold: .4 }).observe(document.querySelector('.datos'));
+    /* Comparación: las filas se resuelven una por una y suma el marcador */
+    var tabla = document.querySelector('.vs-tabla');
+    if (!tabla) return;
+    var filas = tabla.querySelectorAll('.vs-fila:not(.vs-cabeza):not(.vs-marcador)');
+    var marca = tabla.querySelector('.vs-marcador .vs-tla b');
+    tabla.classList.add('jugar'); if (marca) marca.textContent = '0';
+    new IntersectionObserver(function (e, o) {
+      if (!e[0].isIntersecting) return; o.disconnect();
+      filas.forEach(function (f, i) {
+        setTimeout(function () {
+          filas.forEach(function (x) { x.classList.remove('ahora'); });
+          f.classList.add('ahora', 'hecha'); if (marca) marca.textContent = String(i + 1);
+          if (i === filas.length - 1) setTimeout(function () { f.classList.remove('ahora'); tabla.classList.add('final'); }, 650);
+        }, 350 + i * 650);
+      });
+    }, { threshold: .35 }).observe(tabla);
+  } catch (err) {
+    var t = document.querySelector('.vs-tabla'); if (t) { t.classList.remove('jugar'); var m = t.querySelector('.vs-marcador .vs-tla b'); if (m) m.textContent = '5'; }
+    document.querySelectorAll('.datos b').forEach(function (b) { if (b.textContent === '0') b.textContent = b.getAttribute('data-n') || b.textContent; });
+  }
 })();
 </script>
 </body>
