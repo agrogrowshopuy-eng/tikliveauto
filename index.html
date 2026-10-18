@@ -23,12 +23,14 @@
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"TIKLIVEauto","alternateName":"Tikliveauto","operatingSystem":"Windows","applicationCategory":"MultimediaApplication","inLanguage":"es","url":"https://agrogrowshopuy-eng.github.io/tikliveauto/","image":"https://agrogrowshopuy-eng.github.io/tikliveauto/img/captura_inicio.jpg","description":"Programa para Windows que le da vida a tus TikTok LIVE: alertas con videos por regalo, botonera, lector del chat con voces, sonidos, cambio de voz y tu marca en pantalla. 1 mes gratis.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Gonzalo Díaz","alternateName":"santaplanta33","sameAs":["https://www.tiktok.com/@santaplanta33"]},"publisher":{"@type":"Organization","name":"TIKLIVEauto","url":"https://agrogrowshopuy-eng.github.io/tikliveauto/","logo":"https://agrogrowshopuy-eng.github.io/tikliveauto/img/logo.png"}}
 </script>
 <link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Unbounded:wght@600;800&display=swap">
 <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
 <header class="barra">
   <div class="ancho">
     <a class="marca" href="./"><img src="img/logo.png" alt="TIKLIVEauto"></a>
+    <button class="menu-cel" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav>
       <a class="opcional" href="#funciones">Funciones</a>
       <a class="opcional" href="packs.html">Packs</a>
@@ -52,13 +54,28 @@
       </div>
       <p class="nota">Para Windows 10 y 11 · Funciona con TikTok LIVE Studio · Sin tarjeta para la prueba</p>
     </div>
-    <div class="imagen"><img src="img/captura_inicio.jpg" alt="Centro de control de TIKLIVEauto" width="1280" height="800"></div>
+    <div class="imagen escena">
+      <img src="img/captura_inicio.jpg" alt="Centro de control de TIKLIVEauto" width="1280" height="800">
+      <div class="telefono" aria-label="Video de muestra de TIKLIVEauto">
+        <video src="TIKLIVEauto_promo.mp4" poster="img/promo_portada.jpg" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+      <span class="en-vivo">● EN VIVO</span>
+    </div>
+  </div>
+
+  <div class="ancho">
+    <ul class="datos">
+      <li><b>16</b><span>personajes con voz</span></li>
+      <li><b>11</b><span>robots de batalla</span></li>
+      <li><b>1</b><span>link en LIVE Studio</span></li>
+      <li><b>30</b><span>días gratis con todo</span></li>
+    </ul>
   </div>
 
   <div class="ancho" style="padding-bottom:10px">
-    <a href="packs.html" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;text-decoration:none;color:var(--texto);background:rgba(12,20,36,.9);border:1px solid var(--rosa);border-radius:16px;padding:14px 18px;box-shadow:0 0 24px rgba(255,45,149,.18)">
-      <span style="font-size:26px">🎃🔮</span>
-      <span style="flex:1;min-width:200px"><b>Nuevo: packs de animaciones</b><br><span style="color:var(--suave);font-size:15px">Pack Halloween y serie Enigmas, con fondo transparente y sonido.</span></span>
+    <a class="aviso-packs" href="packs.html">
+      <span class="emoji">🎃🔮</span>
+      <span class="texto"><b>Nuevo: packs de animaciones</b><br><span>Pack Halloween y serie Enigmas, con fondo transparente y sonido.</span></span>
       <span class="boton chico principal">Ver packs</span>
     </a>
   </div>
@@ -193,6 +210,33 @@
     <a class="der" href="https://wa.me/59898993720" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </footer>
+<a class="cta-fija" href="cuenta.html?registro=1">⬇️ Probar 1 mes gratis</a>
 <script>document.getElementById('anio').textContent = new Date().getFullYear();</script>
+<script>
+/* Mejoras visuales: si algo falla acá, la página igual funciona como antes */
+(function () {
+  try {
+    var barra = document.querySelector('.barra'), boton = document.querySelector('.menu-cel');
+    if (boton) {
+      boton.addEventListener('click', function () {
+        var abierto = barra.classList.toggle('abierto');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      });
+      barra.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { barra.classList.remove('abierto'); boton.setAttribute('aria-expanded', 'false'); }); });
+    }
+    var cta = document.querySelector('.cta-fija'), portada = document.querySelector('.portada .acciones');
+    var calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var video = document.querySelector('.telefono video');
+    if (video && calmo) { video.removeAttribute('autoplay'); video.pause(); video.controls = true; }
+    if (!('IntersectionObserver' in window)) return;
+    if (cta && portada) new IntersectionObserver(function (e) { cta.classList.toggle('ver', !e[0].isIntersecting && e[0].boundingClientRect.top < 0); }).observe(portada);
+    if (calmo) return;
+    var obs = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visto'); obs.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('section h2, section .sub, .tarjeta, .capturas figure, .plan, details, .datos li').forEach(function (el, i) {
+      el.classList.add('revelar'); el.style.setProperty('--d', (i % 4) * 70 + 'ms'); obs.observe(el);
+    });
+  } catch (err) { document.querySelectorAll('.revelar').forEach(function (el) { el.classList.add('visto'); }); }
+})();
+</script>
 </body>
 </html>

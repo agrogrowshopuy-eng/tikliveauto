@@ -150,3 +150,135 @@ footer .der { margin-left: auto; }
 /* Evita que las imágenes se deformen al tener width/height */
 img { max-width: 100%; height: auto; }
 .barra .marca img { width: auto; }
+
+/* ===== Mejoras de diseño (18/10/2026) — solo suman, no cambian nombres de clases ===== */
+body { font-family: 'Manrope', system-ui, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, .plan .precio, .datos b { font-family: 'Unbounded', 'Manrope', system-ui, sans-serif; letter-spacing: -.02em; }
+h1 { font-weight: 800; } h2 { font-weight: 600; }
+.portada h1 { font-size: clamp(30px, 4.4vw, 50px); line-height: 1.08; }
+section h2 { font-size: clamp(24px, 3.1vw, 34px); }
+section .sub { max-width: 640px; }
+:focus-visible { outline: 2px solid var(--cel); outline-offset: 3px; border-radius: 6px; }
+::selection { background: var(--rosa); color: #fff; }
+
+/* Botón principal con brillo que pasa */
+.boton.principal { position: relative; overflow: hidden; }
+.boton.principal::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%); transform: translateX(-120%); animation: brillo 4.5s ease-in-out infinite; pointer-events: none; }
+@keyframes brillo { 0%, 70% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+/* Portada: captura + celular con el video promo */
+.escena { position: relative; padding: 10px 70px 40px 0; }
+.escena > img { transform: perspective(1400px) rotateY(-8deg) rotateX(3deg); transform-origin: left center; }
+.telefono { position: absolute; right: 0; bottom: 0; width: 34%; max-width: 210px; aspect-ratio: 9 / 16; border-radius: 26px; padding: 7px;
+  background: linear-gradient(160deg, #1b2a44, #070b16); border: 1px solid rgba(34,229,255,.45);
+  box-shadow: 0 24px 60px rgba(0,0,0,.65), 0 0 36px rgba(255,45,149,.35); animation: flotar 6s ease-in-out infinite; }
+.telefono video { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; display: block; background: #060913; }
+.en-vivo { position: absolute; top: 0; left: 18px; font: 800 12px/1 'Manrope', sans-serif; letter-spacing: .12em; padding: 7px 11px; border-radius: 999px;
+  color: #fff; background: #ff2d55; box-shadow: 0 0 18px rgba(255,45,85,.6); }
+@keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@media (max-width: 860px) {
+  .logo-grande { width: min(240px, 66%); }
+  .escena { padding: 18px 56px 30px 0; margin-top: 6px; }
+  .escena > img { transform: none; }
+  .telefono { width: 36%; max-width: 150px; border-radius: 20px; padding: 5px; }
+  .telefono video { border-radius: 15px; }
+}
+
+/* Franja de datos */
+.datos { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 4px 0 26px; border: 1px solid var(--borde); border-radius: 18px; overflow: hidden; background: var(--borde); }
+.datos li { background: rgba(10,16,30,.95); padding: 18px 16px; display: flex; align-items: baseline; gap: 10px; }
+.datos b { font-size: 30px; background: linear-gradient(90deg, var(--cel), var(--rosa)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.datos span { color: var(--suave); font-size: 14px; line-height: 1.3; }
+@media (max-width: 760px) { .datos { grid-template-columns: 1fr 1fr; } .datos li { flex-direction: column; gap: 2px; padding: 14px; } .datos b { font-size: 24px; } }
+
+/* Aviso de packs (antes con estilos sueltos) */
+.aviso-packs { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; text-decoration: none; color: var(--texto); border-radius: 16px; padding: 14px 18px;
+  background: linear-gradient(rgba(12,20,36,.95), rgba(12,20,36,.95)) padding-box, linear-gradient(120deg, var(--rosa), #ff9d2d, var(--violeta)) border-box;
+  border: 1px solid transparent; box-shadow: 0 0 24px rgba(255,45,149,.18); transition: transform .2s, box-shadow .2s; }
+.aviso-packs:hover { transform: translateY(-2px); box-shadow: 0 0 34px rgba(255,45,149,.32); }
+.aviso-packs .emoji { font-size: 26px; }
+.aviso-packs .texto { flex: 1; min-width: 200px; }
+.aviso-packs .texto span { color: var(--suave); font-size: 15px; }
+
+/* Tarjetas con más vida */
+.tarjeta { position: relative; transition: transform .25s, border-color .25s, box-shadow .25s; }
+.grilla .tarjeta:hover { transform: translateY(-4px); border-color: rgba(34,229,255,.55); box-shadow: 0 14px 36px rgba(0,0,0,.4), 0 0 22px rgba(34,229,255,.14); }
+.tarjeta .ico { width: 52px; height: 52px; display: grid; place-items: center; font-size: 26px; border-radius: 14px; margin-bottom: 12px;
+  background: linear-gradient(135deg, rgba(34,229,255,.16), rgba(255,45,149,.16)); border: 1px solid rgba(34,229,255,.22); }
+@media (max-width: 620px) {
+  .grilla { grid-template-columns: 1fr; gap: 10px; }
+  .grilla .tarjeta { display: grid; grid-template-columns: 46px 1fr; column-gap: 14px; padding: 16px; }
+  .grilla .tarjeta .ico { width: 46px; height: 46px; font-size: 22px; margin: 0; grid-row: span 2; }
+  .grilla .tarjeta h3 { font-size: 17px; margin-bottom: 2px; }
+  .grilla .tarjeta p { font-size: 14.5px; }
+}
+
+/* Capturas: en celular se deslizan de costado */
+.capturas figure { transition: transform .25s, border-color .25s; }
+.capturas figure:hover { transform: translateY(-4px); border-color: rgba(255,45,149,.5); }
+@media (max-width: 700px) {
+  .capturas { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -20px; padding: 0 20px 8px; scrollbar-width: none; }
+  .capturas::-webkit-scrollbar { display: none; }
+  .capturas figure { flex: 0 0 84%; scroll-snap-align: center; }
+}
+
+/* Pasos unidos por una línea */
+.pasos { position: relative; }
+@media (min-width: 761px) { .pasos::before { content: ''; position: absolute; top: 27px; left: 8%; right: 8%; height: 2px; background: linear-gradient(90deg, var(--cel), var(--violeta), var(--rosa)); opacity: .35; } }
+.pasos .tarjeta::before { width: 30px; height: 30px; box-shadow: 0 0 16px rgba(255,45,149,.45); }
+
+/* Planes */
+.plan { transition: transform .25s; }
+.plan.destacado { background: linear-gradient(rgba(16,14,36,.96), rgba(12,20,36,.96)) padding-box, linear-gradient(160deg, var(--rosa), var(--violeta), var(--cel)) border-box; border: 1px solid transparent; }
+@media (min-width: 900px) { .plan.destacado { scale: 1.04; } }
+@media (max-width: 860px) { .plan.destacado { order: -1; } }
+
+/* Preguntas con + y − */
+details { transition: border-color .2s; }
+details[open] { border-color: rgba(34,229,255,.45); }
+details summary { list-style: none; display: flex; justify-content: space-between; gap: 14px; align-items: center; }
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: '+'; flex: 0 0 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: var(--cel); border: 1px solid var(--borde); transition: transform .2s; }
+details[open] summary::after { content: '−'; color: var(--rosa); }
+
+/* Llamado final */
+.llamado { margin: 20px auto 60px; max-width: 1080px; border-radius: 26px; border: 1px solid var(--borde);
+  background: radial-gradient(600px 220px at 50% 0%, rgba(255,45,149,.22), transparent 70%), radial-gradient(600px 240px at 50% 100%, rgba(34,229,255,.16), transparent 70%), rgba(10,16,30,.9); }
+@media (max-width: 1120px) { .llamado { margin: 20px 16px 60px; } }
+
+/* Menú en celular */
+.menu-cel { display: none; }
+@media (max-width: 760px) {
+  .menu-cel { display: grid; gap: 5px; margin-left: auto; order: 3; width: 44px; height: 44px; padding: 12px 10px; border-radius: 12px; border: 1px solid var(--borde); background: var(--caja2); cursor: pointer; }
+  .menu-cel span { display: block; height: 2px; background: var(--texto); border-radius: 2px; transition: transform .2s, opacity .2s; }
+  .barra .ancho { gap: 10px; }
+  .barra nav { margin-left: auto; }
+  .barra.abierto .menu-cel span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .barra.abierto .menu-cel span:nth-child(2) { opacity: 0; }
+  .barra.abierto .menu-cel span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .barra.abierto nav a.opcional { display: block; }
+  .barra.abierto nav { position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 20px 18px; background: #060913; box-shadow: 0 30px 60px rgba(0,0,0,.7); border-bottom: 1px solid var(--borde); }
+  .barra.abierto nav a.opcional { padding: 14px 4px; font-size: 17px; border-bottom: 1px solid rgba(29,53,80,.6); }
+  .barra.abierto nav .boton { margin-top: 12px; justify-content: center; }
+}
+@media (max-width: 400px) { .barra nav .boton.chico { padding: 8px 10px; font-size: 13px; } }
+
+/* Botón fijo abajo en celular */
+.cta-fija { display: none; }
+@media (max-width: 760px) {
+  .cta-fija { display: block; position: fixed; left: 16px; right: 16px; bottom: 14px; z-index: 30; text-align: center; padding: 15px; border-radius: 16px; font-weight: 800; text-decoration: none; color: #061018;
+    background: linear-gradient(135deg, var(--cel), var(--violeta) 55%, var(--rosa)); box-shadow: 0 10px 30px rgba(0,0,0,.55), 0 0 22px rgba(255,45,149,.4);
+    transform: translateY(140%); transition: transform .3s ease; }
+  .cta-fija.ver { transform: translateY(0); }
+  footer { padding-bottom: 90px; }
+}
+
+/* Aparecer al bajar (solo si el JS lo activa) */
+.revelar { opacity: 0; transform: translateY(18px); transition: opacity .6s ease var(--d, 0ms), transform .6s ease var(--d, 0ms); }
+.revelar.visto { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+.plan ul { align-content: start; }
