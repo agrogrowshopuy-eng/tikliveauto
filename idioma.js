@@ -62,7 +62,11 @@
     });
     s.onchange = function () {
       try { localStorage.setItem('tla_idioma', s.value); } catch (e) {}
-      var u = new URL(location.href); u.searchParams.delete('lang'); location.href = u.toString();
+      // Siempre recargar (aunque la dirección tenga #planes) y dejar el idioma en la dirección,
+      // así funciona también en navegadores que no guardan datos (celular, modo privado).
+      var u = new URL(location.href); u.searchParams.set('lang', s.value);
+      try { history.replaceState(null, '', u.toString()); } catch (e) {}
+      location.reload();
     };
     cont.appendChild(s);
   }
