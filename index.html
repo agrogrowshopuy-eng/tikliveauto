@@ -25,6 +25,14 @@
 <link rel="icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Unbounded:wght@600;800&display=swap">
 <link rel="stylesheet" href="estilo.css">
+<style>
+  .planes.cuatro { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .planes.cuatro .plan { grid-column: span 2; }
+  .planes.cuatro .plan.medida { grid-column: span 3; }
+  @media (max-width: 1000px) { .planes.cuatro { grid-template-columns: repeat(2, minmax(0, 1fr)); } .planes.cuatro .plan, .planes.cuatro .plan.medida { grid-column: auto; } }
+  @media (max-width: 640px) { .planes.cuatro { grid-template-columns: 1fr; } }
+  .plan.packs { border-color: rgba(255,205,90,.45); }
+</style>
 </head>
 <body>
 <header class="barra">
@@ -174,8 +182,8 @@
   <section id="planes">
     <div class="ancho">
       <h2>Planes</h2>
-      <p class="sub">Probalo gratis un mes con todo. Después elegís.</p>
-      <div class="planes">
+      <p class="sub">Probalo gratis un mes con todo. Después elegís. También tenemos packs de animaciones y sistemas a medida para tarot y radio.</p>
+      <div class="planes cuatro">
         <div class="plan">
           <h3>Gratis</h3>
           <div class="precio">0 <small>USD</small></div>
@@ -210,16 +218,47 @@
           </ul>
           <a class="boton principal" href="cuenta.html?registro=1">Probar gratis</a>
         </div>
-        <div class="plan">
-          <h3>A medida</h3>
-          <div class="precio">150 <small>USD</small></div>
+        <div class="plan packs">
+          <span class="etiqueta" style="background:rgba(230,40,55,.2);color:#ffd9a0">🎄 NUEVO: NAVIDAD</span>
+          <h3>Packs de animaciones</h3>
+          <div class="precio"><small>desde</small> 15 <small>USD</small></div>
+          <small style="display:block;opacity:.8;margin-top:-6px">Pago único, son tuyas para siempre</small>
           <ul>
-            <li>Avatar personalizado para tu LIVE</li>
-            <li>Animaciones para tus MVP y guantes (desde 15 USD)</li>
-            <li>Pago único</li>
-            <li>Atención por WhatsApp</li>
+            <li>Premium Navidad: 10 animaciones que salen solas en tus batallas (20 USD)</li>
+            <li>Pack Halloween: 10 animaciones (70 USD)</li>
+            <li>Cada animación suelta (15 USD)</li>
+            <li>Serie Enigmas: 20 USD cada una o las 7 por 100 USD</li>
+            <li>Fondo transparente y con sonido</li>
+            <li>Animaciones a medida para tus MVP y guantes (desde 15 USD, por WhatsApp)</li>
           </ul>
-          <a class="boton" href="https://wa.me/59898993720" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="boton" href="packs.html">Ver los packs</a>
+        </div>
+        <div class="plan medida">
+          <span class="etiqueta" style="background:rgba(138,125,255,.2);color:#d5cfff">🔮 A MEDIDA</span>
+          <h3>Tarot para tu LIVE</h3>
+          <div class="precio">150 <small>USD · pago único</small></div>
+          <ul>
+            <li>Tarotista con avatar personalizado</li>
+            <li>Tiradas de cartas animadas según el regalo</li>
+            <li>Cola de lecturas ordenada por regalo</li>
+            <li>Se agrega a tu programa TIKLIVEauto</li>
+            <li>Lo armamos con vos y te atendemos por WhatsApp</li>
+          </ul>
+          <a class="boton" href="https://wa.me/59898993720?text=%C2%A1Hola%21%20Quiero%20consultar%20por%3A%20Tarot%20para%20mi%20LIVE." target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+        <div class="plan medida">
+          <span class="etiqueta" style="background:rgba(62,215,255,.16);color:#bdf3ff">📻 NUEVO · A MEDIDA</span>
+          <h3>Radio para tu LIVE</h3>
+          <div class="precio">150 <small>USD · pago único</small></div>
+          <ul>
+            <li>Tu público pide canciones por el chat</li>
+            <li>La IA encuentra la canción y suena sola</li>
+            <li>Cola de pedidos en pantalla, con prioridad por regalo</li>
+            <li>Cartel ON AIR con el diseño de tu radio</li>
+            <li>Se agrega a tu programa TIKLIVEauto</li>
+            <li>Lo armamos con vos y te atendemos por WhatsApp</li>
+          </ul>
+          <a class="boton" href="https://wa.me/59898993720?text=%C2%A1Hola%21%20Quiero%20consultar%20por%3A%20Radio%20para%20mi%20LIVE." target="_blank" rel="noopener">Consultar por WhatsApp</a>
         </div>
       </div>
     </div>
