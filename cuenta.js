@@ -15,6 +15,7 @@ const urlDescarga = () => CFG.github.usuario && CFG.github.usuario !== 'PEGAR_AQ
 // ---------- Vuelta de Mercado Pago: guarda el número de suscripción ----------
 // Mercado Pago devuelve a esta página con ?preapproval_id=XXXX. Se guarda en el navegador
 // (por si la persona todavía tiene que entrar a su cuenta) y se limpia la dirección.
+const T = (x) => (window.tr ? window.tr(x) : x);
 const CLAVE_MP = 'tla_mp_suscripcion';
 (function () {
   try {
@@ -38,7 +39,7 @@ function avisoPago(texto, bien = false) {
     const caja = document.querySelector('.estado-plan');
     if (caja) caja.appendChild(a);
   }
-  a.textContent = texto;
+  a.textContent = T(texto);
   a.className = 'aviso' + (texto ? (bien ? ' bien' : ' mal') : '');
   a.style.marginTop = '12px';
 }
@@ -46,19 +47,19 @@ function avisoPago(texto, bien = false) {
 // ---------- Modo: entrar o registrarse ----------
 let registro = new URLSearchParams(location.search).has('registro');
 function pintarModo() {
-  $('#titulo-entrar').textContent = registro ? 'Crear cuenta' : 'Entrar';
-  $('#sub-entrar').textContent = registro ? `Creá tu cuenta gratis: tenés ${CFG.diasPrueba} días con todo.` : 'Entrá para descargar TIKLIVEauto y ver tu plan.';
-  $('#b-email').textContent = registro ? 'Crear cuenta' : 'Entrar';
+  $('#titulo-entrar').textContent = T(registro ? 'Crear cuenta' : 'Entrar');
+  $('#sub-entrar').textContent = registro ? T('Creá tu cuenta gratis: tenés {n} días con todo.').replace('{n}', CFG.diasPrueba) : T('Entrá para descargar TIKLIVEauto y ver tu plan.');
+  $('#b-email').textContent = T(registro ? 'Crear cuenta' : 'Entrar');
   $('#campo-nombre').classList.toggle('oculto', !registro);
   $('#clave').autocomplete = registro ? 'new-password' : 'current-password';
-  $('#cambiar').innerHTML = registro ? '¿Ya tenés cuenta? <a id="b-cambiar">Entrar</a>' : '¿No tenés cuenta? <a id="b-cambiar">Crear una gratis</a>';
+  $('#cambiar').innerHTML = T(registro ? '¿Ya tenés cuenta? <a id="b-cambiar">Entrar</a>' : '¿No tenés cuenta? <a id="b-cambiar">Crear una gratis</a>');
   $('#b-cambiar').onclick = () => { registro = !registro; pintarModo(); avisar(''); };
 }
 pintarModo();
 
 function avisar(texto, bien = false) {
   const a = $('#aviso');
-  a.textContent = texto;
+  a.textContent = T(texto);
   a.className = 'aviso' + (texto ? (bien ? ' bien' : ' mal') : '');
 }
 const ERRORES = {
@@ -74,7 +75,7 @@ const ERRORES = {
   'auth/popup-closed-by-user': 'Cerraste la ventana de Google antes de terminar.',
   'auth/network-request-failed': 'Sin conexión a internet. Revisá tu conexión.',
 };
-const traducir = (e) => ERRORES[e && e.code] || ('No se pudo: ' + (e && e.message || e));
+const traducir = (e) => ERRORES[e && e.code] || (T('No se pudo: ') + (e && e.message || e));
 
 // ---------- Zona del usuario ----------
 function pintarZona(u, datos) {
@@ -85,10 +86,10 @@ function pintarZona(u, datos) {
   const ahora = Date.now();
   const prem = datos.premiumHasta ? datos.premiumHasta : 0;
   const prueba = datos.pruebaHasta ? datos.pruebaHasta : 0;
-  let plan, vence, venceT = 'Vence';
-  if (prem > ahora) { plan = '<span class="chip premium">⭐ Premium</span>'; vence = new Date(prem).toLocaleDateString('es'); }
-  else if (prueba > ahora) { plan = '<span class="chip prueba">🎁 Prueba gratis</span>'; const d = Math.ceil((prueba - ahora) / DIA); vence = `en ${d} día${d === 1 ? '' : 's'}`; venceT = 'Termina'; }
-  else { plan = '<span class="chip gratis">Gratis</span>'; vence = '—'; }
+  let plan, vence, venceT = T('Vence');
+  if (prem > ahora) { plan = '<span class="chip premium">⭐ Premium</span>'; vence = new Date(prem).toLocaleDateString(document.documentElement.lang || 'es'); }
+  else if (prueba > ahora) { plan = '<span class="chip prueba">' + T('🎁 Prueba gratis') + '</span>'; const d = Math.ceil((prueba - ahora) / DIA); vence = T(d === 1 ? 'en 1 día' : 'en {n} días').replace('{n}', d); venceT = T('Termina'); }
+  else { plan = '<span class="chip gratis">' + T('Gratis') + '</span>'; vence = '—'; }
   $('#z-plan').innerHTML = plan; $('#z-vence').textContent = vence; $('#z-vence-t').textContent = venceT;
   const precio = CFG.precioPremium || 10, P = CFG.pagos || {};
   $('#p-precio').textContent = precio; $('#z-email3').textContent = u.email;
@@ -100,7 +101,7 @@ function pintarZona(u, datos) {
   $('#caja-premium').classList.toggle('oculto', prem > ahora);
   const url = urlDescarga();
   $('#b-descargar').href = url;
-  if (url === '#') { $('#b-descargar').onclick = (e) => { e.preventDefault(); alert('La descarga todavía no está publicada.'); }; }
+  if (url === '#') { $('#b-descargar').onclick = (e) => { e.preventDefault(); alert(T('La descarga todavía no está publicada.')); }; }
   avisoCelular(url);
 }
 
@@ -114,15 +115,15 @@ function avisoCelular(url) {
   $('#b-descargar').classList.add('oculto');
   const d = document.createElement('div');
   d.innerHTML = `
-    <p style="margin-bottom:14px">📱 <b>Estás en un celular.</b> El programa se instala en una <b>PC con Windows</b>. Entrá a esta misma página desde tu PC, con esta cuenta, y descargalo ahí.</p>
-    <button class="boton principal" type="button" id="b-copiar-link" style="width:100%;justify-content:center">🔗 Copiar el link para abrirlo en la PC</button>
-    <a class="boton" href="celular.html" style="width:100%;justify-content:center;margin-top:10px">🎛️ Usar la botonera en el celular</a>
-    <small style="display:block;margin-top:10px"><a href="${url}">Descargar igual el instalador de Windows</a></small>`;
+    <p style="margin-bottom:14px">${T('📱 <b>Estás en un celular.</b> El programa se instala en una <b>PC con Windows</b>. Entrá a esta misma página desde tu PC, con esta cuenta, y descargalo ahí.')}</p>
+    <button class="boton principal" type="button" id="b-copiar-link" style="width:100%;justify-content:center">${T('🔗 Copiar el link para abrirlo en la PC')}</button>
+    <a class="boton" href="celular.html" style="width:100%;justify-content:center;margin-top:10px">${T('🎛️ Usar la botonera en el celular')}</a>
+    <small style="display:block;margin-top:10px"><a href="${url}">${T('Descargar igual el instalador de Windows')}</a></small>`;
   caja.insertBefore(d, $('#z-version'));
   $('#b-copiar-link').onclick = async () => {
     const link = location.origin + location.pathname;
-    try { await navigator.clipboard.writeText(link); $('#b-copiar-link').textContent = '✅ Link copiado: mandátelo por WhatsApp o mail'; }
-    catch (e) { prompt('Copiá este link:', link); }
+    try { await navigator.clipboard.writeText(link); $('#b-copiar-link').textContent = T('✅ Link copiado: mandátelo por WhatsApp o mail'); }
+    catch (e) { prompt(T('Copiá este link:'), link); }
   };
 }
 
@@ -135,7 +136,7 @@ if (DEMO) {
   $('#b-olvide').onclick = () => avisar('En la versión real te llega un email para cambiar la contraseña.', true);
   $('#b-salir').onclick = () => location.reload();
 } else {
-  iniciarFirebase().catch((e) => avisar('No se pudo cargar: ' + e.message));
+  iniciarFirebase().catch((e) => avisar(T('No se pudo cargar: ') + e.message));
 }
 
 async function iniciarFirebase() {
@@ -144,7 +145,7 @@ async function iniciarFirebase() {
   const A = await import(`https://www.gstatic.com/firebasejs/${V}/firebase-auth.js`);
   const F = await import(`https://www.gstatic.com/firebasejs/${V}/firebase-firestore.js`);
   const app = initializeApp(CFG.firebaseConfig);
-  const auth = A.getAuth(app); auth.languageCode = 'es';
+  const auth = A.getAuth(app); auth.languageCode = (document.documentElement.lang || 'es').slice(0, 2);
   const db = F.getFirestore(app);
 
   // Lee (o crea la primera vez) la ficha del usuario

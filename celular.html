@@ -1,18 +1,20 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TIKLIVEauto en el celular — Botonera para Android y iPhone</title>
-<meta name="description" content="Usá TIKLIVEauto desde tu celular Android o iPhone: la botonera para lanzar animaciones y sonidos en tu LIVE con un toque, instalada como app. Gratis.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://agrogrowshopuy-eng.github.io/tikliveauto/celular.html">
-<meta property="og:title" content="TIKLIVEauto en el celular — Android y iPhone">
-<meta property="og:description" content="La botonera de TIKLIVEauto en tu celular, como una app. Lanzá animaciones y sonidos con un toque.">
-<meta property="og:image" content="https://agrogrowshopuy-eng.github.io/tikliveauto/img/captura_inicio.jpg">
-<link rel="icon" href="img/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Unbounded:wght@600;800&display=swap">
-<link rel="stylesheet" href="estilo.css">
+<meta charset="utf-8"/>
+<script src="idioma.js?v=1"></script>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title data-t="t179364b7">TIKLIVEauto en el celular — Botonera para Android y iPhone</title>
+<meta content="Usá TIKLIVEauto desde tu celular Android o iPhone: la botonera para lanzar animaciones y sonidos en tu LIVE con un toque, instalada como app. Gratis." data-t-content="t0774ed96" name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://agrogrowshopuy-eng.github.io/tikliveauto/celular.html" rel="canonical"/>
+<meta content="TIKLIVEauto en el celular — Android y iPhone" data-t-content="t3000f933" property="og:title"/>
+<meta content="La botonera de TIKLIVEauto en tu celular, como una app. Lanzá animaciones y sonidos con un toque." data-t-content="t1b58106b" property="og:description"/>
+<meta content="https://agrogrowshopuy-eng.github.io/tikliveauto/img/captura_inicio.jpg" property="og:image"/>
+<link href="img/favicon.png" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Unbounded:wght@600;800&amp;display=swap" rel="stylesheet"/>
+<link href="estilo.css" rel="stylesheet"/>
 <style>
   .cel-portada { padding: 56px 20px 20px; text-align: center; }
   .cel-portada h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.1; margin-bottom: 14px; }
@@ -41,130 +43,119 @@
 </head>
 <body>
 <header class="barra">
-  <div class="ancho">
-    <a class="marca" href="./"><img src="img/logo.png" alt="TIKLIVEauto"></a>
-    <nav>
-      <a class="opcional" href="./#funciones">Funciones</a>
-      <a class="opcional" href="packs.html">Packs</a>
-      <a class="opcional" href="./#planes">Planes</a>
-      <a class="boton chico principal" href="cuenta.html">Entrar / Registrarme</a>
-    </nav>
-  </div>
+<div class="ancho">
+<a class="marca" href="./"><img alt="TIKLIVEauto" data-t-alt="t5b7aa692" src="img/logo.png"/></a>
+<nav>
+<a class="opcional" data-t="tfd095f33" href="./#funciones">Funciones</a>
+<a class="opcional" data-t="teeb7feed" href="packs.html">Packs</a>
+<a class="opcional" data-t="tbdd42864" href="./#planes">Planes</a>
+<a class="boton chico principal" data-t="t3211f196" href="cuenta.html">Entrar / Registrarme</a>
+</nav>
+</div>
 </header>
-
 <main>
-  <div class="ancho cel-portada">
-    <div style="font-size:44px">📱</div>
-    <h1>TIKLIVEauto <span class="grad">en tu celular</span></h1>
-    <p>Tu botonera en la mano: lanzá animaciones, sonidos y potenciadores en tu LIVE con un toque, desde Android o iPhone. Se instala como una app, gratis.</p>
-  </div>
-
-  <section style="padding-top:20px">
-    <div class="ancho">
-      <h2>Qué necesitás</h2>
-      <div class="requisitos">
-        <div class="tarjeta"><div class="ico">💻</div><h3>El programa abierto en tu PC</h3><p>TIKLIVEauto instalado y abierto en Windows. El celular funciona como control remoto.</p></div>
-        <div class="tarjeta"><div class="ico">📶</div><h3>El mismo WiFi</h3><p>El celular y la PC tienen que estar conectados a la misma red de tu casa.</p></div>
-        <div class="tarjeta"><div class="ico">🔢</div><h3>La dirección de tu PC</h3><p>La ves en el programa: <b>Panel → Botonera → En el celular</b>. Es algo como <b>192.168.1.20</b>.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="ancho">
-      <h2>Abrí tu botonera</h2>
-      <div class="abrir">
-        <h3>🎛️ Dirección de tu PC</h3>
-        <p>Escribila una sola vez. Queda guardada en este celular.</p>
-        <form class="fila" id="form-abrir">
-          <input id="ip" inputmode="decimal" autocomplete="off" placeholder="Ej: 192.168.1.20" aria-label="Dirección de tu PC">
-          <button class="boton principal" type="submit">Abrir botonera</button>
-        </form>
-        <div class="aviso" id="aviso"></div>
-        <p class="nota-chica">Si no abre: revisá que el programa esté abierto, que estés en el mismo WiFi y, la primera vez, aceptá el permiso de red que muestra Windows.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="ancho">
-      <h2>Instalala como app</h2>
-      <p class="sub">Después de abrir la botonera, hacé esto <b>en esa misma página</b> para que te quede el ícono en el celular.</p>
-      <div class="pestanas" role="tablist">
-        <button role="tab" data-sis="iphone" aria-selected="false">🍎 iPhone</button>
-        <button role="tab" data-sis="android" aria-selected="false">🤖 Android</button>
-      </div>
-
-      <div class="sistema" id="sis-iphone">
-        <div class="pasos">
-          <div class="tarjeta"><h3>Abrila con Safari</h3><p>En iPhone tiene que ser con <b>Safari</b>, el navegador de Apple.</p></div>
-          <div class="tarjeta"><h3>Tocá Compartir</h3><p>El botón del <b>cuadrado con la flecha hacia arriba</b>, abajo en el centro.</p></div>
-          <div class="tarjeta"><h3>Agregar a inicio</h3><p>Bajá y tocá <b>"Agregar a pantalla de inicio"</b> y después <b>"Agregar"</b>.</p></div>
-        </div>
-      </div>
-
-      <div class="sistema" id="sis-android">
-        <div class="pasos">
-          <div class="tarjeta"><h3>Abrila con Chrome</h3><p>Usá <b>Google Chrome</b>, que viene en casi todos los Android.</p></div>
-          <div class="tarjeta"><h3>Tocá los 3 puntitos</h3><p>Arriba a la derecha, el menú <b>⋮</b>.</p></div>
-          <div class="tarjeta"><h3>Agregar a inicio</h3><p>Tocá <b>"Agregar a pantalla principal"</b> (o "Instalar app") y confirmá.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="ancho">
-      <h2>Qué podés hacer desde el celular</h2>
-      <div class="grilla">
-        <div class="tarjeta"><div class="ico">🎛️</div><h3>Botonera</h3><p>Tus botones con fotos y colores. Los mismos en la PC, el celular y la tablet.</p></div>
-        <div class="tarjeta"><div class="ico">🎬</div><h3>Animaciones y sonidos</h3><p>Lanzá videos, imágenes y sonidos en tu LIVE sin tocar la PC.</p></div>
-        <div class="tarjeta"><div class="ico">🥊</div><h3>Potenciadores</h3><p>Los robots de batalla y tus animaciones, a un toque.</p></div>
-        <div class="tarjeta"><div class="ico">📸</div><h3>Fotos de los botones</h3><p>Subí la foto de un botón directo desde la galería del celular.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="ancho">
-      <h2>¿No tenés PC? Modo solo celular</h2>
-      <div class="abrir">
-        <span class="en-prueba">🧪 EN PRUEBA · MUY PRONTO</span>
-        <h3>📲 TIKLIVEauto Celular</h3>
-        <p class="aviso-prueba">Esta versión está en etapa de prueba. Muy pronto va a estar disponible para el público.</p>
-        <p>Transmití desde el celular con PRISM Live y TIKLIVEauto funciona en internet: robots de batalla automáticos, animaciones por regalo y lector del chat con voz. <b>15 días gratis</b>, después 20 USD por mes.</p>
-        <span class="boton" aria-disabled="true" style="width:100%;justify-content:center;opacity:.6;cursor:default">⏳ Disponible muy pronto</span>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="ancho">
-      <h2>Próximamente</h2>
-      <div class="grilla">
-        <div class="tarjeta pronto"><div class="ico">🌐</div><h3>Más plataformas</h3><p>YouTube, Kick, Facebook e Instagram, además de TikTok.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="llamado">
-    <h2>¿Todavía no tenés el programa?</h2>
-    <p class="sub" style="color:var(--suave);margin-bottom:22px">Creá tu cuenta desde el celular y descargá el programa en tu PC con Windows. 1 mes gratis con todo, sin tarjeta.</p>
-    <a class="boton principal" href="cuenta.html?registro=1">✨ Crear mi cuenta gratis</a>
-  </div>
+<div class="ancho cel-portada">
+<div style="font-size:44px">📱</div>
+<h1 data-t="tc16f90a2">TIKLIVEauto <span class="grad">en tu celular</span></h1>
+<p data-t="t81543828">Tu botonera en la mano: lanzá animaciones, sonidos y potenciadores en tu LIVE con un toque, desde Android o iPhone. Se instala como una app, gratis.</p>
+</div>
+<section style="padding-top:20px">
+<div class="ancho">
+<h2 data-t="t06890d63">Qué necesitás</h2>
+<div class="requisitos">
+<div class="tarjeta"><div class="ico">💻</div><h3 data-t="t1dd35a3b">El programa abierto en tu PC</h3><p data-t="t310012f7">TIKLIVEauto instalado y abierto en Windows. El celular funciona como control remoto.</p></div>
+<div class="tarjeta"><div class="ico">📶</div><h3 data-t="t8dd65735">El mismo WiFi</h3><p data-t="t0ad243b0">El celular y la PC tienen que estar conectados a la misma red de tu casa.</p></div>
+<div class="tarjeta"><div class="ico">🔢</div><h3 data-t="t8a3051dc">La dirección de tu PC</h3><p data-t="ted61d0e0">La ves en el programa: <b>Panel → Botonera → En el celular</b>. Es algo como <b>192.168.1.20</b>.</p></div>
+</div>
+</div>
+</section>
+<section>
+<div class="ancho">
+<h2 data-t="t186cfc4b">Abrí tu botonera</h2>
+<div class="abrir">
+<h3 data-t="tbb06eb88">🎛️ Dirección de tu PC</h3>
+<p data-t="te3198e60">Escribila una sola vez. Queda guardada en este celular.</p>
+<form class="fila" id="form-abrir">
+<input aria-label="Dirección de tu PC" autocomplete="off" data-t-aria-label="td396fba7" data-t-placeholder="t819c032a" id="ip" inputmode="decimal" placeholder="Ej: 192.168.1.20"/>
+<button class="boton principal" data-t="ta6547579" type="submit">Abrir botonera</button>
+</form>
+<div class="aviso" id="aviso"></div>
+<p class="nota-chica" data-t="t3ee3ac3b">Si no abre: revisá que el programa esté abierto, que estés en el mismo WiFi y, la primera vez, aceptá el permiso de red que muestra Windows.</p>
+</div>
+</div>
+</section>
+<section>
+<div class="ancho">
+<h2 data-t="t97de4c1b">Instalala como app</h2>
+<p class="sub" data-t="t8b20b43f">Después de abrir la botonera, hacé esto <b>en esa misma página</b> para que te quede el ícono en el celular.</p>
+<div class="pestanas" role="tablist">
+<button aria-selected="false" data-sis="iphone" data-t="taa6a8e96" role="tab">🍎 iPhone</button>
+<button aria-selected="false" data-sis="android" data-t="tad728de2" role="tab">🤖 Android</button>
+</div>
+<div class="sistema" id="sis-iphone">
+<div class="pasos">
+<div class="tarjeta"><h3 data-t="tdfaf9a97">Abrila con Safari</h3><p data-t="t6a2b0e2b">En iPhone tiene que ser con <b>Safari</b>, el navegador de Apple.</p></div>
+<div class="tarjeta"><h3 data-t="t136ae670">Tocá Compartir</h3><p data-t="tb583d36e">El botón del <b>cuadrado con la flecha hacia arriba</b>, abajo en el centro.</p></div>
+<div class="tarjeta"><h3 data-t="tf5ff006d">Agregar a inicio</h3><p data-t="t7064c8bf">Bajá y tocá <b>"Agregar a pantalla de inicio"</b> y después <b>"Agregar"</b>.</p></div>
+</div>
+</div>
+<div class="sistema" id="sis-android">
+<div class="pasos">
+<div class="tarjeta"><h3 data-t="tfe75da27">Abrila con Chrome</h3><p data-t="t122fa968">Usá <b>Google Chrome</b>, que viene en casi todos los Android.</p></div>
+<div class="tarjeta"><h3 data-t="tf60cae98">Tocá los 3 puntitos</h3><p data-t="tabfe06b9">Arriba a la derecha, el menú <b>⋮</b>.</p></div>
+<div class="tarjeta"><h3 data-t="tf5ff006d">Agregar a inicio</h3><p data-t="t57f93e5c">Tocá <b>"Agregar a pantalla principal"</b> (o "Instalar app") y confirmá.</p></div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="ancho">
+<h2 data-t="tdd5c1185">Qué podés hacer desde el celular</h2>
+<div class="grilla">
+<div class="tarjeta"><div class="ico">🎛️</div><h3 data-t="t3a142bb0">Botonera</h3><p data-t="t862439ec">Tus botones con fotos y colores. Los mismos en la PC, el celular y la tablet.</p></div>
+<div class="tarjeta"><div class="ico">🎬</div><h3 data-t="t8e279eb6">Animaciones y sonidos</h3><p data-t="t463c5f52">Lanzá videos, imágenes y sonidos en tu LIVE sin tocar la PC.</p></div>
+<div class="tarjeta"><div class="ico">🥊</div><h3 data-t="t6012593f">Potenciadores</h3><p data-t="taa10bb0e">Los robots de batalla y tus animaciones, a un toque.</p></div>
+<div class="tarjeta"><div class="ico">📸</div><h3 data-t="tdb0990e9">Fotos de los botones</h3><p data-t="te3919242">Subí la foto de un botón directo desde la galería del celular.</p></div>
+</div>
+</div>
+</section>
+<section>
+<div class="ancho">
+<h2 data-t="tad5f0957">¿No tenés PC? Modo solo celular</h2>
+<div class="abrir">
+<span class="en-prueba" data-t="tcc028e3b">🧪 EN PRUEBA · MUY PRONTO</span>
+<h3 data-t="te6445135">📲 TIKLIVEauto Celular</h3>
+<p class="aviso-prueba" data-t="t0682f91b">Esta versión está en etapa de prueba. Muy pronto va a estar disponible para el público.</p>
+<p data-t="t92a5d2db">Transmití desde el celular con PRISM Live y TIKLIVEauto funciona en internet: robots de batalla automáticos, animaciones por regalo y lector del chat con voz. <b>15 días gratis</b>, después 20 USD por mes.</p>
+<span aria-disabled="true" class="boton" data-t="tb4ff151b" style="width:100%;justify-content:center;opacity:.6;cursor:default">⏳ Disponible muy pronto</span>
+</div>
+</div>
+</section>
+<section>
+<div class="ancho">
+<h2 data-t="t6be60f82">Próximamente</h2>
+<div class="grilla">
+<div class="tarjeta pronto"><div class="ico">🌐</div><h3 data-t="t7f7e5372">Más plataformas</h3><p data-t="tb3f431ac">YouTube, Kick, Facebook e Instagram, además de TikTok.</p></div>
+</div>
+</div>
+</section>
+<div class="llamado">
+<h2 data-t="teb436d9e">¿Todavía no tenés el programa?</h2>
+<p class="sub" data-t="t5e069b9e" style="color:var(--suave);margin-bottom:22px">Creá tu cuenta desde el celular y descargá el programa en tu PC con Windows. 1 mes gratis con todo, sin tarjeta.</p>
+<a class="boton principal" data-t="tb8754b0f" href="cuenta.html?registro=1">✨ Crear mi cuenta gratis</a>
+</div>
 </main>
-
 <footer>
-  <div class="ancho">
-    <span>© <span id="anio"></span> TIKLIVEauto</span>
-    <a href="./">Inicio</a>
-    <a href="packs.html">Packs de animaciones</a>
-    <a href="privacidad.html">Privacidad</a>
-    <a href="terminos.html">Términos de uso</a>
-    <a class="der" href="https://wa.me/59898993720" target="_blank" rel="noopener">WhatsApp</a>
-  </div>
+<div class="ancho">
+<span data-t="taf3c40a4">© <span id="anio"></span> TIKLIVEauto</span>
+<a data-t="tbf89f675" href="./">Inicio</a>
+<a data-t="t0197fbe5" href="packs.html">Packs de animaciones</a>
+<a data-t="t965c9bb3" href="privacidad.html">Privacidad</a>
+<a data-t="t566e2a2d" href="terminos.html">Términos de uso</a>
+<a class="der" data-t="t8b777ebc" href="https://wa.me/59898993720" rel="noopener" target="_blank">WhatsApp</a>
+</div>
 </footer>
-
+<script>TLA_aplicar()</script>
 <script>
 document.getElementById('anio').textContent = new Date().getFullYear();
 
