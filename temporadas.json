@@ -101,6 +101,111 @@
           "valor": "!snipe",
           "archivo": "tem_halloween-2026_snipe.webm"
         }
+      ],
+      "desde": "2026-10-13"
+    },
+    {
+      "id": "navidad-2026",
+      "nombre": "Navidad",
+      "emoji": "🎄",
+      "precio": 20,
+      "requierePremium": true,
+      "desde": "2026-12-08",
+      "descripcion": "10 animaciones de Navidad que salen solas en tus batallas y en tu LIVE. También las podés lanzar con comandos, regalos o botones.",
+      "paquete": "https://github.com/agrogrowshopuy-eng/tikliveauto/releases/download/temporadas/navidad-2026.tlpack",
+      "tamano": 127636469,
+      "sha256": "0df7d317dc131367a2d5e1190615bd9dd6f270a21453cfa1116c035e05a52100",
+      "archivos": [
+        {
+          "archivo": "tem_navidad-2026_guante_rojo.webm",
+          "nombre": "GUANTE ROJO",
+          "cuando": "Te tiran un guante",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_guante_rojo.jpg"
+        },
+        {
+          "archivo": "tem_navidad-2026_guante_dorado.webm",
+          "nombre": "GUANTE DORADO",
+          "cuando": "Te tiran el guante dorado",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_guante_dorado.jpg"
+        },
+        {
+          "archivo": "tem_navidad-2026_x2.webm",
+          "nombre": "X2",
+          "cuando": "Se activa el x2",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_x2.jpg"
+        },
+        {
+          "archivo": "tem_navidad-2026_x3.webm",
+          "nombre": "X3",
+          "cuando": "Se activa el x3",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_x3.jpg"
+        },
+        {
+          "archivo": "tem_navidad-2026_fight.webm",
+          "nombre": "FIGHT",
+          "cuando": "Empieza la batalla",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_fight.jpg"
+        },
+        {
+          "archivo": "tem_navidad-2026_game_over.webm",
+          "nombre": "GAME OVER",
+          "cuando": "Termina la batalla",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_game_over.jpg"
+        },
+        {
+          "archivo": "tem_navidad-2026_level_up.webm",
+          "nombre": "LEVEL UP",
+          "cuando": "Alguien sube de nivel en tu club de fans",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_level_up.jpg"
+        },
+        {
+          "archivo": "tem_navidad-2026_quiereme.webm",
+          "nombre": "QUIÉREME",
+          "cuando": "Te regalan un Quiéreme",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_quiereme.jpg"
+        },
+        {
+          "archivo": "tem_navidad-2026_tap_tap.webm",
+          "nombre": "TAP TAP",
+          "cuando": "Lluvia de tap tap",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_tap_tap.jpg"
+        },
+        {
+          "archivo": "tem_navidad-2026_snipe.webm",
+          "nombre": "SNIPE",
+          "cuando": "Con !snipe en el chat o un botón",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/n_snipe.jpg"
+        }
+      ],
+      "potenciadores": {
+        "guante": "tem_navidad-2026_guante_rojo.webm",
+        "guante dorado": "tem_navidad-2026_guante_dorado.webm",
+        "x2": "tem_navidad-2026_x2.webm",
+        "x3": "tem_navidad-2026_x3.webm",
+        "inicio batalla": "tem_navidad-2026_fight.webm",
+        "fin batalla": "tem_navidad-2026_game_over.webm",
+        "nivel equipo": "tem_navidad-2026_level_up.webm",
+        "snipe": "tem_navidad-2026_snipe.webm"
+      },
+      "eventos": [
+        {
+          "nombre": "Quiéreme",
+          "disparador": "regalo",
+          "valor": "Heart Me, Quiéreme",
+          "archivo": "tem_navidad-2026_quiereme.webm"
+        },
+        {
+          "nombre": "Tap Tap",
+          "disparador": "likes",
+          "valor": "300",
+          "archivo": "tem_navidad-2026_tap_tap.webm"
+        },
+        {
+          "nombre": "Snipe",
+          "disparador": "comando",
+          "valor": "!snipe",
+          "archivo": "tem_navidad-2026_snipe.webm"
+        }
       ]
     }
   ]
