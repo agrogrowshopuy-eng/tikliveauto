@@ -207,6 +207,588 @@
           "archivo": "tem_navidad-2026_snipe.webm"
         }
       ]
+    },
+    {
+      "id": "p-gamer",
+      "nombre": "Gamer",
+      "emoji": "🎮",
+      "pack": true,
+      "precio": 17,
+      "requierePremium": true,
+      "descripcion": "6 animaciones estilo gamer que salen solas en tus batallas: guante, x2, x3, snipe, tap tap y gracias por tu Quiéreme.",
+      "paquete": "https://github.com/agrogrowshopuy-eng/tikliveauto/releases/download/packs/p-gamer.tlpack",
+      "tamano": 136303719,
+      "sha256": "8bf2cc73b307deaba9b7a6e1bba97ad3b16afccc83b9e407fc71e76c0ee480d6",
+      "potenciadores": {
+        "guante": "tem_p-gamer_guante_rojo.webm",
+        "x2": "tem_p-gamer_x2.webm",
+        "x3": "tem_p-gamer_x3.webm",
+        "snipe": "tem_p-gamer_snipe.webm"
+      },
+      "eventos": [
+        {
+          "nombre": "Quiéreme",
+          "disparador": "regalo",
+          "valor": "Heart Me, Quiéreme",
+          "archivo": "tem_p-gamer_quiereme.webm"
+        },
+        {
+          "nombre": "Tap Tap",
+          "disparador": "likes",
+          "valor": "300",
+          "archivo": "tem_p-gamer_tap_tap.webm"
+        },
+        {
+          "nombre": "Snipe",
+          "disparador": "comando",
+          "valor": "!snipe",
+          "archivo": "tem_p-gamer_snipe.webm"
+        }
+      ],
+      "archivos": [
+        {
+          "archivo": "tem_p-gamer_guante_rojo.webm",
+          "nombre": "GUANTE ROJO",
+          "cuando": "Te tiran un guante",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_guante_rojo.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_guante_rojo.mp4"
+        },
+        {
+          "archivo": "tem_p-gamer_x2.webm",
+          "nombre": "X2",
+          "cuando": "Se activa el x2",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_x2.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_x2.mp4"
+        },
+        {
+          "archivo": "tem_p-gamer_x3.webm",
+          "nombre": "X3",
+          "cuando": "Se activa el x3",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_x3.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_x3.mp4"
+        },
+        {
+          "archivo": "tem_p-gamer_snipe.webm",
+          "nombre": "SNIPE",
+          "cuando": "Con !snipe en el chat o un botón",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_snipe.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_snipe.mp4"
+        },
+        {
+          "archivo": "tem_p-gamer_tap_tap.webm",
+          "nombre": "TAP TAP",
+          "cuando": "Lluvia de tap tap",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_tap_tap.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_tap_tap.mp4"
+        },
+        {
+          "archivo": "tem_p-gamer_quiereme.webm",
+          "nombre": "GRACIAS POR TU QUIÉREME",
+          "cuando": "Te regalan un Quiéreme",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_quiereme.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/g_quiereme.mp4"
+        }
+      ]
+    },
+    {
+      "id": "p-rock-hombre",
+      "nombre": "Rock (hombre)",
+      "emoji": "🎸",
+      "pack": true,
+      "precio": 17,
+      "requierePremium": true,
+      "descripcion": "7 carteles rock con rockero que salen solos en tus batallas: guante, guante dorado, neblina, martillo, snipe, tap tap y Quiéreme.",
+      "paquete": "https://github.com/agrogrowshopuy-eng/tikliveauto/releases/download/packs/p-rock-hombre.tlpack",
+      "tamano": 111141128,
+      "sha256": "a5c406e10590c7495da3eb6a84ff1d8528910b7d672caf1900db8e13673d2ed1",
+      "potenciadores": {
+        "guante": "tem_p-rock-hombre_guante_rojo.webm",
+        "guante dorado": "tem_p-rock-hombre_guante_dorado.webm",
+        "neblina": "tem_p-rock-hombre_neblina.webm",
+        "martillo": "tem_p-rock-hombre_martillo.webm",
+        "snipe": "tem_p-rock-hombre_snipe.webm"
+      },
+      "eventos": [
+        {
+          "nombre": "Quiéreme",
+          "disparador": "regalo",
+          "valor": "Heart Me, Quiéreme",
+          "archivo": "tem_p-rock-hombre_quiereme.webm"
+        },
+        {
+          "nombre": "Tap Tap",
+          "disparador": "likes",
+          "valor": "300",
+          "archivo": "tem_p-rock-hombre_tap_tap.webm"
+        },
+        {
+          "nombre": "Snipe",
+          "disparador": "comando",
+          "valor": "!snipe",
+          "archivo": "tem_p-rock-hombre_snipe.webm"
+        }
+      ],
+      "archivos": [
+        {
+          "archivo": "tem_p-rock-hombre_guante_rojo.webm",
+          "nombre": "GUANTE",
+          "cuando": "Te tiran un guante",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_guante_rojo.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_guante_rojo.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-hombre_guante_dorado.webm",
+          "nombre": "GUANTE DORADO",
+          "cuando": "Te tiran el guante dorado",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_guante_dorado.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_guante_dorado.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-hombre_neblina.webm",
+          "nombre": "NEBLINA",
+          "cuando": "Te tiran neblina",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_neblina.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_neblina.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-hombre_martillo.webm",
+          "nombre": "MARTILLO",
+          "cuando": "Te tiran el martillo",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_martillo.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_martillo.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-hombre_snipe.webm",
+          "nombre": "SNIPE",
+          "cuando": "Con !snipe en el chat o un botón",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_snipe.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_snipe.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-hombre_tap_tap.webm",
+          "nombre": "TAP TAP",
+          "cuando": "Lluvia de tap tap",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_tap_tap.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_tap_tap.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-hombre_quiereme.webm",
+          "nombre": "QUIÉREME",
+          "cuando": "Te regalan un Quiéreme",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_quiereme.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rh_quiereme.mp4"
+        }
+      ]
+    },
+    {
+      "id": "p-rock-mujer",
+      "nombre": "Rock (mujer)",
+      "emoji": "🤘",
+      "pack": true,
+      "precio": 17,
+      "requierePremium": true,
+      "descripcion": "7 carteles rock con rockera que salen solos en tus batallas: guante, guante dorado, neblina, martillo, snipe, tap tap y Quiéreme.",
+      "paquete": "https://github.com/agrogrowshopuy-eng/tikliveauto/releases/download/packs/p-rock-mujer.tlpack",
+      "tamano": 110493680,
+      "sha256": "c5dbb5c6b57a9c450815955db32d8dd681eb939375430014da46ae7191c434fd",
+      "potenciadores": {
+        "guante": "tem_p-rock-mujer_guante_rojo.webm",
+        "guante dorado": "tem_p-rock-mujer_guante_dorado.webm",
+        "neblina": "tem_p-rock-mujer_neblina.webm",
+        "martillo": "tem_p-rock-mujer_martillo.webm",
+        "snipe": "tem_p-rock-mujer_snipe.webm"
+      },
+      "eventos": [
+        {
+          "nombre": "Quiéreme",
+          "disparador": "regalo",
+          "valor": "Heart Me, Quiéreme",
+          "archivo": "tem_p-rock-mujer_quiereme.webm"
+        },
+        {
+          "nombre": "Tap Tap",
+          "disparador": "likes",
+          "valor": "300",
+          "archivo": "tem_p-rock-mujer_tap_tap.webm"
+        },
+        {
+          "nombre": "Snipe",
+          "disparador": "comando",
+          "valor": "!snipe",
+          "archivo": "tem_p-rock-mujer_snipe.webm"
+        }
+      ],
+      "archivos": [
+        {
+          "archivo": "tem_p-rock-mujer_guante_rojo.webm",
+          "nombre": "GUANTE",
+          "cuando": "Te tiran un guante",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_guante_rojo.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_guante_rojo.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-mujer_guante_dorado.webm",
+          "nombre": "GUANTE DORADO",
+          "cuando": "Te tiran el guante dorado",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_guante_dorado.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_guante_dorado.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-mujer_neblina.webm",
+          "nombre": "NEBLINA",
+          "cuando": "Te tiran neblina",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_neblina.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_neblina.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-mujer_martillo.webm",
+          "nombre": "MARTILLO",
+          "cuando": "Te tiran el martillo",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_martillo.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_martillo.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-mujer_snipe.webm",
+          "nombre": "SNIPE",
+          "cuando": "Con !snipe en el chat o un botón",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_snipe.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_snipe.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-mujer_tap_tap.webm",
+          "nombre": "TAP TAP",
+          "cuando": "Lluvia de tap tap",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_tap_tap.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_tap_tap.mp4"
+        },
+        {
+          "archivo": "tem_p-rock-mujer_quiereme.webm",
+          "nombre": "QUIÉREME",
+          "cuando": "Te regalan un Quiéreme",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_quiereme.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/rm_quiereme.mp4"
+        }
+      ]
+    },
+    {
+      "id": "p-enigmas",
+      "nombre": "Enigmas",
+      "emoji": "❓",
+      "pack": true,
+      "precio": 17,
+      "requierePremium": true,
+      "complemento": true,
+      "descripcion": "7 animaciones de Enigmas (con el Rey y la Reina) para tus dinámicas. Se lanzan con el botón ▶, la Botonera o un comando (!enigma1, !reina...).",
+      "paquete": "https://github.com/agrogrowshopuy-eng/tikliveauto/releases/download/packs/p-enigmas.tlpack",
+      "tamano": 156863777,
+      "sha256": "5bf63737ec536939e389942f84e2d4a82c428299d0d83152d2a43e52211a9a54",
+      "potenciadores": {},
+      "eventos": [
+        {
+          "nombre": "Enigma 1",
+          "disparador": "comando",
+          "valor": "!enigma1",
+          "archivo": "tem_p-enigmas_enigma_1.webm"
+        },
+        {
+          "nombre": "Enigma 2",
+          "disparador": "comando",
+          "valor": "!enigma2",
+          "archivo": "tem_p-enigmas_enigma_2.webm"
+        },
+        {
+          "nombre": "Enigma 3",
+          "disparador": "comando",
+          "valor": "!enigma3",
+          "archivo": "tem_p-enigmas_enigma_3.webm"
+        },
+        {
+          "nombre": "Enigma 4",
+          "disparador": "comando",
+          "valor": "!enigma4",
+          "archivo": "tem_p-enigmas_enigma_4.webm"
+        },
+        {
+          "nombre": "Enigma 5",
+          "disparador": "comando",
+          "valor": "!enigma5",
+          "archivo": "tem_p-enigmas_enigma_5.webm"
+        },
+        {
+          "nombre": "Reina de los Enigmas",
+          "disparador": "comando",
+          "valor": "!reina",
+          "archivo": "tem_p-enigmas_reina.webm"
+        },
+        {
+          "nombre": "Rey de los Enigmas",
+          "disparador": "comando",
+          "valor": "!rey",
+          "archivo": "tem_p-enigmas_rey.webm"
+        }
+      ],
+      "archivos": [
+        {
+          "archivo": "tem_p-enigmas_enigma_1.webm",
+          "nombre": "ENIGMA 1",
+          "cuando": "Botón ▶ o !enigma1",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_1.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_1.mp4"
+        },
+        {
+          "archivo": "tem_p-enigmas_enigma_2.webm",
+          "nombre": "ENIGMA 2",
+          "cuando": "Botón ▶ o !enigma2",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_2.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_2.mp4"
+        },
+        {
+          "archivo": "tem_p-enigmas_enigma_3.webm",
+          "nombre": "ENIGMA 3",
+          "cuando": "Botón ▶ o !enigma3",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_3.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_3.mp4"
+        },
+        {
+          "archivo": "tem_p-enigmas_enigma_4.webm",
+          "nombre": "ENIGMA 4",
+          "cuando": "Botón ▶ o !enigma4",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_4.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_4.mp4"
+        },
+        {
+          "archivo": "tem_p-enigmas_enigma_5.webm",
+          "nombre": "ENIGMA 5",
+          "cuando": "Botón ▶ o !enigma5",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_5.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_enigma_5.mp4"
+        },
+        {
+          "archivo": "tem_p-enigmas_reina.webm",
+          "nombre": "REINA DE LOS ENIGMAS",
+          "cuando": "Botón ▶ o !reina",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_reina.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_reina.mp4"
+        },
+        {
+          "archivo": "tem_p-enigmas_rey.webm",
+          "nombre": "REY DE LOS ENIGMAS",
+          "cuando": "Botón ▶ o !rey",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_rey.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/e_rey.mp4"
+        }
+      ]
+    },
+    {
+      "id": "p-one-piece",
+      "nombre": "Piratas (estilo One Piece)",
+      "emoji": "🏴‍☠️",
+      "pack": true,
+      "precio": 17,
+      "requierePremium": true,
+      "descripcion": "12 animaciones piratas que salen solas en tus batallas: guantes, x2, x3, FIGHT, GAME OVER, snipe, tap tap, gracias por tu Quiéreme y extras para lanzar con ▶.",
+      "paquete": "https://github.com/agrogrowshopuy-eng/tikliveauto/releases/download/packs/p-one-piece.tlpack",
+      "tamano": 269190517,
+      "sha256": "aa3df61433297b9a18ab282a4a23ce5e3d951530fc46ad9d67b315dd894af72f",
+      "potenciadores": {
+        "guante": "tem_p-one-piece_guante_rojo.webm",
+        "guante dorado": "tem_p-one-piece_guante_dorado.webm",
+        "x2": "tem_p-one-piece_x2.webm",
+        "x3": "tem_p-one-piece_x3.webm",
+        "inicio batalla": "tem_p-one-piece_fight.webm",
+        "fin batalla": "tem_p-one-piece_game_over.webm",
+        "snipe": "tem_p-one-piece_snipe.webm"
+      },
+      "eventos": [
+        {
+          "nombre": "Quiéreme",
+          "disparador": "regalo",
+          "valor": "Heart Me, Quiéreme",
+          "archivo": "tem_p-one-piece_gracias_1.webm"
+        },
+        {
+          "nombre": "Tap Tap",
+          "disparador": "likes",
+          "valor": "300",
+          "archivo": "tem_p-one-piece_tap_tap.webm"
+        },
+        {
+          "nombre": "Snipe",
+          "disparador": "comando",
+          "valor": "!snipe",
+          "archivo": "tem_p-one-piece_snipe.webm"
+        }
+      ],
+      "archivos": [
+        {
+          "archivo": "tem_p-one-piece_guante_rojo.webm",
+          "nombre": "GUANTE ROJO",
+          "cuando": "Te tiran un guante",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_guante_rojo.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_guante_rojo.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_guante_dorado.webm",
+          "nombre": "GUANTE DORADO",
+          "cuando": "Te tiran el guante dorado",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_guante_dorado.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_guante_dorado.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_x2.webm",
+          "nombre": "X2",
+          "cuando": "Se activa el x2",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_x2.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_x2.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_x3.webm",
+          "nombre": "X3",
+          "cuando": "Se activa el x3",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_x3.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_x3.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_fight.webm",
+          "nombre": "FIGHT",
+          "cuando": "Empieza la batalla",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_fight.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_fight.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_game_over.webm",
+          "nombre": "GAME OVER",
+          "cuando": "Termina la batalla",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_game_over.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_game_over.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_snipe.webm",
+          "nombre": "SNIPE",
+          "cuando": "Con !snipe en el chat o un botón",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_snipe.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_snipe.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_tap_tap.webm",
+          "nombre": "TAP TAP",
+          "cuando": "Lluvia de tap tap",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_tap_tap.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_tap_tap.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_dorado_2.webm",
+          "nombre": "GUANTE DORADO 2",
+          "cuando": "Botón ▶ o !dorado2",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_dorado_2.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_dorado_2.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_gracias_1.webm",
+          "nombre": "GRACIAS POR TU QUIÉREME",
+          "cuando": "Te regalan un Quiéreme",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_gracias_1.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_gracias_1.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_gracias_2.webm",
+          "nombre": "GRACIAS POR TU QUIÉREME 2",
+          "cuando": "Botón ▶ o !gracias2",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_gracias_2.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_gracias_2.mp4"
+        },
+        {
+          "archivo": "tem_p-one-piece_extra.webm",
+          "nombre": "BIENVENIDOS / COMPARTÍ EL LIVE",
+          "cuando": "Botón ▶ o !bienvenidos",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_extra.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/op_extra.mp4"
+        }
+      ]
+    },
+    {
+      "id": "p-street-fighter",
+      "nombre": "Pelea (estilo Street Fighter)",
+      "emoji": "🕹️",
+      "pack": true,
+      "precio": 17,
+      "requierePremium": true,
+      "descripcion": "7 animaciones de pelea que salen solas en tus batallas: guante, guante dorado, x2, x3, snipe, tap tap y un gracias para lanzar con ▶.",
+      "paquete": "https://github.com/agrogrowshopuy-eng/tikliveauto/releases/download/packs/p-street-fighter.tlpack",
+      "tamano": 151666239,
+      "sha256": "23f4deb43819608ea2bdf0a78ea909adfa0858c15c90e77c0f189401ddc0cfb6",
+      "potenciadores": {
+        "guante": "tem_p-street-fighter_guante_rojo.webm",
+        "guante dorado": "tem_p-street-fighter_guante_dorado.webm",
+        "x2": "tem_p-street-fighter_x2.webm",
+        "x3": "tem_p-street-fighter_x3.webm",
+        "snipe": "tem_p-street-fighter_snipe.webm"
+      },
+      "eventos": [
+        {
+          "nombre": "Tap Tap",
+          "disparador": "likes",
+          "valor": "300",
+          "archivo": "tem_p-street-fighter_tap_tap.webm"
+        },
+        {
+          "nombre": "Snipe",
+          "disparador": "comando",
+          "valor": "!snipe",
+          "archivo": "tem_p-street-fighter_snipe.webm"
+        }
+      ],
+      "archivos": [
+        {
+          "archivo": "tem_p-street-fighter_guante_rojo.webm",
+          "nombre": "GUANTE",
+          "cuando": "Te tiran un guante",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_guante_rojo.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_guante_rojo.mp4"
+        },
+        {
+          "archivo": "tem_p-street-fighter_guante_dorado.webm",
+          "nombre": "GUANTE DORADO",
+          "cuando": "Te tiran el guante dorado",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_guante_dorado.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_guante_dorado.mp4"
+        },
+        {
+          "archivo": "tem_p-street-fighter_x2.webm",
+          "nombre": "X2",
+          "cuando": "Se activa el x2",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_x2.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_x2.mp4"
+        },
+        {
+          "archivo": "tem_p-street-fighter_x3.webm",
+          "nombre": "X3",
+          "cuando": "Se activa el x3",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_x3.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_x3.mp4"
+        },
+        {
+          "archivo": "tem_p-street-fighter_snipe.webm",
+          "nombre": "SNIPE",
+          "cuando": "Con !snipe en el chat o un botón",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_snipe.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_snipe.mp4"
+        },
+        {
+          "archivo": "tem_p-street-fighter_tap_tap.webm",
+          "nombre": "TAP TAP",
+          "cuando": "Lluvia de tap tap",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_tap_tap.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_tap_tap.mp4"
+        },
+        {
+          "archivo": "tem_p-street-fighter_gracias.webm",
+          "nombre": "GRACIAS",
+          "cuando": "Botón ▶ o !gracias",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_gracias.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/sf_gracias.mp4"
+        }
+      ]
     }
   ]
 }

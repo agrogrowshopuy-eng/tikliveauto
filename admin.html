@@ -75,6 +75,11 @@
         <input id="llave-txt" placeholder="Pegá la llave acá" style="flex:1;min-width:220px">
         <button class="oro" id="b-llave">Guardar llave</button>
       </div>
+      <p style="margin:10px 0 6px;font-size:13px;opacity:.85">📦 <b>Varias juntas:</b> abrí el archivo <b>LLAVES_PACKS_NO_COMPARTIR.txt</b>, copiá TODO su contenido, pegalo acá y tocá "Guardar todas".</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <textarea id="llaves-varias" rows="3" placeholder='{"p-gamer": "…", "p-rock-hombre": "…"}' style="flex:1;min-width:220px"></textarea>
+        <button class="oro" id="b-llaves-varias">Guardar todas</button>
+      </div>
     </details>
     <input class="buscar" id="buscar" placeholder="🔎 Buscar por email o nombre…">
     <div class="aviso msg" id="aviso"></div>
@@ -123,6 +128,19 @@
     $('#estado-llaves').textContent = faltan.length ? `— ⚠️ falta la llave de: ${faltan.join(', ')}` : temporadas.length ? '— ✅ todas guardadas' : '';
     $('#caja-llaves').open = faltan.length > 0;
   }
+  // 07-11-2026: guardar varias llaves de una (las de los packs nuevos vienen juntas en un archivo)
+  $('#b-llaves-varias').onclick = async () => {
+    let lista;
+    try { lista = JSON.parse($('#llaves-varias').value.trim()); } catch { return avisar('No se entiende lo pegado: copiá el archivo entero, desde la primera { hasta la última }.'); }
+    const ok = [], mal = [];
+    for (const [id, llave] of Object.entries(lista || {})) {
+      if (!/^[\w-]+$/.test(id) || !/^[A-Za-z0-9+/=]{40,}$/.test(String(llave))) { mal.push(id); continue; }
+      try { await F.setDoc(F.doc(db, 'temporadas', id), { llave: String(llave) }); ok.push(id); } catch (e) { mal.push(id + ' (' + e.message + ')'); }
+    }
+    $('#llaves-varias').value = '';
+    avisar(mal.length ? `Guardadas: ${ok.length}. No se pudieron: ${mal.join(', ')}` : `✔ ${ok.length} llaves guardadas`, !mal.length);
+    cargarTemporadas();
+  };
   $('#b-llave').onclick = async () => {
     const id = $('#llave-tem').value, llave = $('#llave-txt').value.trim();
     if (!id || !/^[A-Za-z0-9+/=]{40,}$/.test(llave)) return avisar('Esa llave no parece correcta: pegala entera, sin espacios.');
@@ -165,6 +183,7 @@
         <td>${hace(u.ultimaVez)}<small>${u.version ? 'versión ' + esc(u.version) : ''}</small></td>
         <td><div class="acciones">
           <button class="oro" data-a="premium">⭐ +1 mes Premium</button>
+          <button class="oro" data-a="anual">🔥 +1 año Premium</button>
           <button data-a="prueba">🎁 +7 días prueba</button>
           ${temporadas.map((t) => `<button data-a="temporada" data-t="${esc(t.id)}" class="${u.temporadas.includes(t.id) ? 'oro' : ''}">${esc(t.emoji || '🎃')} ${esc(t.nombre)}${u.temporadas.includes(t.id) ? ' ✔ (quitar)' : ''}</button>`).join('')}
           ${u.premiumHasta > Date.now() ? '<button data-a="quitar">Quitar Premium</button>' : ''}
@@ -187,6 +206,11 @@
     const b = ev.target.closest('button[data-a]'); if (!b) return;
     const u = usuarios.find((x) => x.id === b.closest('tr').dataset.id); if (!u) return;
     const ahora = Date.now();
+    if (b.dataset.a === 'anual') { // 07-11-2026: plan anual (99 USD) = 12 meses de Premium
+      const desde = Math.max(ahora, u.premiumHasta);
+      const hasta = new Date(desde); hasta.setFullYear(hasta.getFullYear() + 1);
+      guardar(u, { premiumHasta: F.Timestamp.fromDate(hasta), plan: 'premium' }, `Premium ANUAL hasta el ${fecha(hasta.getTime())}`);
+    }
     if (b.dataset.a === 'premium') {
       const desde = Math.max(ahora, u.premiumHasta);  // si ya es Premium, suma un mes al final
       const hasta = new Date(desde); hasta.setMonth(hasta.getMonth() + 1);

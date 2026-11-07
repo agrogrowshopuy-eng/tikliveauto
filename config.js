@@ -17,8 +17,9 @@ window.TIKLIVE_CONFIG = {
   github: { usuario: 'agrogrowshopuy-eng', repositorio: 'tikliveauto' },
   diasPrueba: 30,
   whatsapp: '59898993720',
-  precioPremium: 12,
-  // Cobro de Premium. precioPremium = lo que se cobra por PayPal, en USD. mercadopago = link del plan de suscripción ($ 500 uruguayos por mes). Vacío = no se muestra.
+  precioPremium: 17,
+  precioAnual: 99, // plan anual por PayPal (USD por 12 meses)
+  // Cobro de Premium. precioPremium = lo que se cobra por PayPal, en USD. mercadopago = link del plan de suscripción ($ 700 uruguayos por mes). Vacío = no se muestra.
   // webhook = dirección del sistema de cobro automático (Make). Vacío = el Premium se activa a mano.
   pagos: { paypal: 'agrogrow', mercadopago: 'https://mpago.la/2j6YiXo', webhook: 'https://hook.us2.make.com/9ohlfib262v92jwefflir4f83q8lr6ik' },
 };

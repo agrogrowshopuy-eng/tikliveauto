@@ -96,6 +96,9 @@ function pintarZona(u, datos) {
   $('#b-premium').href = `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(`¡Hola! Ya pagué TIKLIVEauto Premium (${precio} USD). Mi email es ${u.email}`)}`;
   $('#b-paypal').href = P.paypal ? `https://www.paypal.com/paypalme/${P.paypal}/${precio}USD` : '#';
   $('#b-paypal').classList.toggle('oculto', !P.paypal);
+  // 07-11-2026: plan anual (12 meses de Premium por un pago)
+  const anual = CFG.precioAnual || 0, bA = $('#b-anual');
+  if (bA) { bA.href = P.paypal && anual ? `https://www.paypal.com/paypalme/${P.paypal}/${anual}USD` : '#'; bA.classList.toggle('oculto', !(P.paypal && anual)); }
   $('#b-mp').href = P.mercadopago || '#';
   $('#b-mp').classList.toggle('oculto', !P.mercadopago);
   $('#caja-premium').classList.toggle('oculto', prem > ahora);
