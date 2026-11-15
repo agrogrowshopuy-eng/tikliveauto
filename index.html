@@ -36,6 +36,24 @@
   .plan .demo { margin: 12px 0 4px; border-radius: 14px; overflow: hidden; border: 1px solid var(--borde); background: #05070f; aspect-ratio: 9 / 16; max-width: 260px; }
   .plan .demo video { width: 100%; height: 100%; display: block; object-fit: cover; }
   .plan.packs { border-color: rgba(255,205,90,.45); }
+/* 🎀 1.4.8: Decoración de transmisión LIVE (dibujos con emojis y CSS, sin imágenes) */
+.deco-grilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 8px; }
+.deco-demo { height: 120px; border-radius: 12px; margin-bottom: 14px; border: 1px solid var(--borde); overflow: hidden; position: relative;
+  background: radial-gradient(120px 80px at 50% 110%, rgba(255,45,149,.22), transparent 70%), linear-gradient(180deg, #0b1222, #05070f); display: grid; place-items: center; }
+.deco-pill { display: inline-block; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 999px; background: rgba(255,79,176,.2); color: #ffb3d6; vertical-align: middle; }
+.dm-marcador { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 18px; }
+.dm-marcador .cara { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 22px; background: #13203a; box-shadow: 0 0 0 2px #22e5ff; }
+.dm-marcador .cara.r { box-shadow: 0 0 0 2px #ff2d95; }
+.dm-marcador .vs { color: #ffd166; font-size: 14px; }
+.dm-jarron { font-size: 58px; line-height: 1; position: relative; }
+.dm-jarron i { position: absolute; font-style: normal; font-size: 18px; }
+.dm-lluvia { position: absolute; inset: 0; }
+.dm-lluvia i { position: absolute; font-style: normal; }
+.dm-bordes { position: absolute; inset: 0; box-shadow: inset 0 0 28px rgba(255,120,30,.75), inset 0 0 8px rgba(255,210,90,.9); }
+.dm-bordes i { position: absolute; font-style: normal; font-size: 22px; }
+.dm-cuadro { border: 2px solid #19e3d9; border-radius: 12px; padding: 6px 10px; font-size: 12px; font-weight: 800; line-height: 1.6; background: rgba(10,14,34,.8); box-shadow: 0 0 14px rgba(25,227,217,.45); }
+@media (prefers-reduced-motion: no-preference) { .dm-lluvia i { animation: dmSube 3.2s linear infinite; } }
+@keyframes dmSube { from { transform: translateY(30px); opacity: 0; } 20% { opacity: 1; } to { transform: translateY(-110px); opacity: 0; } }
 </style>
 </head>
 <body>
@@ -137,6 +155,7 @@
 <h2 data-t="tea64f70e">Todo lo que necesitás para tu LIVE</h2>
 <p class="sub" data-t="t4db8f6ff">Se conecta a tu LIVE y reacciona solo a regalos, comentarios, seguidores y likes.</p>
 <div class="grilla">
+<div class="tarjeta"><div class="ico">🎀</div><h3><span data-t="tn16d15">🎀 Decoración de transmisión LIVE</span> <small data-t="tn15t03" style="font-size:11px;padding:2px 8px;border-radius:999px;background:rgba(255,45,149,.2);color:#ffb3d6;vertical-align:middle">NUEVO</small></h3><p data-t="tn16d16">Marcador de batalla, jarrón de regalos, lluvia de emojis, efectos de bordes y cuadro de regalos. <a href="#decoracion">Ver más →</a></p></div>
 <div class="tarjeta"><div class="ico">👆</div><h3><span data-t="tn15t01">👆 Top 10 de tap tap</span> <small data-t="tn15t03" style="font-size:11px;padding:2px 8px;border-radius:999px;background:rgba(255,45,149,.2);color:#ffb3d6;vertical-align:middle">NUEVO</small></h3><p data-t="tn15t02">Los 10 que más tocan la pantalla, con su foto, nombre y cantidad. Se acomoda solo en vivo y vuelve a cero en cada LIVE.</p></div>
 <div class="tarjeta"><div class="ico">🎬</div><h3 data-t="t5161af95">Alertas por regalo</h3><p data-t="t0ec80ddd">Cada regalo dispara tu video, imagen o sonido. Quita el fondo verde o azul solo (chroma), como en OBS.</p></div>
 <div class="tarjeta"><div class="ico">🎛️</div><h3 data-t="t3a142bb0">Botonera</h3><p data-t="tde4259da">Tus propios botones en la PC o en el celular, con fotos y colores. Tu Stream Deck, gratis. <a href="celular.html">Usala en el celular →</a></p></div>
@@ -165,6 +184,24 @@
 <li data-t="tn15t07">Un solo link para TikTok LIVE Studio y para OBS.</li>
 <li data-t="tn15t08">Cuando alguien sube de puesto, su fila se desliza, brilla y sale una flechita ▲.</li>
 <li data-t="tn15t09"><b>Gratis</b> con el tema Clásico. <b>Premium</b>: temas 🦉 Búho, 🦍 Gorila, 🦁 León y 🎨 Libre (elegís cualquier emoji para tu comunidad).</li>
+</ul>
+<p style="text-align:center;margin-top:18px"><a class="boton principal" data-t="tn15t13" href="cuenta.html?registro=1">Probar gratis</a></p>
+</div>
+</section>
+<section id="decoracion">
+<div class="ancho">
+<h2 data-t="tn16d01">Nuevo: 🎀 Decoración de transmisión LIVE</h2>
+<p class="sub" data-t="tn16d02">Adornos con fondo transparente que se ven encima de tu cámara. Cada uno tiene su propio link para TikTok LIVE Studio y OBS, con transparencia y tamaño a tu gusto.</p>
+<div class="deco-grilla">
+<div class="tarjeta"><div class="deco-demo" aria-hidden="true"><div class="dm-marcador"><span class="cara">😎</span>1.250<span class="vs">VS</span>980<span class="cara r">🤠</span></div></div><h3><span data-t="tn16d03">🥊 Marcador de batalla</span> <span class="deco-pill">⭐ PREMIUM</span></h3><p data-t="tn16d04">Tus puntos y los del rival, cada uno con su foto y un VS en el medio. Ves los puntos del rival aunque tire neblina. Sale solo durante las batallas.</p></div>
+<div class="tarjeta"><div class="deco-demo" aria-hidden="true"><div class="dm-jarron">🫙<i style="left:6px;top:-14px">🌹</i><i style="right:2px;top:-24px">💎</i><i style="left:22px;top:-34px">⭐</i></div></div><h3><span data-t="tn16d05">🫙 Jarrón de regalos</span> <span class="deco-pill">⭐ PREMIUM</span></h3><p data-t="tn16d06">Cada regalo cae adentro con la foto de quien lo mandó y se va llenando. Frasco, pecera, copa, mate, gorra y más estilos.</p></div>
+<div class="tarjeta"><div class="deco-demo" aria-hidden="true"><div class="dm-lluvia"><i style="left:12%;bottom:0;font-size:22px">💖</i><i style="left:30%;bottom:0;font-size:26px;animation-delay:.8s">🦉</i><i style="left:50%;bottom:0;font-size:20px;animation-delay:1.6s">✨</i><i style="left:68%;bottom:0;font-size:26px;animation-delay:.4s">🦁</i><i style="left:84%;bottom:0;font-size:22px;animation-delay:2.2s">💖</i></div></div><h3><span data-t="tn16d07">💖 Lluvia de emojis</span> <span class="deco-pill">⭐ PREMIUM</span></h3><p data-t="tn16d08">Con cada tap tap suben emojis de tu comunidad (🦉 🦍 🦁 o los que elijas), con la foto chiquita de quien tocó la pantalla.</p></div>
+<div class="tarjeta"><div class="deco-demo" aria-hidden="true"><div class="dm-bordes"><i style="left:6px;bottom:6px">🔥</i><i style="right:6px;bottom:6px">🔥</i><i style="left:6px;top:6px">⚡</i><i style="right:6px;top:6px">⚡</i></div><span style="font-size:30px">🙂</span></div><h3><span data-t="tn16d09">✨ Efectos de bordes</span> <span class="deco-pill">⭐ PREMIUM</span></h3><p data-t="tn16d10">8 animaciones que salen desde los bordes y dejan libre tu cara: fuego, hielo, rayos, lluvia, discoteca, estadio, radio y DJ. Con un toque quedan en tu botonera.</p></div>
+<div class="tarjeta"><div class="deco-demo" aria-hidden="true"><div class="dm-cuadro">🎁 LIVE FEST 26<br>🎁 Explorador de FEST<br>🎁 Músico de FEST</div></div><h3><span data-t="tn16d11">🎁 Cuadro de regalos</span> <span class="deco-pill">⭐ PREMIUM</span></h3><p data-t="tn16d12">La foto y el nombre de cada regalo de un evento (como el LIVE FEST), fijo en un costado. Solo informativo: nunca pide regalos. Gratis en tu pantalla de alertas; con link propio, transparencia y tamaño en Premium.</p></div>
+</div>
+<ul style="max-width:760px;margin:18px auto 0;line-height:1.7;padding-left:22px">
+<li data-t="tn16d13">⭐ La decoración es Premium y también la tenés durante el mes de prueba gratis.</li>
+<li data-t="tn16d14">Cada adorno se puede ver antes en el programa con datos de ejemplo, para acomodarlo sin estar en vivo.</li>
 </ul>
 <p style="text-align:center;margin-top:18px"><a class="boton principal" data-t="tn15t13" href="cuenta.html?registro=1">Probar gratis</a></p>
 </div>
@@ -207,7 +244,8 @@
 <li data-t="tc28adddd">Lector del chat con voz normal</li>
 <li data-t="tc9a08a57">Hasta 5 sonidos del chat</li>
 <li data-t="t47ba9970">Robots de potenciadores (menos el guante dorado)</li>
-<li data-t="tn15t11">Top 10 de tap tap (tema Clásico)</li>
+<li data-t="tn16p03">Top 10 de tap tap (tema Clásico, con transparencia y tamaño)</li>
+<li data-t="tn16p01">Cuadro de regalos del evento (en tu pantalla de alertas)</li>
 <li class="no" data-t="t7b3dd69e">Personajes del lector</li>
 <li class="no" data-t="tfe799728">Voces de IA para el chat</li>
 <li class="no" data-t="t3a3f33c4">Sin la marca "Hecho con TIKLIVEauto"</li>
@@ -230,6 +268,7 @@
 <li data-t="t38c98b40">Hasta 50 sonidos del chat</li>
 <li data-t="t47cbe114">Todos los robots, con el guante dorado</li>
 <li data-t="tn15t12">Top 10 de tap tap con todos los temas: Búho, Gorila, León y Libre</li>
+<li data-t="tn16p02"><b>🎀 Decoración:</b> marcador de batalla, jarrón de regalos, lluvia de emojis, 8 efectos de bordes y cuadro de regalos con link propio</li>
 <li data-t="ta267a42f">Potenciadores con tu propia animación</li>
 <li data-t="tb79a6788">Sin marca en pantalla</li>
 </ul>
@@ -289,7 +328,7 @@
 <div class="precio">270 <small data-t="t3994aa30">USD · pago único</small></div>
 <small style="display:block;opacity:.8;margin-top:-6px">o $ 11.000 uruguayos con Mercado Pago</small>
 <ul>
-<li data-t="tn14c03">Un personaje propio que vive en tu LIVE (como Tokio, el búho)</li>
+<li data-t="tn16c03">Un personaje propio que vive en tu LIVE (un búho, un gato o el que quieras)</li>
 <li data-t="tn14c04">Le hablás con tu voz y te responde con la suya</li>
 <li data-t="tn14c05">Le pedís y lo hace: lanza animaciones, efectos o lo que le configures</li>
 <li data-t="tn14c06">Agradece regalos y saluda a los que entran</li>
