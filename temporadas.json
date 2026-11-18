@@ -291,6 +291,88 @@
       ]
     },
     {
+      "id": "p-neon-miami",
+      "nombre": "Neón Miami",
+      "emoji": "🌴",
+      "pack": true,
+      "precio": 17,
+      "requierePremium": true,
+      "descripcion": "6 animaciones estilo noches de Miami (neón rosa y celeste, atardecer y palmeras) que salen solas en tus batallas: guante, x2, x3, snipe, tap tap y gracias por tu Quiéreme.",
+      "paquete": "https://github.com/agrogrowshopuy-eng/tikliveauto/releases/download/packs/p-neon-miami.tlpack",
+      "tamano": 23707934,
+      "sha256": "b25054b759b5c516bb807f5854b3712387f801ee205b5ec607d92f1f9107428e",
+      "potenciadores": {
+        "guante": "tem_p-neon-miami_guante_rojo.webm",
+        "x2": "tem_p-neon-miami_x2.webm",
+        "x3": "tem_p-neon-miami_x3.webm",
+        "snipe": "tem_p-neon-miami_snipe.webm"
+      },
+      "eventos": [
+        {
+          "nombre": "Quiéreme",
+          "disparador": "regalo",
+          "valor": "Heart Me, Quiéreme",
+          "archivo": "tem_p-neon-miami_quiereme.webm"
+        },
+        {
+          "nombre": "Tap Tap",
+          "disparador": "likes",
+          "valor": "300",
+          "archivo": "tem_p-neon-miami_tap_tap.webm"
+        },
+        {
+          "nombre": "Snipe",
+          "disparador": "comando",
+          "valor": "!snipe",
+          "archivo": "tem_p-neon-miami_snipe.webm"
+        }
+      ],
+      "archivos": [
+        {
+          "archivo": "tem_p-neon-miami_guante_rojo.webm",
+          "nombre": "GUANTE ROJO",
+          "cuando": "Te tiran un guante",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_guante_rojo.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_guante_rojo.mp4"
+        },
+        {
+          "archivo": "tem_p-neon-miami_x2.webm",
+          "nombre": "X2",
+          "cuando": "Se activa el x2",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_x2.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_x2.mp4"
+        },
+        {
+          "archivo": "tem_p-neon-miami_x3.webm",
+          "nombre": "X3",
+          "cuando": "Se activa el x3",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_x3.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_x3.mp4"
+        },
+        {
+          "archivo": "tem_p-neon-miami_snipe.webm",
+          "nombre": "SNIPE",
+          "cuando": "Con !snipe en el chat o un botón",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_snipe.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_snipe.mp4"
+        },
+        {
+          "archivo": "tem_p-neon-miami_tap_tap.webm",
+          "nombre": "TAP TAP",
+          "cuando": "Lluvia de tap tap",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_tap_tap.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_tap_tap.mp4"
+        },
+        {
+          "archivo": "tem_p-neon-miami_quiereme.webm",
+          "nombre": "GRACIAS POR TU QUIÉREME",
+          "cuando": "Te regalan un Quiéreme",
+          "muestra": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_quiereme.jpg",
+          "video": "https://agrogrowshopuy-eng.github.io/tikliveauto/packs/nm_quiereme.mp4"
+        }
+      ]
+    },
+    {
       "id": "p-rock-hombre",
       "nombre": "Rock (hombre)",
       "emoji": "🎸",
@@ -581,7 +663,7 @@
     },
     {
       "id": "p-one-piece",
-      "nombre": "Piratas (estilo One Piece)",
+      "nombre": "Piratas",
       "emoji": "🏴‍☠️",
       "pack": true,
       "precio": 17,
@@ -708,7 +790,7 @@
     },
     {
       "id": "p-street-fighter",
-      "nombre": "Pelea (estilo Street Fighter)",
+      "nombre": "Pelea",
       "emoji": "🕹️",
       "pack": true,
       "precio": 17,
