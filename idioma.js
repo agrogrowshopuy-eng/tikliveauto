@@ -28,7 +28,7 @@
   if (elegido !== 'es') {
     html.className += ' tla-trad';
     document.write('<style>html.tla-trad body{visibility:hidden}</style>');
-    document.write('<script src="' + base + 'i18n/' + elegido + '.js?v=149"><\/script>');
+    document.write('<script src="' + base + 'i18n/' + elegido + '.js?v=150"><\/script>');
   }
   // Traducir un texto armado desde JavaScript (busca por el texto en español)
   window.tr = function (es) {
