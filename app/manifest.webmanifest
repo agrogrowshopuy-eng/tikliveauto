@@ -1,7 +1,7 @@
 {
   "name": "TIKLIVEauto Celular",
   "short_name": "TIKLIVEauto",
-  "description": "Animaciones, robots de batalla y lector del chat para tu LIVE, sin PC.",
+  "description": "Lector del chat con voz y sonidos para tu LIVE, sin PC.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

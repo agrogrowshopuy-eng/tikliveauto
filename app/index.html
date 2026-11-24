@@ -94,7 +94,7 @@
   <!-- ========== ENTRAR ========== -->
   <section id="v-entrar" class="oculto">
     <h1>TIKLIVEauto Celular</h1>
-    <p class="suave" style="margin-bottom:16px">Tu LIVE con animaciones, robots de batalla y lector del chat, sin PC. Entrá con tu cuenta de TIKLIVEauto: los primeros <b>15 días son gratis</b>.</p>
+    <p class="suave" style="margin-bottom:16px">Lector del chat con voz, sonidos por regalo y botonera de sonidos para tu LIVE, sin PC y sin clave de transmisión. Entrá con tu cuenta de TIKLIVEauto: los primeros <b>15 días son gratis</b>.</p>
     <div class="caja">
       <button class="boton google" id="b-google" type="button">
         <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
@@ -154,24 +154,24 @@
       </div>
 
       <div class="caja rosa">
-        <h2>2. Tu enlace para PRISM Live</h2>
-        <p class="suave">Las animaciones y la voz salen en tu LIVE por este enlace.</p>
-        <div class="enlace" id="enlace">…</div>
-        <button class="boton principal" id="b-copiar" type="button">📋 Copiar enlace</button>
+        <h2>2. ¿Dónde suena?</h2>
+        <p class="suave">La voz y los sonidos salen por el parlante del equipo que tenga esta app abierta, y el micrófono del celular con el que transmitís los capta.</p>
+        <div class="interruptor"><span>🔊 Este equipo pone el sonido<small>Dejá la app abierta en pantalla</small></span><input type="checkbox" id="s-aqui"></div>
+        <div class="aviso mal oculto" id="s-tocar">👆 Tocá este botón para que el celular deje sonar la app:<button class="boton principal" id="b-s-activar" type="button" style="margin-top:8px">🔊 Activar sonido</button></div>
         <p class="suave" id="txt-overlay" style="margin-top:10px"></p>
       </div>
 
       <div class="caja">
-        <h2>3. Cómo transmitir desde el celular</h2>
+        <h2>3. Cómo usarlo sin PC</h2>
         <ol class="pasos">
-          <li>Instalá <b>PRISM Live Studio</b> (gratis, Play Store o App Store).</li>
-          <li>En PRISM agregá tu destino con <b>RTMP personalizado</b>: pegá la <b>URL del servidor</b> y la <b>clave de transmisión</b> de tu plataforma.</li>
-          <li>En la pantalla principal de PRISM deslizá a la izquierda: <b>My Studio → Widget → Web</b>.</li>
-          <li>Pegá tu enlace (paso 2), poné un nombre y tocá <b>Save</b>. Agrandalo a <b>toda la pantalla</b>.</li>
-          <li>Empezá el LIVE desde PRISM. Acá tiene que decir <b>"Enlace abierto en PRISM ✅"</b>.</li>
+          <li>Empezá tu LIVE como siempre desde la <b>app de TikTok</b>.</li>
+          <li>En <b>otro celular, tablet o compu</b> abrí esta app con tu misma cuenta, tocá <b>Conectar</b> y activá <b>"Este equipo pone el sonido"</b>.</li>
+          <li>Ponelo cerca de tu celular, con el volumen alto. Lo que suene ahí se escucha en tu LIVE.</li>
+          <li>Desde ese mismo equipo usás la botonera y ves el chat.</li>
         </ol>
-        <div class="aviso info">🍎 En <b>iPhone</b> las animaciones con fondo transparente pueden verse con fondo negro. En <b>Android</b> se ven bien.</div>
-        <div class="aviso info">🔑 TikTok da la clave de transmisión a cuentas con cierta cantidad de seguidores o con agencia. YouTube y Kick se la dan a cualquiera.</div>
+        <div class="aviso info">🍎 <b>iPhone:</b> funciona como segundo equipo, con la app abierta en pantalla. En el mismo iPhone que transmite no suena: Apple corta el sonido de las apps web cuando quedan de fondo.</div>
+        <div class="aviso info">🤖 <b>Android:</b> lo mejor también es un segundo equipo. De prueba podés usar el mismo celular en <b>pantalla dividida</b> (TikTok arriba, esta app abajo). En Samsung ayuda la app <b>Sound Assistant → Multisonido</b>. Puede cortarse.</div>
+        <div class="aviso info">💡 Mientras el sonido está activo, la pantalla no se apaga sola.</div>
       </div>
 
       <div class="caja">
@@ -183,8 +183,8 @@
     <!-- BOTONERA -->
     <div data-pestana="botonera" class="oculto">
       <div class="caja">
-        <h2>🤖 Robots</h2>
-        <p class="suave" style="margin-bottom:12px">Tocá uno y sale en tu LIVE.</p>
+        <h2>🔊 Sonidos</h2>
+        <p class="suave" style="margin-bottom:12px">Tocá uno y suena en el equipo que pone el sonido.</p>
         <div class="robots" id="robots"></div>
         <button class="boton rojo" id="b-cortar" type="button" style="margin-top:14px">✋ Cortar lo que está sonando</button>
       </div>
@@ -193,7 +193,7 @@
         <input id="decir" placeholder="Escribí lo que querés que diga">
         <button class="boton principal" id="b-decir" type="button" style="margin-top:10px">Decir en el LIVE</button>
       </div>
-      <div class="aviso info">💡 Mientras transmitís, PRISM está en pantalla. Para usar la botonera en pleno LIVE, abrí esta app en <b>otro celular o tablet</b> con tu misma cuenta.</div>
+      <div class="aviso info">💡 Mientras transmitís, TikTok está en pantalla. Para usar la botonera en pleno LIVE, abrí esta app en <b>otro celular o tablet</b> con tu misma cuenta.</div>
     </div>
 
     <!-- LECTOR -->
@@ -219,7 +219,7 @@
         </select>
         <label for="l-vel">Velocidad: <b id="l-vel-t">0</b></label>
         <input id="l-vel" type="range" min="-30" max="40" step="5" style="padding:0">
-        <label for="vol">Volumen del LIVE: <b id="vol-t">80</b>%</label>
+        <label for="vol">Volumen: <b id="vol-t">80</b>%</label>
         <input id="vol" type="range" min="0" max="100" step="5" style="padding:0">
         <button class="boton" id="b-probar-voz" type="button" style="margin-top:14px">🔊 Probar la voz</button>
       </div>
@@ -233,12 +233,12 @@
     <div data-pestana="regalos" class="oculto">
       <div class="caja">
         <h2>🥊 Batallas</h2>
-        <div class="interruptor"><span>Robots automáticos<small>Cuando tiran guante, neblina, martillo, x2, x3… sale el robot solo</small></span><input type="checkbox" id="b-auto"></div>
+        <div class="interruptor"><span>Sonido automático en batallas<small>Cuando tiran guante, neblina, martillo, x2, x3… suena la voz del robot</small></span><input type="checkbox" id="b-auto"></div>
         <div class="interruptor"><span>Solo los que me tiran a mí<small>Los potenciadores para el rival no se muestran</small></span><input type="checkbox" id="b-mios"></div>
       </div>
       <div class="caja">
-        <h2>🎁 Animación por regalo</h2>
-        <p class="suave" style="margin-bottom:12px">Elegí qué animación sale con cada regalo. El regalo se escribe como aparece en TikTok (ej: Rosa, Rosquilla).</p>
+        <h2>🎁 Sonido por regalo</h2>
+        <p class="suave" style="margin-bottom:12px">Elegí qué sonido sale con cada regalo. El regalo se escribe como aparece en TikTok (ej: Rosa, Rosquilla).</p>
         <div id="eventos"></div>
         <button class="boton" id="b-agregar-ev" type="button">➕ Agregar regalo</button>
         <button class="boton principal" id="b-guardar-ev" type="button">💾 Guardar</button>
@@ -300,6 +300,14 @@ const ROBOTS = [
 ];
 const ARCHIVO = { guante: 'pot_robot_guante.webm', 'guante dorado': 'pot_robot_guante_dorado.webm', neblina: 'pot_robot_neblina.webm', martillo: 'pot_robot_martillo.webm', 'numero 2': 'pot_robot_n2.webm', 'numero 3': 'pot_robot_n3.webm', x2: 'pot_robot_x2.webm', x3: 'pot_robot_x3.webm', tiempo: 'pot_robot_tiempo.webm', snipe: 'pot_robot_snipe.webm', musica: 'pot_robot_musica.webm' };
 let MEDIA = new URL('robots/', location.href).href;
+const SON = new URL('sonidos/', location.href).href;
+const SONIDOS = [
+  ['aplausos', '👏', 'Aplausos'], ['tada', '🎉', 'Tadá'], ['redoble', '🥁', 'Redoble'],
+  ['campana', '🔔', 'Campana'], ['ding', '✨', 'Ding'], ['subida', '⬆️', 'Subida'],
+  ['bocina', '📯', 'Bocina'], ['alarma', '🚨', 'Alarma'], ['laser', '🔫', 'Láser'],
+  ...ROBOTS.map(([id, e, n]) => ['robot_' + ARCHIVO[id].replace('pot_robot_', '').replace('.webm', ''), e, 'Robot ' + n]),
+];
+const urlSon = (id) => SON + id + '.mp3';
 
 let auth = null, A = null, ws = null, cfg = null, cuenta = null, sala = '';
 
@@ -388,8 +396,7 @@ function pintarCuenta() {
   else if (cuenta.plan === 'premium') { chip.className = 'chip premium'; chip.textContent = '⭐ Celular'; }
   else { chip.className = 'chip prueba'; chip.textContent = `🎁 Prueba: ${Math.max(0, dias)} día${dias === 1 ? '' : 's'}`; }
   $('#txt-cuenta').innerHTML = `${esc(cuenta.email)}<br>${cuenta.admin ? 'Administrador' : cuenta.plan === 'premium' ? `Modo celular activo hasta el ${new Date(cuenta.vence).toLocaleDateString('es')}` : `Prueba gratis: te quedan ${Math.max(0, dias)} días. Después, ${cuenta.precio} USD por mes.`}`;
-  const enlace = new URL(`overlay.html?sala=${sala}`, location.href).href;
-  $('#enlace').textContent = enlace;
+  if ($('#s-aqui').checked) sonidoAqui(true);
 }
 
 const MENSAJES = {
@@ -406,7 +413,7 @@ function pintarEstado(e = {}, overlays) {
   const activo = e.conectado || e.conectando || ['esperandoLive', 'reconectando', 'noEncontrado', 'limite', 'error'].includes(e.mensaje);
   $('#b-conectar').classList.toggle('oculto', !!activo);
   $('#b-desconectar').classList.toggle('oculto', !activo);
-  if (overlays !== undefined) $('#txt-overlay').innerHTML = overlays ? '<b style="color:var(--verde)">Enlace abierto en PRISM ✅</b>' : 'Todavía no está abierto en PRISM.';
+  if (overlays !== undefined) $('#txt-overlay').innerHTML = overlays ? `<b style="color:var(--verde)">🔊 ${overlays === 1 ? '1 equipo pone' : overlays + ' equipos ponen'} el sonido ✅</b>` : 'Ningún equipo está poniendo el sonido todavía.';
 }
 
 function pintarCfg() {
@@ -428,36 +435,37 @@ $('#vol').oninput = () => { $('#vol-t').textContent = $('#vol').value; };
 $('#vol').onchange = () => mandarCfg({ volumen: Number($('#vol').value) });
 $('#b-auto').onchange = () => mandarCfg({ potenciadores: $('#b-auto').checked });
 $('#b-mios').onchange = () => mandarCfg({ soloMios: $('#b-mios').checked });
-$('#b-probar-voz').onclick = () => enviar({ tipo: 'decir', texto: '¡Hola! Así suena la voz del lector en tu LIVE.' });
+$('#b-probar-voz').onclick = () => { if (!$('#s-aqui').checked) toast('Ojo: este equipo no está poniendo el sonido (pestaña Inicio).'); enviar({ tipo: 'decir', texto: '¡Hola! Así suena la voz del lector en tu LIVE.' }); };
 
 $('#b-conectar').onclick = () => { const u = $('#usuario').value.trim(); if (!u) return toast('Escribí tu usuario de TikTok'); enviar({ tipo: 'conectar', usuario: u }); };
 $('#b-desconectar').onclick = () => enviar({ tipo: 'desconectar' });
-$('#b-copiar').onclick = async () => { const t = $('#enlace').textContent; try { await navigator.clipboard.writeText(t); toast('✅ Enlace copiado. Pegalo en PRISM → Widget → Web'); } catch { prompt('Copiá este enlace:', t); } };
+
 
 // ---------- Botonera ----------
-$('#robots').innerHTML = ROBOTS.map(([id, e, n]) => `<button type="button" data-r="${id}"><span class="e">${e}</span>${n}</button>`).join('');
-$$('#robots button').forEach((b) => b.onclick = () => { enviar({ tipo: 'robot', cual: b.dataset.r }); navigator.vibrate?.(30); });
+$('#robots').innerHTML = SONIDOS.map(([id, e, n]) => `<button type="button" data-s="${id}"><span class="e">${e}</span>${n}</button>`).join('');
+$$('#robots button').forEach((b) => b.onclick = () => { enviar({ tipo: 'video', url: urlSon(b.dataset.s) }); navigator.vibrate?.(30); });
 $('#b-cortar').onclick = () => enviar({ tipo: 'cortar' });
 $('#b-decir').onclick = () => { const t = $('#decir').value.trim(); if (t) { enviar({ tipo: 'decir', texto: t }); $('#decir').value = ''; } };
 
 // ---------- Regalos ----------
 function opcionesAnim(url) {
-  const ops = ROBOTS.map(([id, , n]) => { const u = MEDIA + ARCHIVO[id]; return `<option value="${u}" ${u === url ? 'selected' : ''}>🤖 Robot ${n}</option>`; }).join('');
-  const propio = url && !url.startsWith(MEDIA);
-  return ops + `<option value="propio" ${propio ? 'selected' : ''}>🔗 Mi animación (link)</option>`;
+  url = aSonido(url);
+  const ops = SONIDOS.map(([id, e, n]) => { const u = urlSon(id); return `<option value="${u}" ${u === url ? 'selected' : ''}>${e} ${n}</option>`; }).join('');
+  const propio = url && !url.startsWith(SON);
+  return ops + `<option value="propio" ${propio ? 'selected' : ''}>🔗 Mi sonido (link .mp3)</option>`;
 }
 function filaEvento(ev = {}) {
   const d = document.createElement('div'); d.className = 'evento';
-  const propio = ev.url && !ev.url.startsWith(MEDIA);
+  const propio = ev.url && !aSonido(ev.url).startsWith(SON);
   d.innerHTML = `<div class="fila"><input class="ev-regalo" placeholder="Regalo (vacío = cualquiera)" value="${esc(ev.regalo || '')}"><input class="ev-min" type="number" inputmode="numeric" min="1" placeholder="Monedas mín." value="${ev.minMonedas || 1}" style="max-width:110px"></div>
-    <label>Animación</label><select class="ev-anim">${opcionesAnim(ev.url)}</select>
-    <input class="ev-url ${propio ? '' : 'oculto'}" placeholder="https://… (video .webm o .mp4)" value="${propio ? esc(ev.url) : ''}" style="margin-top:8px">
+    <label>Sonido</label><select class="ev-anim">${opcionesAnim(ev.url)}</select>
+    <input class="ev-url ${propio ? '' : 'oculto'}" placeholder="https://… (sonido .mp3)" value="${propio ? esc(ev.url) : ''}" style="margin-top:8px">
     <button type="button" class="boton rojo ev-borrar" style="margin-top:8px;padding:9px">Quitar</button>`;
   d.querySelector('.ev-anim').onchange = (e) => d.querySelector('.ev-url').classList.toggle('oculto', e.target.value !== 'propio');
   d.querySelector('.ev-borrar').onclick = () => d.remove();
   return d;
 }
-function pintarEventos() { const c = $('#eventos'); c.innerHTML = ''; (cfg.eventos || []).forEach((ev) => c.append(filaEvento(ev))); if (!cfg.eventos?.length) c.append(filaEvento({ regalo: 'Rosa', url: MEDIA + ARCHIVO.guante })); }
+function pintarEventos() { const c = $('#eventos'); c.innerHTML = ''; (cfg.eventos || []).forEach((ev) => c.append(filaEvento(ev))); if (!cfg.eventos?.length) c.append(filaEvento({ regalo: 'Rosa', url: urlSon('aplausos') })); }
 $('#b-agregar-ev').onclick = () => $('#eventos').append(filaEvento());
 $('#b-guardar-ev').onclick = () => {
   const eventos = $$('#eventos .evento').map((d) => {
@@ -473,6 +481,53 @@ function pintarAdmin(lista = []) {
 }
 $('#b-admin-dar').onclick = () => enviar({ tipo: 'admin-dar', email: $('#a-email').value, dias: Number($('#a-dias').value) || 30 });
 $('#b-admin-sacar').onclick = () => { if (confirm('¿Sacarle el modo celular a ' + $('#a-email').value + '?')) enviar({ tipo: 'admin-dar', email: $('#a-email').value, dias: -1 }); };
+
+// ---------- Sonido en este equipo ----------
+// La app se conecta al servidor como "overlay" (igual que el enlace de PRISM), pero solo reproduce sonido.
+const HTTP = SERVIDOR.replace(/^ws/, 'http').replace(/\/ws$/, '');
+const RAIZ = SERVIDOR.replace(/\/ws$/, '');
+function aSonido(url) {
+  const m = String(url || '').match(/pot_robot_([a-z0-9_]+)\.webm/i);
+  return m ? urlSon('robot_' + m[1]) : url;
+}
+let wsS = null, esperaS = 1000, colaS = [], sonando = null, wake = null, desbloqueado = false;
+function siguienteSonido() {
+  if (sonando || !colaS.length) return;
+  const { url, volumen } = colaS.shift();
+  const a = new Audio(url);
+  a.volume = Math.max(0, Math.min(1, (volumen ?? 80) / 100));
+  sonando = a;
+  const fin = () => { clearTimeout(a.t); sonando = null; siguienteSonido(); };
+  a.onended = fin; a.onerror = fin; a.t = setTimeout(() => { a.pause(); fin(); }, 30000);
+  a.play().catch(() => { $('#s-tocar').classList.remove('oculto'); fin(); });
+}
+async function pedirPantalla() { try { if ('wakeLock' in navigator && !wake) { wake = await navigator.wakeLock.request('screen'); wake.onrelease = () => { wake = null; }; } } catch {} }
+function sonidoAqui(si) {
+  guardarLS('tla_sonido_aqui', si);
+  try { wsS && wsS.close(); } catch {} wsS = null; colaS = [];
+  if (!si) { try { wake && wake.release(); } catch {} wake = null; $('#s-tocar').classList.add('oculto'); return; }
+  if (!sala) return;
+  if (!desbloqueado) $('#s-tocar').classList.remove('oculto');
+  pedirPantalla();
+  const yo = new WebSocket(`${RAIZ}/ws?rol=overlay&sala=${encodeURIComponent(sala)}`); wsS = yo;
+  yo.onopen = () => { esperaS = 1000; };
+  yo.onmessage = (e) => {
+    let m; try { m = JSON.parse(e.data); } catch { return; }
+    if (m.tipo === 'video') { if (colaS.length < 8) colaS.push({ url: aSonido(m.url), volumen: m.volumen }); siguienteSonido(); }
+    else if (m.tipo === 'audio') { if (colaS.length < 8) colaS.push({ url: HTTP + m.url, volumen: m.volumen }); siguienteSonido(); }
+    else if (m.tipo === 'cortar') { colaS = []; if (sonando) { sonando.pause(); sonando.onended?.(); } }
+  };
+  yo.onclose = () => { if (wsS !== yo) return; setTimeout(() => { if (wsS === yo) sonidoAqui(true); }, esperaS); esperaS = Math.min(esperaS * 2, 15000); };
+}
+$('#s-aqui').checked = !!leerLS('tla_sonido_aqui', false);
+$('#s-aqui').onchange = () => { if ($('#s-aqui').checked) desbloquear(); sonidoAqui($('#s-aqui').checked); };
+function desbloquear() {
+  // El celular solo deja sonar una página después de que la tocás: reproducimos un sonido mudo.
+  const a = new Audio(urlSon('ding')); a.volume = 0.01;
+  a.play().then(() => { desbloqueado = true; $('#s-tocar').classList.add('oculto'); }).catch(() => {});
+}
+$('#b-s-activar').onclick = () => { desbloquear(); pedirPantalla(); toast('🔊 Sonido activado'); };
+document.addEventListener('visibilitychange', () => { if (!document.hidden && $('#s-aqui').checked) { pedirPantalla(); if (!wsS || wsS.readyState > 1) sonidoAqui(true); } });
 
 // Al volver a la app, se reconecta enseguida
 document.addEventListener('visibilitychange', () => { if (!document.hidden && auth?.currentUser && (!ws || ws.readyState > 1)) conectarServidor(); });
