@@ -26,8 +26,8 @@ const ADMIN = String(process.env.ADMIN_EMAIL || 'agrogrowshopuy@gmail.com').toLo
 const SECRETO = process.env.SECRETO_SALAS || 'tikliveauto-nube';
 const MAX_SALAS = Number(process.env.MAX_SALAS) || 40;
 const SIGN_API_KEY = process.env.SIGN_API_KEY || '';
-const DIAS_PRUEBA = Number(process.env.DIAS_PRUEBA) || 15;
-const PRECIO_USD = Number(process.env.PRECIO_USD) || 20;
+const DIAS_PRUEBA = Number(process.env.DIAS_PRUEBA) || 30;
+const PRECIO_USD = Number(process.env.PRECIO_USD) || 5;
 const fs = require('fs');
 const path = require('path');
 const CARPETA = process.env.CARPETA_DATOS || (fs.existsSync('/data') ? '/data' : path.join(__dirname, 'datos'));
@@ -78,9 +78,9 @@ async function revisarCuenta(token) {
   const email = String(u.email || '').toLowerCase();
   const esAdmin = email === ADMIN && u.emailVerified === true;
   // El modo celular es un producto APARTE del programa de Windows:
-  //  - celularHasta: lo activa el admin desde la app (sección Admin) cuando alguien paga los 20 USD del mes.
+  //  - celularHasta: lo activa el admin desde la app (sección Admin) cuando alguien paga los 5 USD del mes.
   //    Se guarda en este servidor, no en Firestore, así nadie se lo puede poner solo.
-  //  - si no pagó: 15 días de prueba desde la primera vez que usa el modo celular
+  //  - si no pagó: 30 días de prueba desde la primera vez que usa el modo celular
   const ahora = Date.now();
   const c = cuentas[u.localId] || (cuentas[u.localId] = { email, pruebaDesde: ahora });
   c.email = email; c.visto = ahora;
