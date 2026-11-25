@@ -114,6 +114,15 @@
   </section>
 
   <!-- ========== SIN PLAN ========== -->
+  <section id="v-email" class="oculto">
+    <div class="caja rosa">
+      <h2>📧 Confirmá tu email</h2>
+      <p id="txt-email" class="suave" style="margin-bottom:14px"></p>
+      <button class="boton principal" type="button" id="b-ya-confirme">✅ Ya confirmé</button>
+      <button class="boton" type="button" id="b-reenviar">📨 Mandarme el mail de nuevo</button>
+    </div>
+    <button class="boton" type="button" data-salir>Salir de la cuenta</button>
+  </section>
   <section id="v-plan" class="oculto">
     <div class="caja rosa">
       <h2>⭐ Modo celular</h2>
@@ -287,7 +296,7 @@ const SERVIDOR = 'wss://nube-production-3662.up.railway.app/ws';
 const CFG = window.TIKLIVE_CONFIG;
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => [...document.querySelectorAll(s)];
-const ver = (id) => ['#v-entrar', '#v-plan', '#v-app'].forEach((x) => $(x).classList.toggle('oculto', x !== id));
+const ver = (id) => ['#v-entrar', '#v-email', '#v-plan', '#v-app'].forEach((x) => $(x).classList.toggle('oculto', x !== id));
 const toast = (t) => { const e = $('#toast'); e.textContent = t; e.classList.remove('oculto'); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.add('oculto'), 3000); };
 const leerLS = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
 const guardarLS = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
@@ -371,6 +380,7 @@ function recibir(m) {
   else if (m.tipo === 'admin') pintarAdmin(m.lista);
   else if (m.tipo === 'error') {
     if (m.codigo === 'plan') { cerrando = true; mostrarPlan(m.texto, m.precio); }
+    else if (m.codigo === 'email') { cerrando = true; mostrarEmail(m.texto); }
     else toast(m.texto);
   }
 }
@@ -380,6 +390,20 @@ function agregar(sel, html, esHtml) {
   const d = document.createElement('div'); if (esHtml) d.innerHTML = html; else d.textContent = html;
   caja.prepend(d); while (caja.children.length > 60) caja.lastChild.remove();
 }
+
+// 25-11-2026: los días gratis empiezan recién con el email confirmado
+let mailMandado = false;
+async function mandarMail() {
+  try { await A.sendEmailVerification(auth.currentUser); toast('Te mandamos el mail. Mirá también en Spam.'); }
+  catch (e) { toast(/too-many-requests/.test(e.code || '') ? 'Ya te mandamos el mail hace poco: esperá unos minutos.' : 'No se pudo mandar el mail. Probá de nuevo.'); }
+}
+function mostrarEmail(texto) {
+  ver('#v-email'); $('#nav').classList.add('oculto');
+  $('#txt-email').textContent = texto;
+  if (!mailMandado) { mailMandado = true; mandarMail(); }
+}
+$('#b-reenviar').onclick = mandarMail;
+$('#b-ya-confirme').onclick = async () => { try { await auth.currentUser.reload(); } catch {} conectarServidor(); };
 
 function mostrarPlan(texto, precio) {
   const u = auth.currentUser;

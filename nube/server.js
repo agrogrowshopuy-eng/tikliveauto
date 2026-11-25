@@ -82,15 +82,18 @@ async function revisarCuenta(token) {
   //    Se guarda en este servidor, no en Firestore, así nadie se lo puede poner solo.
   //  - si no pagó: 30 días de prueba desde la primera vez que usa el modo celular
   const ahora = Date.now();
-  const c = cuentas[u.localId] || (cuentas[u.localId] = { email, pruebaDesde: ahora });
-  c.email = email; c.visto = ahora;
-  const pend = cuentas._pendientes?.[email];
+  // 25-11-2026: la prueba gratis y los días "pendientes" valen solo con el email CONFIRMADO
+  const verificado = u.emailVerified === true;
+  const c = cuentas[u.localId] || (cuentas[u.localId] = { email });
+  c.email = email; c.visto = ahora; c.verificado = verificado;
+  if (verificado && !c.pruebaDesde) c.pruebaDesde = ahora; // los días gratis empiezan cuando confirma el email
+  const pend = verificado ? cuentas._pendientes?.[email] : 0;
   if (pend) { c.celularHasta = Math.max(c.celularHasta || 0, pend); delete cuentas._pendientes[email]; }
   guardarCuentas();
   const celularHasta = c.celularHasta || 0;
-  const pruebaHasta = c.pruebaDesde + DIAS_PRUEBA * 864e5;
+  const pruebaHasta = verificado && c.pruebaDesde ? c.pruebaDesde + DIAS_PRUEBA * 864e5 : 0;
   const plan = esAdmin || celularHasta > ahora ? 'premium' : pruebaHasta > ahora ? 'prueba' : 'gratis';
-  return { uid: u.localId, email, esAdmin, nombre: u.displayName || email.split('@')[0], plan, vence: plan === 'premium' ? celularHasta : pruebaHasta };
+  return { uid: u.localId, email, esAdmin, verificado, nombre: u.displayName || email.split('@')[0], plan, vence: plan === 'premium' ? celularHasta : pruebaHasta };
 }
 const codigoSala = (uid) => crypto.createHmac('sha256', SECRETO).update(uid).digest('base64url').replace(/[-_]/g, '').slice(0, 10).toLowerCase();
 
@@ -379,6 +382,7 @@ wss.on('connection', (ws, req) => {
     try {
       if (m.tipo === 'hola') {
         const cuenta = await revisarCuenta(m.token);
+        if (cuenta.plan === 'gratis' && !cuenta.verificado) return enviar(ws, { tipo: 'error', codigo: 'email', texto: `Para empezar tus ${DIAS_PRUEBA} días gratis, confirmá tu email: te mandamos un mail a ${cuenta.email} (mirá también en Spam). Tocá el link del mail y después "Ya confirmé".` });
         if (cuenta.plan === 'gratis') return enviar(ws, { tipo: 'error', codigo: 'plan', precio: PRECIO_USD, texto: `Terminaron tus ${DIAS_PRUEBA} días gratis del modo celular. Para seguir usándolo: ${PRECIO_USD} USD por mes.` });
         const codigo = codigoSala(cuenta.uid);
         if (cuentas[cuenta.uid]) { cuentas[cuenta.uid].codigo = codigo; guardarCuentas(); }
@@ -408,15 +412,17 @@ wss.on('connection', (ws, req) => {
           const email = String(m.email || '').trim().toLowerCase();
           const dias = Math.max(-1, Math.min(400, Number(m.dias) || 30));
           if (!/^\S+@\S+\.\S+$/.test(email)) return enviar(ws, { tipo: 'error', texto: 'Email no válido' });
-          const uid = Object.keys(cuentas).find((k) => k !== '_pendientes' && cuentas[k].email === email);
+          // Solo se aplica directo si esa cuenta ya entró con el email confirmado; si no, queda pendiente hasta que lo confirme
+          const uidAlguno = Object.keys(cuentas).find((k) => k !== '_pendientes' && cuentas[k].email === email);
+          const uid = uidAlguno && (cuentas[uidAlguno].verificado || dias < 0) ? uidAlguno : '';
           const base = uid ? Math.max(Date.now(), cuentas[uid].celularHasta || 0) : Date.now();
           const hasta = dias < 0 ? 0 : base + dias * 864e5;
           if (uid) cuentas[uid].celularHasta = hasta;
           else (cuentas._pendientes ||= {})[email] = hasta;
           guardarCuentas();
-          enviar(ws, { tipo: 'aviso', texto: dias < 0 ? `Se le sacó el modo celular a ${email}` : `✅ ${email}: modo celular hasta el ${new Date(hasta).toLocaleDateString('es-UY')}${uid ? '' : ' (se activa cuando entre por primera vez)'}` });
+          enviar(ws, { tipo: 'aviso', texto: dias < 0 ? `Se le sacó el modo celular a ${email}` : `✅ ${email}: modo celular hasta el ${new Date(hasta).toLocaleDateString('es-UY')}${uid ? '' : ' (se activa cuando entre con el email confirmado)'}` });
         }
-        const lista = Object.entries(cuentas).filter(([k]) => k !== '_pendientes').map(([, v]) => ({ email: v.email, celularHasta: v.celularHasta || 0, pruebaHasta: v.pruebaDesde + DIAS_PRUEBA * 864e5, visto: v.visto || 0 }))
+        const lista = Object.entries(cuentas).filter(([k]) => k !== '_pendientes').map(([, v]) => ({ email: v.email, celularHasta: v.celularHasta || 0, pruebaHasta: v.verificado && v.pruebaDesde ? v.pruebaDesde + DIAS_PRUEBA * 864e5 : 0, visto: v.visto || 0 }))
           .sort((a, b) => b.visto - a.visto).slice(0, 100);
         enviar(ws, { tipo: 'admin', lista });
       }
@@ -431,7 +437,7 @@ function salaDesdeCodigo(codigo) {
   const uid = Object.keys(cuentas).find((k) => cuentas[k].codigo === codigo);
   if (!uid || salas.size >= MAX_SALAS) return null;
   const c = cuentas[uid];
-  const vence = Math.max(c.celularHasta || 0, c.pruebaDesde + DIAS_PRUEBA * 864e5);
+  const vence = Math.max(c.celularHasta || 0, c.verificado && c.pruebaDesde ? c.pruebaDesde + DIAS_PRUEBA * 864e5 : 0);
   const esAdmin = c.email === ADMIN;
   if (!esAdmin && vence < Date.now()) return null;
   const s = nuevaSala(codigo, { uid, email: c.email, nombre: c.email.split('@')[0], plan: (c.celularHasta || 0) > Date.now() || esAdmin ? 'premium' : 'prueba', esAdmin: false });

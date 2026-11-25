@@ -156,6 +156,10 @@ async function iniciarFirebase() {
     const ref = F.doc(db, 'usuarios', u.uid);
     let s = await F.getDoc(ref);
     if (!s.exists()) {
+      // 25-11-2026: la prueba gratis solo con el email confirmado (las cuentas de Google ya vienen confirmadas)
+      if (!u.emailVerified) { try { await u.reload(); } catch {} }
+      if (!u.emailVerified) throw Object.assign(new Error('Falta confirmar el email'), { sinConfirmar: true });
+      await u.getIdToken(true); // así la base de datos ve el email ya confirmado
       await F.setDoc(ref, {
         email: u.email, nombre: nombre || u.displayName || '', creado: F.serverTimestamp(),
         plan: 'prueba', pruebaHasta: F.Timestamp.fromMillis(Date.now() + CFG.diasPrueba * DIA), premiumHasta: null,
@@ -175,6 +179,13 @@ async function iniciarFirebase() {
       activarSuscripcion(u, datos);
     }
     catch (e) {
+      if (e && e.sinConfirmar) {
+        let mandado = true;
+        try { await A.sendEmailVerification(u); } catch { mandado = false; }
+        avisar((mandado ? 'Te mandamos un mail a ' : 'Ya te mandamos un mail a ') + u.email + ' para confirmar tu cuenta (mirá también en Spam). Tocá el link del mail y después entrá de nuevo: ahí empiezan tus días gratis.', true);
+        try { await A.signOut(auth); } catch {}
+        return;
+      }
       // Si la base de datos falla, la persona igual entra y puede descargar (su prueba la controla el programa)
       console.warn('Ficha del usuario:', e);
       pintarZona(u, { nombre: u.displayName || '', pruebaHasta: Date.now() + CFG.diasPrueba * DIA });
